@@ -1,94 +1,106 @@
-package TrabProg3;
+// package TrabProg3;
 
-import java.util.ArrayList;
-import java.util.Date;
 
-public class Eleicao {
+#include <iostream>
+#include <string>
+#include <list>
 
+#include "Candidatos.hpp";
+
+using namespace std;
+
+class Eleicao {
+	private:
 	int numeroVagasEleicao; 
-	private ArrayList <Partidos> partidosEleicao;
-	private ArrayList <Candidatos> eleitosProporcionalmente;
-	private ArrayList <Candidatos> maisVotados;
-	private ArrayList <Candidatos> eleitosMajoritariamente;
-	private ArrayList <Candidatos> naoEleitosMajoritariamente; 
-	private Date dataEleicao;
-	private int qtdVagas; 
+	// ArrayList <Partidos> partidosEleicao;
+	list<Partidos> partidosEleicao;
+	// ArrayList <Candidatos> eleitosProporcionalmente;
+	list<Candidatos> eleitosProporcionalmente;
+	// ArrayList <Candidatos> maisVotados;
+	list<Candidatos> maisVotados;
+	// ArrayList <Candidatos> eleitosMajoritariamente;
+	list<Candidatos> eleitosMajoritariamente;
+	// ArrayList <Candidatos> naoEleitosMajoritariamente; 
+	list<Candidatos> naoEleitosMajoritariamente;
+	Date dataEleicao;
+	int qtdVagas; 
 	
-	public Eleicao() {
-		super();
+
+	public:
+	Eleicao() {
 		this.numeroVagasEleicao = numeroVagasEleicao;
-		this.partidosEleicao = new ArrayList <Partidos>();
-		this.eleitosProporcionalmente = new ArrayList <Candidatos>();
-		this.maisVotados = new ArrayList<Candidatos>();
-		this.eleitosMajoritariamente = new ArrayList <Candidatos>();
-		this.naoEleitosMajoritariamente = new ArrayList <Candidatos>();
+		this.partidosEleicao = partidosEleicao;
+		this.eleitosProporcionalmente = eleitosProporcionalmente;
+		this.maisVotados = maisVotados;
+		this.eleitosMajoritariamente = eleitosMajoritariamente;
+		this.naoEleitosMajoritariamente = naoEleitosMajoritariamente;
 		this.dataEleicao = dataEleicao;
 	}
 
-	public int getNumeroVagasEleicao() {
+	int getNumeroVagasEleicao() {
 		return numeroVagasEleicao;
 	}
 
-	public void setNumeroVagasEleicao(int numeroVagasEleicao) {
+	void setNumeroVagasEleicao(int numeroVagasEleicao) {
 		this.numeroVagasEleicao = numeroVagasEleicao;
 	}
 
-	public ArrayList<Partidos> getPartidosEleicao() {
+	list<Partidos> getPartidosEleicao() {
 		return partidosEleicao;
 	}
 
-	public void setPartidosEleicao(ArrayList<Partidos> partidosEleicao) {
+	void setPartidosEleicao(list<Partidos> partidosEleicao) {
 		this.partidosEleicao = partidosEleicao;
 	}
 
-	public ArrayList<Candidatos> getEleitosProporcionalmente() {
+	list<Candidatos> getEleitosProporcionalmente() {
 		return eleitosProporcionalmente;
 	}
-	public void setEleitosProporcionalmente(ArrayList<Candidatos> eleitosProporcionalmente) {
+	void setEleitosProporcionalmente(list<Candidatos> eleitosProporcionalmente) {
 		this.eleitosProporcionalmente = eleitosProporcionalmente;
 	}
-	public ArrayList<Candidatos> getMaisVotados() {
+	list<Candidatos> getMaisVotados() {
 		return maisVotados;
 	}
-	public void setMaisVotados(ArrayList<Candidatos> maisVotados) {
+	void setMaisVotados(list<Candidatos> maisVotados) {
 		this.maisVotados = maisVotados;
 	}
-	public ArrayList<Candidatos> getEleitosMajoritariamente() {
+	list<Candidatos> getEleitosMajoritariamente() {
 		return eleitosMajoritariamente;
 	}
-	public void setEleitosMajoritariamente(ArrayList<Candidatos> eleitosMajoritariamente) {
+	void setEleitosMajoritariamente(list<Candidatos> eleitosMajoritariamente) {
 		this.eleitosMajoritariamente = eleitosMajoritariamente;
 	}
-	public ArrayList<Candidatos> getNaoEleitosMajoritariamente() {
+	list<Candidatos> getNaoEleitosMajoritariamente() {
 		return naoEleitosMajoritariamente;
 	}
-	public void setNaoEleitosMajoritariamente(ArrayList<Candidatos> naoEleitosMajoritariamente) {
+	void setNaoEleitosMajoritariamente(list<Candidatos> naoEleitosMajoritariamente) {
 		this.naoEleitosMajoritariamente = naoEleitosMajoritariamente;
 	}
-	public Date getDataEleicao() {
+	Date getDataEleicao() {
 		return dataEleicao;
 	}
-	public void setDataEleicao(Date dataEleicao) {
+	void setDataEleicao(Date dataEleicao) {
 		this.dataEleicao = dataEleicao;
 	}
-	public void addPartido(Partidos p) {
+	void addPartido(Partidos p) {
 		this.partidosEleicao.add(p);	
 	}
 	
-	public Partidos retornaPartidoPeloNum(int x) {
-		for(Partidos p : this.partidosEleicao) {
+	Partidos retornaPartidoPeloNum(int x) {
+		for(this.partidosEleicao = Partidos.begin(); this.partidosEleicao != Partidos.end(); ++this.partidosEleicao) {
 			if(x == p.getNumeroPartido()) {
 				return p;
 			}
 		}
-		return null;
+		return NULL;
 	}
 
-	public int getQtdVagas() {
+	int getQtdVagas() {
 		return qtdVagas;
 	}
 
-	public void setQtdVagas(int qtdVagas) {
+	void setQtdVagas(int qtdVagas) {
 		this.qtdVagas = qtdVagas;
 	}
 }
