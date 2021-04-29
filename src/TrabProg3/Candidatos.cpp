@@ -20,15 +20,15 @@ class Candidatos{
 	public:
 	Candidatos(int numeroCandidato, int votosNominaisCandidato,string situacaoCandidato,string nomeCandidato,string nomeUrnaCandidato,
 			string sexoCandidato,Date dataNascimentoCandidato, string destinoVoto, int numeroPartidoCandidato) {
-		this.numeroCandidato = numeroCandidato;
-		this.votosNominaisCandidato = votosNominaisCandidato;
-		this.situacaoCandidato = situacaoCandidato;
-		this.nomeCandidato = nomeCandidato;
-		this.nomeUrnaCandidato = nomeUrnaCandidato;
-		this.sexoCandidato = sexoCandidato;
-		this.dataNascimentoCandidato = dataNascimentoCandidato;
-		this.destinoVoto = destinoVoto;
-		this.numeroPartidoCandidato = numeroPartidoCandidato;
+		this->numeroCandidato = numeroCandidato;
+		this->votosNominaisCandidato = votosNominaisCandidato;
+		this->situacaoCandidato = situacaoCandidato;
+		this->nomeCandidato = nomeCandidato;
+		this->nomeUrnaCandidato = nomeUrnaCandidato;
+		this->sexoCandidato = sexoCandidato;
+		this->dataNascimentoCandidato = dataNascimentoCandidato;
+		this->destinoVoto = destinoVoto;
+		this->numeroPartidoCandidato = numeroPartidoCandidato;
 	}
 
 	int getNumeroCandidato() {
@@ -76,4 +76,4 @@ class Candidatos{
 	
 	
 	
-}
+};

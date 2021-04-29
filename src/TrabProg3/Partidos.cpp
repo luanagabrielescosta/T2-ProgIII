@@ -1,74 +1,76 @@
-package TrabProg3;
+#include <iostream>
+#include <string>
+#include <list>
+#include "Candidatos.hpp"
 
-import java.util.ArrayList;
+using namespace std;
 
-
-public class Partidos implements Comparable<Partidos>{
-
-	ArrayList <Candidatos> candidatosPartido; 
+class Partidos{
+	list<Candidatos> candidatosPartido; 
 	int numeroPartido; 
 	int votosLegendaPartido; 
-	String nomePartido; 
-	String siglaPartido; 
+	string nomePartido; 
+	string siglaPartido; 
 	int votosNominaisTotaisPartido;
-	public int getVotosNominaisTotaisPartido() {
+
+	public:
+	int getVotosNominaisTotaisPartido() {
 		return votosNominaisTotaisPartido;
 	}
 
-	public void setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
-		this.votosNominaisTotaisPartido = votosNominaisTotaisPartido;
+	void setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
+		this->votosNominaisTotaisPartido = votosNominaisTotaisPartido;
 	}
 
 	int votosTotaisPartido;
 	//int qtdCandidatosEleitos
 	
-	public int getVotosTotaisPartido() {
+	int getVotosTotaisPartido() {
 		return votosTotaisPartido;
 	}
 
-	public void setVotosTotaisPartido(int votosTotaisPartido) {
-		this.votosTotaisPartido = votosTotaisPartido;
+	void setVotosTotaisPartido(int votosTotaisPartido) {
+		this->votosTotaisPartido = votosTotaisPartido;
 	}
 
-	public Partidos(int numeroPartido, int votosLegendaPartido,
-			String nomePartido, String siglaPartido) {
-		super();
-		this.candidatosPartido = new ArrayList <Candidatos>();
-		this.numeroPartido = numeroPartido;
-		this.votosLegendaPartido = votosLegendaPartido;
-		this.nomePartido = nomePartido;
-		this.siglaPartido = siglaPartido;
+	Partidos(int numeroPartido, int votosLegendaPartido, string nomePartido, string siglaPartido) {
+		
+		this->candidatosPartido = candidatosPartido;
+		this->numeroPartido = numeroPartido;
+		this->votosLegendaPartido = votosLegendaPartido;
+		this->nomePartido = nomePartido;
+		this->siglaPartido = siglaPartido;
 	}
 
-	public ArrayList<Candidatos> getCandidatosPartido() {
+	list<Candidatos> getCandidatosPartido() {
 		return candidatosPartido;
 	}
 
-	public int getNumeroPartido() {
+	int getNumeroPartido() {
 		return numeroPartido;
 	}
 
-	public int getVotosLegendaPartido() {
+	int getVotosLegendaPartido() {
 		return votosLegendaPartido;
 	}
 
-	public String getNomePartido() {
+	string getNomePartido() {
 		return nomePartido;
 	}
 
-	public String getSiglaPartido() {
+	string getSiglaPartido() {
 		return siglaPartido;
 	}
 	
 	void addCandidato(Candidatos c){
-		this.candidatosPartido.add(c);
+		this->candidatosPartido.insert(this->candidatosPartido.end(), c);
 	}
 
-	@Override
-	public int compareTo(Partidos o) {
+	// @Override
+	int compareTo(Partidos o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	
 	
-}
+};

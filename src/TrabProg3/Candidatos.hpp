@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "Candidatos.hpp"
 
 using namespace std;
 class Candidatos{
@@ -41,6 +42,6 @@ class Candidatos{
 	int getNumeroPartidoCandidato();
 
 	int compareTo(Candidatos o);
-}
+};
 
 #endif /* candidatos_hpp_ */

@@ -1,11 +1,9 @@
-// package TrabProg3;
-
-
 #include <iostream>
 #include <string>
 #include <list>
 
-#include "Candidatos.hpp";
+#include "Candidatos.hpp"
+#include "Partidos.hpp"
 
 using namespace std;
 
@@ -28,13 +26,13 @@ class Eleicao {
 
 	public:
 	Eleicao() {
-		this.numeroVagasEleicao = numeroVagasEleicao;
-		this.partidosEleicao = partidosEleicao;
-		this.eleitosProporcionalmente = eleitosProporcionalmente;
-		this.maisVotados = maisVotados;
-		this.eleitosMajoritariamente = eleitosMajoritariamente;
-		this.naoEleitosMajoritariamente = naoEleitosMajoritariamente;
-		this.dataEleicao = dataEleicao;
+		this->numeroVagasEleicao = numeroVagasEleicao;
+		this->partidosEleicao = partidosEleicao;
+		this->eleitosProporcionalmente = eleitosProporcionalmente;
+		this->maisVotados = maisVotados;
+		this->eleitosMajoritariamente = eleitosMajoritariamente;
+		this->naoEleitosMajoritariamente = naoEleitosMajoritariamente;
+		this->dataEleicao = dataEleicao;
 	}
 
 	int getNumeroVagasEleicao() {
@@ -42,7 +40,7 @@ class Eleicao {
 	}
 
 	void setNumeroVagasEleicao(int numeroVagasEleicao) {
-		this.numeroVagasEleicao = numeroVagasEleicao;
+		this->numeroVagasEleicao = numeroVagasEleicao;
 	}
 
 	list<Partidos> getPartidosEleicao() {
@@ -50,45 +48,45 @@ class Eleicao {
 	}
 
 	void setPartidosEleicao(list<Partidos> partidosEleicao) {
-		this.partidosEleicao = partidosEleicao;
+		this->partidosEleicao = partidosEleicao;
 	}
 
 	list<Candidatos> getEleitosProporcionalmente() {
 		return eleitosProporcionalmente;
 	}
 	void setEleitosProporcionalmente(list<Candidatos> eleitosProporcionalmente) {
-		this.eleitosProporcionalmente = eleitosProporcionalmente;
+		this->eleitosProporcionalmente = eleitosProporcionalmente;
 	}
 	list<Candidatos> getMaisVotados() {
 		return maisVotados;
 	}
 	void setMaisVotados(list<Candidatos> maisVotados) {
-		this.maisVotados = maisVotados;
+		this->maisVotados = maisVotados;
 	}
 	list<Candidatos> getEleitosMajoritariamente() {
 		return eleitosMajoritariamente;
 	}
 	void setEleitosMajoritariamente(list<Candidatos> eleitosMajoritariamente) {
-		this.eleitosMajoritariamente = eleitosMajoritariamente;
+		this->eleitosMajoritariamente = eleitosMajoritariamente;
 	}
 	list<Candidatos> getNaoEleitosMajoritariamente() {
 		return naoEleitosMajoritariamente;
 	}
 	void setNaoEleitosMajoritariamente(list<Candidatos> naoEleitosMajoritariamente) {
-		this.naoEleitosMajoritariamente = naoEleitosMajoritariamente;
+		this->naoEleitosMajoritariamente = naoEleitosMajoritariamente;
 	}
 	Date getDataEleicao() {
 		return dataEleicao;
 	}
 	void setDataEleicao(Date dataEleicao) {
-		this.dataEleicao = dataEleicao;
+		this->dataEleicao = dataEleicao;
 	}
 	void addPartido(Partidos p) {
-		this.partidosEleicao.add(p);	
+		this->partidosEleicao.insert(this->partidosEleicao.end(), p);	
 	}
 	
 	Partidos retornaPartidoPeloNum(int x) {
-		for(this.partidosEleicao = Partidos.begin(); this.partidosEleicao != Partidos.end(); ++this.partidosEleicao) {
+		for(Partidos p = this->partidosEleicao.begin(); p != this->partidosEleicao.end(); ++p) {
 			if(x == p.getNumeroPartido()) {
 				return p;
 			}
@@ -101,6 +99,6 @@ class Eleicao {
 	}
 
 	void setQtdVagas(int qtdVagas) {
-		this.qtdVagas = qtdVagas;
+		this->qtdVagas = qtdVagas;
 	}
-}
+};
