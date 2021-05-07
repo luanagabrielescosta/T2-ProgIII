@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include "Candidatos.hpp"
+#include "candidato.hpp"
 
 using namespace std;
 
-class Partidos{
-	list<Candidatos> candidatosPartido; 
+class partido{
+	list<candidato> candidatoPartido; 
 	int numeroPartido; 
 	int votosLegendaPartido; 
 	string nomePartido; 
@@ -23,7 +23,7 @@ class Partidos{
 	}
 
 	int votosTotaisPartido;
-	//int qtdCandidatosEleitos
+	//int qtdcandidatoEleitos
 	
 	int getVotosTotaisPartido() {
 		return votosTotaisPartido;
@@ -33,17 +33,17 @@ class Partidos{
 		this->votosTotaisPartido = votosTotaisPartido;
 	}
 
-	Partidos(int numeroPartido, int votosLegendaPartido, string nomePartido, string siglaPartido) {
+	partido(int numeroPartido, int votosLegendaPartido, string nomePartido, string siglaPartido) {
 		
-		this->candidatosPartido = candidatosPartido;
+		this->candidatoPartido = candidatoPartido;
 		this->numeroPartido = numeroPartido;
 		this->votosLegendaPartido = votosLegendaPartido;
 		this->nomePartido = nomePartido;
 		this->siglaPartido = siglaPartido;
 	}
 
-	list<Candidatos> getCandidatosPartido() {
-		return candidatosPartido;
+	list<candidato> getcandidatoPartido() {
+		return candidatoPartido;
 	}
 
 	int getNumeroPartido() {
@@ -62,12 +62,12 @@ class Partidos{
 		return siglaPartido;
 	}
 	
-	void addCandidato(Candidatos c){
-		this->candidatosPartido.insert(this->candidatosPartido.end(), c);
+	void addCandidato(candidato c){
+		this->candidatoPartido.insert(this->candidatoPartido.end(), c);
 	}
 
 	// @Override
-	int compareTo(Partidos o) {
+	int compareTo(partido o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

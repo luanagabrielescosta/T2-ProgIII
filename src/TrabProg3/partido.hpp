@@ -1,13 +1,13 @@
-#ifndef partidos_hpp_
-#define partidos_hpp_
+#ifndef partido_hpp_
+#define partido_hpp_
 
 #include <list>
-#include "Candidatos.hpp"
+#include "candidato.hpp"
 
 using namespace std;
 
-class Partidos{
-	list<Candidatos> candidatosPartido; 
+class partido{
+	list<candidato> candidatoPartido; 
 	int numeroPartido; 
 	int votosLegendaPartido; 
 	string nomePartido; 
@@ -25,9 +25,9 @@ class Partidos{
 
 	void setVotosTotaisPartido(int votosTotaisPartido);
 
-	Partidos(int numeroPartido, int votosLegendaPartido, string nomePartido, string siglaPartido);
+	partido(int numeroPartido, int votosLegendaPartido, string nomePartido, string siglaPartido);
 
-	list<Candidatos> getCandidatosPartido();
+	list<candidato> getcandidatoPartido();
 
 	int getNumeroPartido();
 
@@ -37,10 +37,10 @@ class Partidos{
 
 	string getSiglaPartido();
 	
-	void addCandidato(Candidatos c);
+	void addCandidato(candidato c);
 
-	int compareTo(Partidos o);
+	int compareTo(partido o);
 	
 };
 
-#endif /* partidos_hpp_ */
+#endif /* partido_hpp_ */

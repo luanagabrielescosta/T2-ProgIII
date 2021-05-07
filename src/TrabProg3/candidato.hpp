@@ -1,12 +1,13 @@
-#ifndef candidatos_hpp_
-#define candidatos_hpp_
+#ifndef candidato_hpp_
+#define candidato_hpp_
+// #pragma once
 
 #include <iostream>
 #include <string>
-#include "Candidatos.hpp"
+#include "date.hpp"
 
 using namespace std;
-class Candidatos{
+class candidato{
 
 	private:
 	int numeroCandidato;
@@ -15,13 +16,13 @@ class Candidatos{
 	string nomeCandidato;
 	string nomeUrnaCandidato;
 	string sexoCandidato; 
-	Date dataNascimentoCandidato; 
+	date dataNascimentoCandidato; 
 	string destinoVoto; 
 	int numeroPartidoCandidato;
 	
 	public:
-	Candidatos(int numeroCandidato, int votosNominaisCandidato,string situacaoCandidato,string nomeCandidato,string nomeUrnaCandidato,
-			string sexoCandidato,Date dataNascimentoCandidato, string destinoVoto, int numeroPartidoCandidato);
+	candidato(int numeroCandidato, int votosNominaisCandidato,string situacaoCandidato,string nomeCandidato,string nomeUrnaCandidato,
+			string sexoCandidato,date dataNascimentoCandidato, string destinoVoto, int numeroPartidoCandidato);
 
 	int getNumeroCandidato();
 
@@ -35,13 +36,13 @@ class Candidatos{
 
 	string getSexoCandidato();
 
-	Date getDataNascimentoCandidato();
+	date getDataNascimentoCandidato();
 
 	string getDestinoVoto();
 
 	int getNumeroPartidoCandidato();
 
-	int compareTo(Candidatos o);
+	int compareTo(candidato o);
 };
 
-#endif /* candidatos_hpp_ */
+#endif /* candidato_hpp_ */

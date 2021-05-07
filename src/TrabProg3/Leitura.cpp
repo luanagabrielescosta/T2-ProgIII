@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Leitura {
+public class leitura {
 	
 	String nPartido,vLegenda,nomePartido,siglaPartido; 
 	String numCandidato,vNominaisCandidato,situCandidato,noCandidato,noUrnaCandidato,sexCandidato,datNascCandidato,destVotoCandidato,nPartidoCandidato;

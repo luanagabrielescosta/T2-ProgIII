@@ -1,29 +1,25 @@
 #include <string>
-#include "Eleicao.hpp"
-#include "Leitura.hpp"
-#include "Escrita.hpp"
+#include "eleicao.hpp"
+#include "leitura.hpp"
+#include "escrita.hpp"
+#include "date.hpp"
 
 using namespace std;
 
-class Main{
-	public:
-	static int main(string args){
+int main(int argc, char** argv){
 
-		Eleicao vereador = Eleicao(); 
-		string arquivoCandidatos = args[0];
-		string arquivoPartidos = args[1];		
-		string dataString = args[2];
-		Leitura lerPartidos = new Leitura(); 
+		eleicao vereador = eleicao(); 
+		string arquivoCandidatos = argv[0];
+		string arquivoPartidos = argv[1];		
+		string dataString = argv[2];
+		leitura lerPartidos = new leitura(); 
 		lerPartidos.lePartidos(vereador,arquivoPartidos);
-		Leitura lerCandidatos = new Leitura(); 
+		leitura lerCandidatos = new leitura(); 
 		lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
-		Escrita escreveArquivoSaida = new Escrita();
+		escrita escreveArquivoSaida = new escrita();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(dataString);
+        date data = formato.parse(dataString);
 		escreveArquivoSaida.escreveArquivo("out.txt",data,vereador);		
 		
 		return 0;
-	}
-};
-
-
+}

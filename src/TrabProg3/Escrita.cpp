@@ -1,49 +1,38 @@
-package TrabProg3;
-
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Calendar;
+#include <iostream>
+#include <string>
+#include <list>
+#include "eleicao.hpp"
 
 
-public class Escrita {
-	
-	
-	public boolean escreveArquivo(String Caminho, Date dataEleicao, Eleicao vereadores) {
+using namespace std;
+
+class escrita {
+	public:
+	bool escreveArquivo(string Caminho, Date dataeleicao, eleicao vereadores) {
 		try {
-//			FileWriter arq= new FileWriter(Caminho);
 			PrintWriter escreverArquivo = new PrintWriter(new OutputStreamWriter (new FileOutputStream (Caminho), "UTF-8")); 
-			ArrayList<Partidos> listaPartidos = vereadores.getPartidosEleicao(); 
-			ArrayList<String> infoCandidatoEleito = new ArrayList<>(); 
-			ArrayList<Candidatos> candidatosEleitos = new ArrayList<>();
-			ArrayList<Candidatos> candidatosVotos = new ArrayList<>();
-			ArrayList<Candidatos> candidatosMaisVotados = new ArrayList<>(); 
-			ArrayList<Candidatos> candidatosEleitosMajoritariamente = new ArrayList<>(); 
-			ArrayList<Candidatos> maisVotadoPartido = new ArrayList<>(); 
-			ArrayList<Candidatos> menosVotadoPartido = new ArrayList<>();			
-			ArrayList <Integer> posicaoRanking = new ArrayList<>();
-			ArrayList <Integer> posicaoRankingMenosVotadosEleitos = new ArrayList<>();
+			list<Partidos> listaPartidos = vereadores.getPartidoseleicao(); 
+			list<string> infoCandidatoEleito; 
+			list<Candidatos> candidatosEleitos;
+			list<Candidatos> candidatosVotos;
+			list<Candidatos> candidatosMaisVotados; 
+			list<Candidatos> candidatosEleitosMajoritariamente; 
+			list<Candidatos> maisVotadoPartido; 
+			list<Candidatos> menosVotadoPartido;			
+			list <int> posicaoRanking;
+			list <int> posicaoRankingMenosVotadosEleitos;
 			
 			int posicaoEleito=1,totalCandidatos=0,aux=0,cont=0,posicaoCandidato=1,eleitoMenosVotos=10000,qtdVagas=0,comparaPartido; 
 			int candidatoMenosVotado = 10000,candidatoMaisVotado = 0,numeroCandidatoMenosVotado,numeroCandidatoMaisVotado;
 			int totalVotosNominaisPartido=0,totalVotosPartido=0,qtdEleitosPartido=0,qtdPartidos=0, totalVotos=0,totalVotosNominais=0,totalVotosLegenda=0, qtdMulheresEleitas=0,qtdHomensEleitos=0;
-			String comparaSituacao = "Eleito",comparaSexoF= "F",comparaSexoM = "M"; 
+			string comparaSituacao = "Eleito",comparaSexoF= "F",comparaSexoM = "M"; 
 			double porcentagemEleitasF,porcentagemEleitosM;
 			double porcentagemVnominais, porcentagemVlegenda;
 			int idadeAbaixoTrinta=0,idadeAbaixoQuarenta=0,idadeAbaixoCinquenta=0,idadeAbaixoSessenta=0, idadeAcimaSessenta=0;
-			//vereadores.setDataEleicao("15/11/2020");
+			//vereadores.setDataeleicao("15/11/2020");
 			
 			//Fun��o de leitura, tamb�m utilizada para descobrir a quantidade de vagas. 
-			for(Partidos p : listaPartidos ) {
+			for(Partidos p = listaPartidos.begin(); p != listaPartidos.end(); ++p){
 				qtdPartidos++;
 				totalVotosLegenda += p.getVotosLegendaPartido(); 
 				for(Candidatos c : p.getCandidatosPartido()) {
@@ -53,11 +42,11 @@ public class Escrita {
 					}
 					
 					Candidatos ca = new Candidatos(c.getNumeroCandidato(),c.getVotosNominaisCandidato(),c.getSituacaoCandidato(),c.getNomeCandidato(),c.getNomeUrnaCandidato(),c.getSexoCandidato(),c.getDataNascimentoCandidato(),c.getDestinoVoto(),c.getNumeroPartidoCandidato());
-					candidatosVotos.add(ca); 
+					candidatosVotos.insert(candidatosVotos.end(),ca); 
 					if(c.getSituacaoCandidato().equals(comparaSituacao)){
-					candidatosEleitos.add(ca);
+					candidatosEleitos.insert(candidatosEleitos.end(), ca);
 					qtdVagas++; 
-					infoCandidatoEleito.add(c.getNomeCandidato() + " / " + c.getNomeUrnaCandidato() + " (" + p.getSiglaPartido()+ ", " + c.getVotosNominaisCandidato() + " votos)");
+					infoCandidatoEleito.insert(infoCandidatoEleito.end(), c.getNomeCandidato() + " / " + c.getNomeUrnaCandidato() + " (" + p.getSiglaPartido()+ ", " + c.getVotosNominaisCandidato() + " votos)");
 					if(c.getSexoCandidato().equals(comparaSexoF)) {
 						qtdMulheresEleitas++; 
 					}else if(c.getSexoCandidato().equals(comparaSexoM)) {
@@ -71,7 +60,7 @@ public class Escrita {
 			
 			int aux2 = qtdVagas; 
 			
-			//Escrita da quantidade de vagas; 
+			//escrita da quantidade de vagas; 
 			escreverArquivo.println("Número de vagas: " + qtdVagas);
 			escreverArquivo.println();
 			//Aqui vamos escrever os candidatos eleitos que foram adicionados a uma lista de eleitos no loop de leitura.
@@ -89,12 +78,12 @@ public class Escrita {
 						
 						Calendar dataNascimento = Calendar.getInstance();
 						dataNascimento.setTime(c.getDataNascimentoCandidato());
-						Calendar dataEleicaoAux = Calendar.getInstance();
-						dataEleicaoAux.setTime(dataEleicao);
+						Calendar dataeleicaoAux = Calendar.getInstance();
+						dataeleicaoAux.setTime(dataeleicao);
 
-						Integer diferencaMes = dataEleicaoAux.get(Calendar.MONTH) - dataNascimento.get(Calendar.MONTH);
-						Integer diferencaDia = dataEleicaoAux.get(Calendar.DAY_OF_MONTH) - dataNascimento.get(Calendar.DAY_OF_MONTH);
-						Integer idade = (dataEleicaoAux.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR));
+						Integer diferencaMes = dataeleicaoAux.get(Calendar.MONTH) - dataNascimento.get(Calendar.MONTH);
+						Integer diferencaDia = dataeleicaoAux.get(Calendar.DAY_OF_MONTH) - dataNascimento.get(Calendar.DAY_OF_MONTH);
+						Integer idade = (dataeleicaoAux.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR));
 
 						if(diferencaMes < 0 || (diferencaMes == 0 && diferencaDia < 0)) {
 							idade--;

@@ -1,104 +1,106 @@
 #include <iostream>
 #include <string>
 #include <list>
-
-#include "Candidatos.hpp"
-#include "Partidos.hpp"
+#include "date.hpp"
+#include "eleicao.hpp"
+#include "candidato.hpp"
+#include "partido.hpp"
 
 using namespace std;
 
-class Eleicao {
-	private:
-	int numeroVagasEleicao; 
-	// ArrayList <Partidos> partidosEleicao;
-	list<Partidos> partidosEleicao;
-	// ArrayList <Candidatos> eleitosProporcionalmente;
-	list<Candidatos> eleitosProporcionalmente;
-	// ArrayList <Candidatos> maisVotados;
-	list<Candidatos> maisVotados;
-	// ArrayList <Candidatos> eleitosMajoritariamente;
-	list<Candidatos> eleitosMajoritariamente;
-	// ArrayList <Candidatos> naoEleitosMajoritariamente; 
-	list<Candidatos> naoEleitosMajoritariamente;
-	Date dataEleicao;
-	int qtdVagas; 
+// class eleicao {
+// 	private:
+// 	int numeroVagaseleicao; 
+// 	// ArrayList <partido> partidoeleicao;
+// 	list<partido> partidoeleicao;
+// 	// ArrayList <candidato> eleitosProporcionalmente;
+// 	list<candidato> eleitosProporcionalmente;
+// 	// ArrayList <candidato> maisVotados;
+// 	list<candidato> maisVotados;
+// 	// ArrayList <candidato> eleitosMajoritariamente;
+// 	list<candidato> eleitosMajoritariamente;
+// 	// ArrayList <candidato> naoEleitosMajoritariamente; 
+// 	list<candidato> naoEleitosMajoritariamente;
+// 	date dataeleicao;
+// 	int qtdVagas; 
 	
 
-	public:
-	Eleicao() {
-		this->numeroVagasEleicao = numeroVagasEleicao;
-		this->partidosEleicao = partidosEleicao;
+// 	public:
+	eleicao::eleicao(){
+		this->numeroVagaseleicao = numeroVagaseleicao;
+		this->partidoeleicao = partidoeleicao;
 		this->eleitosProporcionalmente = eleitosProporcionalmente;
 		this->maisVotados = maisVotados;
 		this->eleitosMajoritariamente = eleitosMajoritariamente;
 		this->naoEleitosMajoritariamente = naoEleitosMajoritariamente;
-		this->dataEleicao = dataEleicao;
+		this->dataeleicao = dataeleicao;
 	}
 
-	int getNumeroVagasEleicao() {
-		return numeroVagasEleicao;
+	int eleicao::getNumeroVagaseleicao(){
+		return numeroVagaseleicao;
 	}
 
-	void setNumeroVagasEleicao(int numeroVagasEleicao) {
-		this->numeroVagasEleicao = numeroVagasEleicao;
+	void eleicao::setNumeroVagaseleicao(int numeroVagaseleicao){
+		this->numeroVagaseleicao = numeroVagaseleicao;
 	}
 
-	list<Partidos> getPartidosEleicao() {
-		return partidosEleicao;
+	list<partido> eleicao::getpartidoeleicao(){
+		return partidoeleicao;
 	}
 
-	void setPartidosEleicao(list<Partidos> partidosEleicao) {
-		this->partidosEleicao = partidosEleicao;
+	void eleicao::setpartidoeleicao(list<partido> partidoeleicao){
+		this->partidoeleicao = partidoeleicao;
 	}
 
-	list<Candidatos> getEleitosProporcionalmente() {
+	list<candidato> eleicao::getEleitosProporcionalmente(){
 		return eleitosProporcionalmente;
 	}
-	void setEleitosProporcionalmente(list<Candidatos> eleitosProporcionalmente) {
+	void eleicao::setEleitosProporcionalmente(list<candidato> eleitosProporcionalmente){
 		this->eleitosProporcionalmente = eleitosProporcionalmente;
 	}
-	list<Candidatos> getMaisVotados() {
+	list<candidato> eleicao::getMaisVotados(){
 		return maisVotados;
 	}
-	void setMaisVotados(list<Candidatos> maisVotados) {
+	void eleicao::setMaisVotados(list<candidato> maisVotados){
 		this->maisVotados = maisVotados;
 	}
-	list<Candidatos> getEleitosMajoritariamente() {
+	list<candidato> eleicao::getEleitosMajoritariamente(){
 		return eleitosMajoritariamente;
 	}
-	void setEleitosMajoritariamente(list<Candidatos> eleitosMajoritariamente) {
+	void eleicao::setEleitosMajoritariamente(list<candidato> eleitosMajoritariamente){
 		this->eleitosMajoritariamente = eleitosMajoritariamente;
 	}
-	list<Candidatos> getNaoEleitosMajoritariamente() {
+	list<candidato> eleicao::getNaoEleitosMajoritariamente(){
 		return naoEleitosMajoritariamente;
 	}
-	void setNaoEleitosMajoritariamente(list<Candidatos> naoEleitosMajoritariamente) {
+	void eleicao::setNaoEleitosMajoritariamente(list<candidato> naoEleitosMajoritariamente){
 		this->naoEleitosMajoritariamente = naoEleitosMajoritariamente;
 	}
-	Date getDataEleicao() {
-		return dataEleicao;
+	date eleicao::getDataeleicao(){
+		return dataeleicao;
 	}
-	void setDataEleicao(Date dataEleicao) {
-		this->dataEleicao = dataEleicao;
+	void eleicao::setDataeleicao(date dataeleicao){
+		this->dataeleicao = dataeleicao;
 	}
-	void addPartido(Partidos p) {
-		this->partidosEleicao.insert(this->partidosEleicao.end(), p);	
+
+	void eleicao::addPartido(partido p){
+		this->partidoeleicao.insert(this->partidoeleicao.end(), p);	
 	}
 	
-	Partidos retornaPartidoPeloNum(int x) {
-		for(Partidos p = this->partidosEleicao.begin(); p != this->partidosEleicao.end(); ++p) {
-			if(x == p.getNumeroPartido()) {
+	partido eleicao::retornaPartidoPeloNum(int x){
+		for(partido p = this->partidoeleicao.begin(); p != this->partidoeleicao.end(); ++p){
+			if(x == p.getNumeroPartido()){
 				return p;
 			}
 		}
 		return NULL;
 	}
 
-	int getQtdVagas() {
+	int eleicao::getQtdVagas(){
 		return qtdVagas;
 	}
 
-	void setQtdVagas(int qtdVagas) {
+	void eleicao::setQtdVagas(int qtdVagas){
 		this->qtdVagas = qtdVagas;
 	}
-};
+// };
