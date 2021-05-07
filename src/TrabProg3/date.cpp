@@ -4,13 +4,6 @@
 
 using namespace std;
 
-    // date::date(int &d, int &m, int &y){
-    //     this->day = d;
-    //     this->month = m;
-    //     this->year = y;
-        
-    // }
-
     date::date(){
     }
     

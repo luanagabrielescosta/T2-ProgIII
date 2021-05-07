@@ -87,14 +87,14 @@ using namespace std;
 		this->partidoeleicao.insert(this->partidoeleicao.end(), p);	
 	}
 	
-	partido eleicao::retornaPartidoPeloNum(int x){
-		// for(auto & partido : p){
-		// 	if(x == partido.getNumeroPartido()){
-		// 		return partido;
-		// 	}
-		// }
-		// return NULL;
-	}
+	// partido eleicao::retornaPartidoPeloNum(int x){
+	// 	for(auto & partido : p){
+	// 		if(x == partido.getNumeroPartido()){
+	// 			return partido;
+	// 		}
+	// 	}
+	// 	return NULL;
+	// }
 
 	int eleicao::getQtdVagas(){
 		return qtdVagas;
