@@ -6,19 +6,7 @@
 // #include "date.hpp"
 
 using namespace std;
-// class candidato{
-// 	private:
-// 	int numeroCandidato;
-// 	int votosNominaisCandidato; 
-// 	string situacaoCandidato; 
-// 	string nomeCandidato;
-// 	string nomeUrnaCandidato;
-// 	string sexoCandidato; 
-// 	date dataNascimentoCandidato; 
-// 	string destinoVoto; 
-// 	int numeroPartidoCandidato;
-	
-// 	public:
+
 	candidato::candidato(int &numeroCandidato, int &votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
 			string &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int &numeroPartidoCandidato){
 		this->numeroCandidato = numeroCandidato;
@@ -70,12 +58,8 @@ using namespace std;
 	}
 
 	// @Override
-	int candidato::compareTo(candidato o){
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-	
-	
-// };
+	// int candidato::compareTo(candidato o){
+	// 	// TODO Auto-generated method stub
+	// 	return 0;
+	// }
+

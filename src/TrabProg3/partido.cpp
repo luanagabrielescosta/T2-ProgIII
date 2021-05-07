@@ -58,7 +58,7 @@ using namespace std;
 	}
 
 	// @Override
-	int partido::compareTo(partido o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	// int partido::compareTo(partido o) {
+	// 	// TODO Auto-generated method stub
+	// 	return 0;
+	// }

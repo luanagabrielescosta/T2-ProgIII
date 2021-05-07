@@ -87,7 +87,7 @@ using namespace std;
 		this->partidoeleicao.insert(this->partidoeleicao.end(), p);	
 	}
 	
-	partido eleicao::retornaPartidoPeloNum(int x, list<partido> p){
+	partido eleicao::retornaPartidoPeloNum(int x){
 		// for(auto & partido : p){
 		// 	if(x == partido.getNumeroPartido()){
 		// 		return partido;
