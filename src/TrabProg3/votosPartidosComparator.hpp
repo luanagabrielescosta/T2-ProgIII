@@ -1,12 +1,12 @@
 #ifndef votos_partido_comparator_hpp_
 #define votos_partido_comparator_hpp_
 
-#include "Partidos.hpp"
+#include "partido.hpp"
 
 class votosPartidosComparator{
 	// @Override
 	public:
-	int compare(Partidos o1, Partidos o2);
+	int compare(partido o1, partido o2);
 };
 
 
