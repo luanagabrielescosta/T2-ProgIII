@@ -19,15 +19,16 @@ using namespace std;
 // 	int numeroPartidoCandidato;
 	
 // 	public:
-	candidato::candidato(int numeroCandidato, int votosNominaisCandidato,string situacaoCandidato,string nomeCandidato,string nomeUrnaCandidato,
-			string sexoCandidato, date dataNascimentoCandidato, string destinoVoto, int numeroPartidoCandidato){
+	candidato::candidato(int &numeroCandidato, int &votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
+			string &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int &numeroPartidoCandidato){
 		this->numeroCandidato = numeroCandidato;
 		this->votosNominaisCandidato = votosNominaisCandidato;
 		this->situacaoCandidato = situacaoCandidato;
 		this->nomeCandidato = nomeCandidato;
 		this->nomeUrnaCandidato = nomeUrnaCandidato;
 		this->sexoCandidato = sexoCandidato;
-		this->dataNascimentoCandidato = dataNascimentoCandidato;
+		this->dataNascimentoCandidato = date();
+		this->dataNascimentoCandidato.turn_into(dataNascimentoCandidato);
 		this->destinoVoto = destinoVoto;
 		this->numeroPartidoCandidato = numeroPartidoCandidato;
 	}

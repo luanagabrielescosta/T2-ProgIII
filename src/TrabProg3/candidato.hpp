@@ -21,8 +21,8 @@ class candidato{
 	int numeroPartidoCandidato;
 	
 	public:
-	candidato(int numeroCandidato, int votosNominaisCandidato,string situacaoCandidato,string nomeCandidato,string nomeUrnaCandidato,
-			string sexoCandidato,date dataNascimentoCandidato, string destinoVoto, int numeroPartidoCandidato);
+	candidato(int &numeroCandidato, int &votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
+			string &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int &numeroPartidoCandidato);
 
 	int getNumeroCandidato();
 

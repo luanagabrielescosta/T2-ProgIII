@@ -2,75 +2,63 @@
 #include <string>
 #include <list>
 #include "candidato.hpp"
+#include "partido.hpp"
 
 using namespace std;
 
-class partido{
-	list<candidato> candidatoPartido; 
-	int numeroPartido; 
-	int votosLegendaPartido; 
-	string nomePartido; 
-	string siglaPartido; 
-	int votosNominaisTotaisPartido;
-
-	public:
-	int getVotosNominaisTotaisPartido() {
+	int partido::getVotosNominaisTotaisPartido() {
 		return votosNominaisTotaisPartido;
 	}
 
-	void setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
+	void partido::setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
 		this->votosNominaisTotaisPartido = votosNominaisTotaisPartido;
 	}
 
 	int votosTotaisPartido;
 	//int qtdcandidatoEleitos
 	
-	int getVotosTotaisPartido() {
+	int partido::getVotosTotaisPartido() {
 		return votosTotaisPartido;
 	}
 
-	void setVotosTotaisPartido(int votosTotaisPartido) {
+	void partido::setVotosTotaisPartido(int votosTotaisPartido) {
 		this->votosTotaisPartido = votosTotaisPartido;
 	}
 
-	partido(int numeroPartido, int votosLegendaPartido, string nomePartido, string siglaPartido) {
-		
-		this->candidatoPartido = candidatoPartido;
+	partido::partido(int &numeroPartido, int &votosLegendaPartido, string &nomePartido, string &siglaPartido){
+		// this->candidatoPartido = candidatoPartido;
 		this->numeroPartido = numeroPartido;
 		this->votosLegendaPartido = votosLegendaPartido;
 		this->nomePartido = nomePartido;
 		this->siglaPartido = siglaPartido;
 	}
 
-	list<candidato> getcandidatoPartido() {
+	list<candidato> partido::getcandidatoPartido() {
 		return candidatoPartido;
 	}
 
-	int getNumeroPartido() {
+	int partido::getNumeroPartido() {
 		return numeroPartido;
 	}
 
-	int getVotosLegendaPartido() {
+	int partido::getVotosLegendaPartido() {
 		return votosLegendaPartido;
 	}
 
-	string getNomePartido() {
+	string partido::getNomePartido() {
 		return nomePartido;
 	}
 
-	string getSiglaPartido() {
+	string partido::getSiglaPartido() {
 		return siglaPartido;
 	}
 	
-	void addCandidato(candidato c){
+	void partido::addCandidato(candidato c){
 		this->candidatoPartido.insert(this->candidatoPartido.end(), c);
 	}
 
 	// @Override
-	int compareTo(partido o) {
+	int partido::compareTo(partido o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
-};

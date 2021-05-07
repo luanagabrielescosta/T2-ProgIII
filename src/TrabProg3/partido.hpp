@@ -25,7 +25,7 @@ class partido{
 
 	void setVotosTotaisPartido(int votosTotaisPartido);
 
-	partido(int numeroPartido, int votosLegendaPartido, string nomePartido, string siglaPartido);
+	partido(int &numeroPartido, int &votosLegendaPartido, string &nomePartido, string &siglaPartido);
 
 	list<candidato> getcandidatoPartido();
 

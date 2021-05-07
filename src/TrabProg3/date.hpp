@@ -13,7 +13,8 @@ class date{
     int year;
     
     public:
-    date(int d, int m, int y);
+    // date(int &d, int &m, int &y);
+    date();
     
     void print_date();
 
@@ -26,6 +27,10 @@ class date{
     int return_year();
 
     unsigned int distance_years(date end);
+
+    void turn_into(date new_date);
+
+    int compare_date(date other, date another);
 };
 
 // int main(){
