@@ -27,13 +27,13 @@ using namespace std;
 
 // 	public:
 	eleicao::eleicao(){
-		this->numeroVagaseleicao = numeroVagaseleicao;
-		this->partidoeleicao = partidoeleicao;
-		this->eleitosProporcionalmente = eleitosProporcionalmente;
-		this->maisVotados = maisVotados;
-		this->eleitosMajoritariamente = eleitosMajoritariamente;
-		this->naoEleitosMajoritariamente = naoEleitosMajoritariamente;
-		this->dataeleicao = dataeleicao;
+		// this->numeroVagaseleicao = numeroVagaseleicao;
+		// this->partidoeleicao = partidoeleicao;
+		// this->eleitosProporcionalmente = eleitosProporcionalmente;
+		// this->maisVotados = maisVotados;
+		// this->eleitosMajoritariamente = eleitosMajoritariamente;
+		// this->naoEleitosMajoritariamente = naoEleitosMajoritariamente;
+		// this->dataeleicao = dataeleicao;
 	}
 
 	int eleicao::getNumeroVagaseleicao(){
