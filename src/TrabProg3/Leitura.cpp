@@ -1,35 +1,23 @@
-package TrabProg3;
+#include "leitura.hpp"
+#include <string>
 
-import TrabProg3.Eleicao.*;
+using namespace std;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Date;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.StringTokenizer;
-
-public class leitura {
+    leitura::leitura(){
+        this->comparaSituacao = "Eleito";
+        this->comparaSexof = "F";
+        this->comparaSexom = "M";
+        this->qtdVagas = 0;
+        this->qtdMulheresEleitas = 0;
+        this->qtdHomensEleitos = 0;
+        this-> totalVotos = 0;
+        this->totalVotosNominais = 0;
+        this->totalVotosLegenda = 0;
+    }
 	
-	String nPartido,vLegenda,nomePartido,siglaPartido; 
-	String numCandidato,vNominaisCandidato,situCandidato,noCandidato,noUrnaCandidato,sexCandidato,datNascCandidato,destVotoCandidato,nPartidoCandidato;
-	String comparaSituacao = "Eleito",comparaSexof = "F",comparaSexom = "M"; 
-	int qtdVagas=0,qtdMulheresEleitas=0,qtdHomensEleitos=0,totalVotos=0,totalVotosNominais=0,totalVotosLegenda=0; 
-	
-	
-	public void lePartidos(Eleicao vereadores, String path) throws IOException {
-		
-//		String path = "/home/joaogobeti/Downloads/afonso-claudio-partidos.csv"; 
+	void leitura::lePartidos(eleicao vereadores, string path){
 		BufferedReader buffRead = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-        String linha = "";
+        string linha = "";
         buffRead.readLine();
         while (true) {
         	linha = buffRead.readLine();
@@ -37,7 +25,7 @@ public class leitura {
                break;
 
             }
-            StringTokenizer st = new StringTokenizer(linha,",");
+            stringTokenizer st = new stringTokenizer(linha,",");
      while (st.hasMoreTokens()) {
          
          nPartido = st.nextToken().trim();
@@ -51,7 +39,7 @@ public class leitura {
          
          
         // System.out.println("Numero Partido: " + numeroPartido + " Votos legenda: " + votosLegenda + " Nome Partido: " + nomePartido + " Sigla Partido: " + siglaPartido) ;
-         Partidos x = new Partidos(numeroPartido,votosLegenda,nomePartido,siglaPartido); 
+         partido x = partido(numeroPartido, votosLegenda, nomePartido, siglaPartido); 
          vereadores.addPartido(x);
          
      }
@@ -59,11 +47,9 @@ public class leitura {
         buffRead.close();
 	}
 	
-	public void leCandidatos(Eleicao vereadores, String path) throws IOException, ParseException{
-		
-//		String path = "/home/joaogobeti/Downloads/afonso-claudio-candidatos.csv"; 
+	void leitura::leCandidatos(eleicao vereadores, string path){
 		BufferedReader buffRead = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-        String linha = "";
+        string linha = "";
         buffRead.readLine();
         while (true) {
         	linha = buffRead.readLine();
@@ -71,7 +57,7 @@ public class leitura {
                break;
 
             }
-            StringTokenizer st = new StringTokenizer(linha,",");
+            stringTokenizer st = new stringTokenizer(linha,",");
      while (st.hasMoreTokens()) {
          
          numCandidato = st.nextToken().trim();
@@ -93,29 +79,18 @@ public class leitura {
          }
          datNascCandidato = st.nextToken().trim(); 
          SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-         Date data = formato.parse(datNascCandidato);
+         date data = formato.parse(datNascCandidato);
          destVotoCandidato = st.nextToken().trim(); 
          nPartidoCandidato = st.nextToken().trim();
          int numeroPartidoCandidato = Integer.parseInt(nPartidoCandidato); 
          
          
-         Partidos p = vereadores.retornaPartidoPeloNum(numeroPartidoCandidato); 
-         Candidatos c = new Candidatos(numeroCandidato,votosNominaisCandidato,situCandidato,noCandidato,noUrnaCandidato,sexCandidato,data,destVotoCandidato,numeroPartidoCandidato); 
+         partido p = vereadores.retornaPartidoPeloNum(numeroPartidoCandidato); 
+         candidato c = candidato(numeroCandidato,votosNominaisCandidato,situCandidato,noCandidato,noUrnaCandidato,sexCandidato,data,destVotoCandidato,numeroPartidoCandidato); 
          p.addCandidato(c);
-         
-         //System.out.println("numero Candidato: " + numeroCandidato); 
-           
      }
      
         }
         buffRead.close();
         totalVotos = totalVotosLegenda + totalVotosNominais; 
-        //System.out.println("VotosLegenda: " + totalVotosLegenda + "VotosNominais: " + totalVotosNominais + "'VotosTotais: " + totalVotos);
-        //System.out.println("quantidade de vagas: " + qtdVagas); 
-        //System.out.println("quantidade de mulheres eleitas: " + qtdMulheresEleitas); 
-        //System.out.println("quantidade de homens eleitos: " + qtdHomensEleitos); 
 	}
-}
-	
-	
-//Eleic�o --> Lista de partidos --> Partido x --> x.numero x.nome x.sigla

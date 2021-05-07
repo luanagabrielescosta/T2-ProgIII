@@ -12,11 +12,11 @@ int main(int argc, char** argv){
 		string arquivoCandidatos = argv[0];
 		string arquivoPartidos = argv[1];		
 		string dataString = argv[2];
-		leitura lerPartidos = new leitura(); 
+		leitura lerPartidos = leitura(); 
 		lerPartidos.lePartidos(vereador,arquivoPartidos);
-		leitura lerCandidatos = new leitura(); 
+		leitura lerCandidatos = leitura(); 
 		lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
-		escrita escreveArquivoSaida = new escrita();
+		escrita escreveArquivoSaida = escrita();
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         date data = formato.parse(dataString);
 		escreveArquivoSaida.escreveArquivo("out.txt",data,vereador);		

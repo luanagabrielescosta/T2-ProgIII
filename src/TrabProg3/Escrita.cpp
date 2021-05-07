@@ -1,47 +1,48 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include "eleicao.hpp"
+#include "escrita.hpp"
 
 
 using namespace std;
 
-class escrita {
-	public:
-	bool escreveArquivo(string Caminho, Date dataeleicao, eleicao vereadores) {
+	escrita::escrita(){
+	}
+
+	bool escrita::escreveArquivo(string Caminho, date dataeleicao, eleicao vereadores) {
 		try {
 			PrintWriter escreverArquivo = new PrintWriter(new OutputStreamWriter (new FileOutputStream (Caminho), "UTF-8")); 
-			list<Partidos> listaPartidos = vereadores.getPartidoseleicao(); 
+			list<partido> listaPartidos = vereadores.getPartidoseleicao(); 
 			list<string> infoCandidatoEleito; 
-			list<Candidatos> candidatosEleitos;
-			list<Candidatos> candidatosVotos;
-			list<Candidatos> candidatosMaisVotados; 
-			list<Candidatos> candidatosEleitosMajoritariamente; 
-			list<Candidatos> maisVotadoPartido; 
-			list<Candidatos> menosVotadoPartido;			
+			list<candidato> candidatosEleitos;
+			list<candidato> candidatosVotos;
+			list<candidato> candidatosMaisVotados; 
+			list<candidato> candidatosEleitosMajoritariamente; 
+			list<candidato> maisVotadoPartido; 
+			list<candidato> menosVotadoPartido;			
 			list <int> posicaoRanking;
 			list <int> posicaoRankingMenosVotadosEleitos;
 			
-			int posicaoEleito=1,totalCandidatos=0,aux=0,cont=0,posicaoCandidato=1,eleitoMenosVotos=10000,qtdVagas=0,comparaPartido; 
-			int candidatoMenosVotado = 10000,candidatoMaisVotado = 0,numeroCandidatoMenosVotado,numeroCandidatoMaisVotado;
-			int totalVotosNominaisPartido=0,totalVotosPartido=0,qtdEleitosPartido=0,qtdPartidos=0, totalVotos=0,totalVotosNominais=0,totalVotosLegenda=0, qtdMulheresEleitas=0,qtdHomensEleitos=0;
-			string comparaSituacao = "Eleito",comparaSexoF= "F",comparaSexoM = "M"; 
-			double porcentagemEleitasF,porcentagemEleitosM;
+			int posicaoEleito=1, totalCandidatos=0, aux=0, cont=0, posicaoCandidato=1, eleitoMenosVotos=10000, qtdVagas=0, comparaPartido; 
+			int candidatoMenosVotado = 10000, candidatoMaisVotado = 0, numeroCandidatoMenosVotado, numeroCandidatoMaisVotado;
+			int totalVotosNominaisPartido=0, totalVotosPartido=0, qtdEleitosPartido=0, qtdPartidos=0, totalVotos=0, totalVotosNominais=0, totalVotosLegenda=0, qtdMulheresEleitas=0, qtdHomensEleitos=0;
+			string comparaSituacao = "Eleito", comparaSexoF= "F", comparaSexoM = "M"; 
+			double porcentagemEleitasF, porcentagemEleitosM;
 			double porcentagemVnominais, porcentagemVlegenda;
-			int idadeAbaixoTrinta=0,idadeAbaixoQuarenta=0,idadeAbaixoCinquenta=0,idadeAbaixoSessenta=0, idadeAcimaSessenta=0;
+			int idadeAbaixoTrinta=0, idadeAbaixoQuarenta=0, idadeAbaixoCinquenta=0, idadeAbaixoSessenta=0, idadeAcimaSessenta=0;
 			//vereadores.setDataeleicao("15/11/2020");
 			
 			//Fun��o de leitura, tamb�m utilizada para descobrir a quantidade de vagas. 
-			for(Partidos p = listaPartidos.begin(); p != listaPartidos.end(); ++p){
+			for(partido p = listaPartidos.begin(); p != listaPartidos.end(); ++p){
 				qtdPartidos++;
 				totalVotosLegenda += p.getVotosLegendaPartido(); 
-				for(Candidatos c : p.getCandidatosPartido()) {
+				for(candidato c : p.getCandidatosPartido()) {
 					totalCandidatos++;
 					if(c.getDestinoVoto().equalsIgnoreCase("Válido")) {
 						totalVotosNominais += c.getVotosNominaisCandidato();	
 					}
 					
-					Candidatos ca = new Candidatos(c.getNumeroCandidato(),c.getVotosNominaisCandidato(),c.getSituacaoCandidato(),c.getNomeCandidato(),c.getNomeUrnaCandidato(),c.getSexoCandidato(),c.getDataNascimentoCandidato(),c.getDestinoVoto(),c.getNumeroPartidoCandidato());
+					candidato ca = candidato(c.getNumeroCandidato(),c.getVotosNominaisCandidato(),c.getSituacaoCandidato(),c.getNomeCandidato(),c.getNomeUrnaCandidato(),c.getSexoCandidato(),c.getDataNascimentoCandidato(),c.getDestinoVoto(),c.getNumeroPartidoCandidato());
 					candidatosVotos.insert(candidatosVotos.end(),ca); 
 					if(c.getSituacaoCandidato().equals(comparaSituacao)){
 					candidatosEleitos.insert(candidatosEleitos.end(), ca);
@@ -403,11 +404,3 @@ class escrita {
 		}
 		
 	}
-
-	//@Override
-	//public int compareTo(Candidatos o) {
-		// TODO Auto-generated method stub
-		//return 0;
-	//}
-		
-}
