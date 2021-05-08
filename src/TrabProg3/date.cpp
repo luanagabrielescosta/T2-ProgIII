@@ -6,6 +6,12 @@ using namespace std;
 
     date::date(){
     }
+
+    void date::enter_date(int d, int m, int y){
+        day = d;
+        month = m;
+        year = y;
+    }
     
     void date::print_date(){
         cout<<this->day<<"/"<<this->month<<"/"<<year<<endl;

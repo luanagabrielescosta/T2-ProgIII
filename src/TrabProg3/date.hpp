@@ -16,6 +16,8 @@ class date{
     // date(int &d, int &m, int &y);
     date();
     
+    void enter_date(int d, int m, int y);
+
     void print_date();
 
     int bi(int year);

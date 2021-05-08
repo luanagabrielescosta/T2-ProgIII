@@ -13,8 +13,8 @@ using namespace std;
 
     leitura::leitura(){
         this->comparaSituacao = "Eleito";
-        this->comparaSexof = "F";
-        this->comparaSexom = "M";
+        this->comparaSexof = 'F';
+        this->comparaSexom = 'M';
         this->qtdVagas = 0;
         this->qtdMulheresEleitas = 0;
         this->qtdHomensEleitos = 0;
@@ -48,27 +48,29 @@ using namespace std;
                     list <string> :: iterator it;
                     int nPartido;
                     int vLegenda;
+                    string nomePartido;
+                    string siglaPartido;
 
                     for(it = tokens.begin(); it != tokens.end(); ++it){
                         lib help = lib();
 
                         nPartido = help.string_to_int(*it);
-                        // cout << nPartido << " *===* ";
+                        // cout << nPartido;
                         it++;
 
                         vLegenda = help.string_to_int(*it); 
-                        // cout << vLegenda << " &===& ";
+                        // cout << vLegenda;
                         it++;
 
                         totalVotosLegenda += vLegenda; 
-                        // cout << totalVotosLegenda << " a===a ";
+                        // cout << totalVotosLegenda;
 
-                        string nomePartido = *it;
-                        // cout << nomePartido << " (===) ";
+                        nomePartido = *it;
+                        // cout << nomePartido;
                         it++; 
 
-                        string siglaPartido = *it; 
-                        // cout << siglaPartido << " m===m ";
+                        siglaPartido = *it; 
+                        // cout << siglaPartido;
                     }
 
                     partido x = partido(nPartido, vLegenda, nomePartido, siglaPartido); 
@@ -108,101 +110,76 @@ using namespace std;
                     list <string> :: iterator it;
                     int numCandidato;
                     int vNominaisCandidato;
+                    string situCandidato;
+                    string noCandidato;
+                    string noUrnaCandidato;
+                    char sexCandidato;
+                    date datNascCandidato;
+                    string destVotoCandidato;
+                    int nPartidoCandidato;
 
                     for(it = tokens.begin(); it != tokens.end(); ++it){
                         lib help = lib();
 
                         numCandidato = help.string_to_int(*it);
-                        // cout << numCandidato << " *===* ";
+                        // cout << numCandidato << " ";
                         it++;
-                        // numCandidato = st.nextToken().trim(); used to be
 
                         vNominaisCandidato = help.string_to_int(*it);
-                        // cout << vNominaisCandidato << " *===* ";
+                        // cout << vNominaisCandidato << " ";
                         it++;
-                        // vNominaisCandidato = st.nextToken().trim();  used to be
+
                         totalVotosNominais += vNominaisCandidato; 
                         
-                        // situCandidato = st.nextToken().trim();
-                        // if(situCandidato.equals(comparaSituacao)) {
-                        //     qtdVagas+=1; 
-                        // }
-                        // noCandidato = st.nextToken().trim(); 
-                        // noUrnaCandidato = st.nextToken().trim(); 
-                        // sexCandidato = st.nextToken().trim(); 
-                        // if(situCandidato.equals(comparaSituacao) && sexCandidato.equals(comparaSexof)) {
-                        //     qtdMulheresEleitas++;
-                        // }else if(situCandidato.equals(comparaSituacao) && sexCandidato.equals(comparaSexom)) {
-                        //     qtdHomensEleitos++; 
-                        // }
-                        // datNascCandidato = st.nextToken().trim(); 
-                        // SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                        // date data = formato.parse(datNascCandidato);
-                        // destVotoCandidato = st.nextToken().trim(); 
-                        // nPartidoCandidato = st.nextToken().trim();
-                        // int numeroPartidoCandidato = Integer.parseInt(nPartidoCandidato); 
-                        
-                        
-                        // partido p = vereadores.retornaPartidoPeloNum(numeroPartidoCandidato); 
-                        // candidato c = candidato(numeroCandidato,votosNominaisCandidato,situCandidato,noCandidato,noUrnaCandidato,sexCandidato,data,destVotoCandidato,numeroPartidoCandidato); 
-                        // p.addCandidato(c);
+                        situCandidato = *it;
+                        // cout << situCandidato << " ";
+                        it++;
+
+                        if(situCandidato.compare(comparaSituacao) == 0){
+                            qtdVagas++; 
+                        }
+
+                        noCandidato = *it;
+                        // cout << noCandidato << " ";
+                        it++;
+
+                        noUrnaCandidato = *it;
+                        // cout << noUrnaCandidato << " ";
+                        it++;
+
+                        sexCandidato = help.string_to_char(*it);
+                        // cout << sexCandidato << " ";
+                        it++;
+
+                        if(situCandidato.compare(comparaSituacao) == 0 && sexCandidato == comparaSexof) {
+                            qtdMulheresEleitas++;
+                        }else if(situCandidato.compare(comparaSituacao) == 0 && sexCandidato == comparaSexom) {
+                            qtdHomensEleitos++; 
+                        }
+
+                        datNascCandidato = help.string_to_date(*it);
+                        // datNascCandidato.print_date();
+                        it++;
+
+                        destVotoCandidato = *it;
+                        // cout << destVotoCandidato;
+                        it++;
+
+                        nPartidoCandidato = help.string_to_int(*it);
+                        // cout << nPartidoCandidato;
+
                     }
+                    // partido p = vereadores.retornaPartidoPeloNum(numeroPartidoCandidato); 
+                    // candidato c = candidato(numeroCandidato,votosNominaisCandidato,situCandidato,noCandidato,noUrnaCandidato,sexCandidato,data,destVotoCandidato,numeroPartidoCandidato); 
+                    // p.addCandidato(c);
 
                     cout << endl;
                 }
             }
             myfile.close();
+            totalVotos = totalVotosLegenda + totalVotosNominais; 
 
         } else{ 
             cout << "Unable to open file";
         }
 	}
-	
-	
-	// void leitura::leCandidatos(eleicao vereadores, string path){
-	// 	BufferedReader buffRead = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
-    //     string linha = "";
-    //     buffRead.readLine();
-    //     while (true) {
-    //     	linha = buffRead.readLine();
-    //         if (linha == null) {
-    //            break;
-
-    //         }
-    //         stringTokenizer st = new stringTokenizer(linha,",");
-    //  while (st.hasMoreTokens()) {
-         
-    //      numCandidato = st.nextToken().trim();
-    //      int numeroCandidato = Integer.parseInt(numCandidato); 
-    //      vNominaisCandidato = st.nextToken().trim(); 
-    //      int votosNominaisCandidato = Integer.parseInt(vNominaisCandidato); 
-    //      totalVotosNominais += votosNominaisCandidato; 
-    //      situCandidato = st.nextToken().trim();
-    //      if(situCandidato.equals(comparaSituacao)) {
-    //     	 qtdVagas+=1; 
-    //      }
-    //      noCandidato = st.nextToken().trim(); 
-    //      noUrnaCandidato = st.nextToken().trim(); 
-    //      sexCandidato = st.nextToken().trim(); 
-    //      if(situCandidato.equals(comparaSituacao) && sexCandidato.equals(comparaSexof)) {
-    //     	 qtdMulheresEleitas++;
-    //      }else if(situCandidato.equals(comparaSituacao) && sexCandidato.equals(comparaSexom)) {
-    //     	 qtdHomensEleitos++; 
-    //      }
-    //      datNascCandidato = st.nextToken().trim(); 
-    //      SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-    //      date data = formato.parse(datNascCandidato);
-    //      destVotoCandidato = st.nextToken().trim(); 
-    //      nPartidoCandidato = st.nextToken().trim();
-    //      int numeroPartidoCandidato = Integer.parseInt(nPartidoCandidato); 
-         
-         
-    //      partido p = vereadores.retornaPartidoPeloNum(numeroPartidoCandidato); 
-    //      candidato c = candidato(numeroCandidato,votosNominaisCandidato,situCandidato,noCandidato,noUrnaCandidato,sexCandidato,data,destVotoCandidato,numeroPartidoCandidato); 
-    //      p.addCandidato(c);
-    //  }
-     
-    //     }
-    //     buffRead.close();
-    //     totalVotos = totalVotosLegenda + totalVotosNominais; 
-	// }
