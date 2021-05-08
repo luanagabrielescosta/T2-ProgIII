@@ -35,6 +35,10 @@ date lib::string_to_date(std:: string old){
     return a;
 }
 
-    char lib::string_to_char(std:: string old){
-        return old[0];
-    }
+char lib::string_to_char(std:: string old){
+    return old[0];
+}
+
+char lib::int_to_char(int old){
+    return (old +'0');
+}

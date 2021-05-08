@@ -10,6 +10,7 @@ class lib{
     int string_to_int(std::string old);
     date string_to_date(std:: string old);
     char string_to_char(std:: string old);
+    char int_to_char(int old);
 };
 
 

@@ -1,24 +1,24 @@
 	bool escrita::escreveArquivo(string Caminho, date dataeleicao, eleicao vereadores) {
 		try {
-			PrintWriter escreverArquivo = new PrintWriter(new OutputStreamWriter (new FileOutputStream (Caminho), "UTF-8")); 
-			list<partido> listaPartidos = vereadores.getPartidoseleicao(); 
-			list<string> infoCandidatoEleito; 
-			list<candidato> candidatosEleitos;
-			list<candidato> candidatosVotos;
-			list<candidato> candidatosMaisVotados; 
-			list<candidato> candidatosEleitosMajoritariamente; 
-			list<candidato> maisVotadoPartido; 
-			list<candidato> menosVotadoPartido;			
-			list <int> posicaoRanking;
-			list <int> posicaoRankingMenosVotadosEleitos;
+			// PrintWriter escreverArquivo = new PrintWriter(new OutputStreamWriter (new FileOutputStream (Caminho), "UTF-8")); 
+			// list<partido> listaPartidos = vereadores.getPartidoseleicao(); 
+			// list<string> infoCandidatoEleito; 
+			// list<candidato> candidatosEleitos;
+			// list<candidato> candidatosVotos;
+			// list<candidato> candidatosMaisVotados; 
+			// list<candidato> candidatosEleitosMajoritariamente; 
+			// list<candidato> maisVotadoPartido; 
+			// list<candidato> menosVotadoPartido;			
+			// list <int> posicaoRanking;
+			// list <int> posicaoRankingMenosVotadosEleitos;
 			
-			int posicaoEleito=1, totalCandidatos=0, aux=0, cont=0, posicaoCandidato=1, eleitoMenosVotos=10000, qtdVagas=0, comparaPartido; 
-			int candidatoMenosVotado = 10000, candidatoMaisVotado = 0, numeroCandidatoMenosVotado, numeroCandidatoMaisVotado;
-			int totalVotosNominaisPartido=0, totalVotosPartido=0, qtdEleitosPartido=0, qtdPartidos=0, totalVotos=0, totalVotosNominais=0, totalVotosLegenda=0, qtdMulheresEleitas=0, qtdHomensEleitos=0;
-			string comparaSituacao = "Eleito", comparaSexoF= "F", comparaSexoM = "M"; 
-			double porcentagemEleitasF, porcentagemEleitosM;
-			double porcentagemVnominais, porcentagemVlegenda;
-			int idadeAbaixoTrinta=0, idadeAbaixoQuarenta=0, idadeAbaixoCinquenta=0, idadeAbaixoSessenta=0, idadeAcimaSessenta=0;
+			// int posicaoEleito=1, totalCandidatos=0, aux=0, cont=0, posicaoCandidato=1, eleitoMenosVotos=10000, qtdVagas=0, comparaPartido; 
+			// int candidatoMenosVotado = 10000, candidatoMaisVotado = 0, numeroCandidatoMenosVotado, numeroCandidatoMaisVotado;
+			// int totalVotosNominaisPartido=0, totalVotosPartido=0, qtdEleitosPartido=0, qtdPartidos=0, totalVotos=0, totalVotosNominais=0, totalVotosLegenda=0, qtdMulheresEleitas=0, qtdHomensEleitos=0;
+			// string comparaSituacao = "Eleito", comparaSexoF= "F", comparaSexoM = "M"; 
+			// double porcentagemEleitasF, porcentagemEleitosM;
+			// double porcentagemVnominais, porcentagemVlegenda;
+			// int idadeAbaixoTrinta=0, idadeAbaixoQuarenta=0, idadeAbaixoCinquenta=0, idadeAbaixoSessenta=0, idadeAcimaSessenta=0;
 			//vereadores.setDataeleicao("15/11/2020");
 			
 			//Fun��o de leitura, tamb�m utilizada para descobrir a quantidade de vagas. 
