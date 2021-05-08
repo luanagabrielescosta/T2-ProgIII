@@ -29,7 +29,7 @@ void leitura::lePartidos(eleicao vereadores, string path){
     int bit = 0;
 
     if (myfile.is_open()){
-        while (! myfile.eof()){ //enquanto end of file for false continua
+        while (!myfile.eof()){ //enquanto end of file for false continua
             getline (myfile,line); // como foi aberto em modo texto(padrão)
             // cout << line << endl; // delete
             if(bit == 0){
@@ -173,7 +173,6 @@ void leitura::leCandidatos(eleicao vereadores, string path){
                 candidato c = candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato,nPartidoCandidato); 
                 p.addCandidato(c);
 
-                cout << endl;
             }
         }
         myfile.close();

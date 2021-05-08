@@ -71,6 +71,8 @@ void eleicao::addPartido(partido p){
 
 partido eleicao::retornaPartidoPeloNum(int x){
 	list<partido> :: iterator it;
+	string a = "inexistente";
+	partido trash = partido(0, 0, a, a);
 
 	for(it = partidoeleicao.begin(); it != partidoeleicao.end(); ++it){
 		partido aux = *it;
@@ -78,7 +80,8 @@ partido eleicao::retornaPartidoPeloNum(int x){
 			return *it;
 		}
 	}
-	// exception
+	
+	return trash;
 }
 
 int eleicao::getQtdVagas(){
