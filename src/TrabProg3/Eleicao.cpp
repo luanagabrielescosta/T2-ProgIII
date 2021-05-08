@@ -8,24 +8,6 @@
 
 using namespace std;
 
-// class eleicao {
-// 	private:
-// 	int numeroVagaseleicao; 
-// 	// ArrayList <partido> partidoeleicao;
-// 	list<partido> partidoeleicao;
-// 	// ArrayList <candidato> eleitosProporcionalmente;
-// 	list<candidato> eleitosProporcionalmente;
-// 	// ArrayList <candidato> maisVotados;
-// 	list<candidato> maisVotados;
-// 	// ArrayList <candidato> eleitosMajoritariamente;
-// 	list<candidato> eleitosMajoritariamente;
-// 	// ArrayList <candidato> naoEleitosMajoritariamente; 
-// 	list<candidato> naoEleitosMajoritariamente;
-// 	date dataeleicao;
-// 	int qtdVagas; 
-	
-
-// 	public:
 	eleicao::eleicao(){
 		// this->numeroVagaseleicao = numeroVagaseleicao;
 		// this->partidoeleicao = partidoeleicao;

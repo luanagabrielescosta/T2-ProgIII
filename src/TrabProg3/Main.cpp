@@ -19,7 +19,7 @@ int main(int argc, char** argv){
 
 		leitura lerPartidos = leitura(); 
 		lerPartidos.lePartidos(vereador,arquivoPartidos);
-		// leitura lerCandidatos = leitura(); 
+		leitura lerCandidatos = leitura(); 
 		// lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
 		// escrita escreveArquivoSaida = escrita();
 		// SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

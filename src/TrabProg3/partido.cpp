@@ -6,6 +6,14 @@
 
 using namespace std;
 
+	partido::partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido){
+		// this->candidatoPartido = candidatoPartido;
+		this->numeroPartido = numeroPartido;
+		this->votosLegendaPartido = votosLegendaPartido;
+		this->nomePartido = nomePartido;
+		this->siglaPartido = siglaPartido;
+	}
+
 	int partido::getVotosNominaisTotaisPartido() {
 		return votosNominaisTotaisPartido;
 	}
@@ -23,14 +31,6 @@ using namespace std;
 
 	void partido::setVotosTotaisPartido(int votosTotaisPartido) {
 		this->votosTotaisPartido = votosTotaisPartido;
-	}
-
-	partido::partido(int &numeroPartido, int &votosLegendaPartido, string &nomePartido, string &siglaPartido){
-		// this->candidatoPartido = candidatoPartido;
-		this->numeroPartido = numeroPartido;
-		this->votosLegendaPartido = votosLegendaPartido;
-		this->nomePartido = nomePartido;
-		this->siglaPartido = siglaPartido;
 	}
 
 	list<candidato> partido::getcandidatoPartido() {
