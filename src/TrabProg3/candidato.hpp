@@ -8,22 +8,24 @@
 
 using namespace std;
 class candidato{
-
 	private:
+	// Atributos
 	int numeroCandidato;
 	int votosNominaisCandidato; 
 	string situacaoCandidato; 
 	string nomeCandidato;
 	string nomeUrnaCandidato;
-	string sexoCandidato; 
+	char sexoCandidato; 
 	date dataNascimentoCandidato; 
 	string destinoVoto; 
 	int numeroPartidoCandidato;
 	
 	public:
+	// Constructor
 	candidato(int &numeroCandidato, int &votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
-			string &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int &numeroPartidoCandidato);
+			char &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int &numeroPartidoCandidato);
 
+	// Métodos
 	int getNumeroCandidato();
 
 	int getVotosNominaisCandidato();
@@ -34,7 +36,7 @@ class candidato{
 
 	string getNomeUrnaCandidato();
 
-	string getSexoCandidato();
+	char getSexoCandidato();
 
 	date getDataNascimentoCandidato();
 

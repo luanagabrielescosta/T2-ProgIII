@@ -6,59 +6,53 @@
 
 using namespace std;
 
-	partido::partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido){
-		// this->candidatoPartido = candidatoPartido;
-		this->numeroPartido = numeroPartido;
-		this->votosLegendaPartido = votosLegendaPartido;
-		this->nomePartido = nomePartido;
-		this->siglaPartido = siglaPartido;
-	}
+partido::partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido){
+	// this->candidatoPartido = candidatoPartido;
+	this->numeroPartido = numeroPartido;
+	this->votosLegendaPartido = votosLegendaPartido;
+	this->nomePartido = nomePartido;
+	this->siglaPartido = siglaPartido;
+}
 
-	int partido::getVotosNominaisTotaisPartido() {
-		return votosNominaisTotaisPartido;
-	}
+int partido::getVotosNominaisTotaisPartido() {
+	return votosNominaisTotaisPartido;
+}
 
-	void partido::setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
-		this->votosNominaisTotaisPartido = votosNominaisTotaisPartido;
-	}
+void partido::setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
+	this->votosNominaisTotaisPartido = votosNominaisTotaisPartido;
+}
 
-	int votosTotaisPartido;
-	//int qtdcandidatoEleitos
-	
-	int partido::getVotosTotaisPartido() {
-		return votosTotaisPartido;
-	}
+int votosTotaisPartido;
+//int qtdcandidatoEleitos
 
-	void partido::setVotosTotaisPartido(int votosTotaisPartido) {
-		this->votosTotaisPartido = votosTotaisPartido;
-	}
+int partido::getVotosTotaisPartido() {
+	return votosTotaisPartido;
+}
 
-	list<candidato> partido::getcandidatoPartido() {
-		return candidatoPartido;
-	}
+void partido::setVotosTotaisPartido(int votosTotaisPartido) {
+	this->votosTotaisPartido = votosTotaisPartido;
+}
 
-	int partido::getNumeroPartido() {
-		return numeroPartido;
-	}
+list<candidato> partido::getcandidatoPartido() {
+	return candidatoPartido;
+}
 
-	int partido::getVotosLegendaPartido() {
-		return votosLegendaPartido;
-	}
+int partido::getNumeroPartido() {
+	return numeroPartido;
+}
 
-	string partido::getNomePartido() {
-		return nomePartido;
-	}
+int partido::getVotosLegendaPartido() {
+	return votosLegendaPartido;
+}
 
-	string partido::getSiglaPartido() {
-		return siglaPartido;
-	}
-	
-	void partido::addCandidato(candidato c){
-		this->candidatoPartido.insert(this->candidatoPartido.end(), c);
-	}
+string partido::getNomePartido() {
+	return nomePartido;
+}
 
-	// @Override
-	// int partido::compareTo(partido o) {
-	// 	// TODO Auto-generated method stub
-	// 	return 0;
-	// }
+string partido::getSiglaPartido() {
+	return siglaPartido;
+}
+
+void partido::addCandidato(candidato c){
+	this->candidatoPartido.insert(this->candidatoPartido.end(), c);
+}
