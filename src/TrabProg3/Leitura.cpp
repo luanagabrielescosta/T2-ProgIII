@@ -170,7 +170,7 @@ void leitura::leCandidatos(eleicao vereadores, string path){
 
                 }
                 partido p = vereadores.retornaPartidoPeloNum(nPartidoCandidato); 
-                candidato c = candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato,nPartidoCandidato); 
+                candidato c = candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato, nPartidoCandidato); 
                 p.addCandidato(c);
 
             }

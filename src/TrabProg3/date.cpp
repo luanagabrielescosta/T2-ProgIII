@@ -74,6 +74,14 @@ int date::compare_date(date other, date another){
         }
     }
 
+    // if(other.return_year() >= another.return_year()){
+    //     if(other.return_month() >= another.return_month()){
+    //         if(other.return_day() >= another.return_day()){
+    //             return 0;
+    //         }
+    //     }
+    // }
+
     return 1;
 }
 

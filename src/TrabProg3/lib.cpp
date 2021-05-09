@@ -62,8 +62,10 @@ int lib::return_int(list<int> lista, int one){
 candidato lib::return_candidato(list<candidato> lista, int one){
     int count;
     date a = date();
-    string b = "";
-    candidato retorno = candidato(0, 0, b, b, b, '0', a, b, 0);
+    a.enter_date(0, 0, 0);
+    string b = " ";
+    char c = ' ';
+    candidato retorno = candidato(0, 0, b, b, b, c, a, b, 0);
     list<candidato> :: iterator it;
 
     for(it = lista.begin(); it != lista.end();it++){

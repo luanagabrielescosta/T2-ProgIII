@@ -7,8 +7,8 @@
 
 using namespace std;
 
-candidato::candidato(int &numeroCandidato, int &votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
-		char &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int &numeroPartidoCandidato){
+candidato::candidato(int numeroCandidato, int votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
+		char &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int numeroPartidoCandidato){
 	this->numeroCandidato = numeroCandidato;
 	this->votosNominaisCandidato = votosNominaisCandidato;
 	this->situacaoCandidato = situacaoCandidato;

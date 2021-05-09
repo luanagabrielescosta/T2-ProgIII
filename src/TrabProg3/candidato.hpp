@@ -22,8 +22,8 @@ class candidato{
 	
 	public:
 	// Constructor
-	candidato(int &numeroCandidato, int &votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
-			char &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int &numeroPartidoCandidato);
+	candidato(int numeroCandidato, int votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
+			char &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int numeroPartidoCandidato);
 
 	// Métodos
 	int getNumeroCandidato();
@@ -45,6 +45,7 @@ class candidato{
 	int getNumeroPartidoCandidato();
 
 	int compare_candidato(candidato o);
+
 };
 
 #endif /* candidato_hpp_ */
