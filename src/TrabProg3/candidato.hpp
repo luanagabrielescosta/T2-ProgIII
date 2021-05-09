@@ -44,7 +44,7 @@ class candidato{
 
 	int getNumeroPartidoCandidato();
 
-	int compareTo(candidato o);
+	int compare_candidato(candidato o);
 };
 
 #endif /* candidato_hpp_ */

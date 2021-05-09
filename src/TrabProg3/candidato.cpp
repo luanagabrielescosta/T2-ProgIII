@@ -57,4 +57,25 @@ int candidato::getNumeroPartidoCandidato(){
 	return numeroPartidoCandidato;
 }
 
-
+int candidato::compare_candidato(candidato o){
+	if(this->numeroCandidato == o.getNumeroCandidato()){
+		if(this->votosNominaisCandidato == o.getVotosNominaisCandidato()){
+			if(this->situacaoCandidato.compare(o.getSituacaoCandidato()) == 0){
+				if(this->nomeCandidato.compare(o.getNomeCandidato()) == 0){
+					if(this->nomeUrnaCandidato.compare(o.getNomeUrnaCandidato()) == 0){
+						if(this->sexoCandidato == o.getSexoCandidato()){
+							if(this->dataNascimentoCandidato.compare_date(this->dataNascimentoCandidato, o.getDataNascimentoCandidato()) == 0){
+								if(this->destinoVoto.compare(o.getDestinoVoto()) == 0){
+									if(this->numeroPartidoCandidato == o.getNumeroPartidoCandidato()){
+										return 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	} 
+	return 1;
+}

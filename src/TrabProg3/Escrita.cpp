@@ -309,7 +309,7 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
                 for(it2 = candidatosMaisVotados.begin(); it2 != candidatosMaisVotados.end(); ++it2){
                     candidato k = *it2;
 
-					if(c == k){
+					if(c.compare_candidato(k) == 0){
 						partido p = vereadores.retornaPartidoPeloNum(c.getNumeroPartidoCandidato());
 						myfile << pos+1 << " - " << c.getNomeCandidato() << " / " << c.getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << c.getVotosNominaisCandidato() << " votos)" << endl;
 						encontrados++;
