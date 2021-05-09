@@ -42,3 +42,38 @@ char lib::string_to_char(std:: string old){
 char lib::int_to_char(int old){
     return (old +'0');
 }
+
+int lib::return_int(list<int> lista, int one){
+    int count;
+    list<int> :: iterator it;
+
+    for(it = lista.begin(); it != lista.end();it++){
+		//printa os numeros pares
+		if(count == one){
+            return *it;
+        }
+
+        count++;
+	}
+
+    return 0;
+}
+
+candidato lib::return_candidato(list<candidato> lista, int one){
+    int count;
+    date a = date();
+    string b = "";
+    candidato retorno = candidato(0, 0, b, b, b, '0', a, b, 0);
+    list<candidato> :: iterator it;
+
+    for(it = lista.begin(); it != lista.end();it++){
+		//printa os numeros pares
+		if(count == one){
+            return *it;
+        }
+
+        count++;
+	}
+
+    return retorno;
+}

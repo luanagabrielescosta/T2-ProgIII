@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <istream>
 #include <iomanip> 
 #include <list>
 #include "escrita.hpp"
@@ -227,7 +228,8 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
                 candidato c = *it2;
 				partido p = vereadores.retornaPartidoPeloNum(c.getNumeroPartidoCandidato());
 
-                myfile << posicaoRanking.get(posicaoCandidato) + " - " + c.getNomeCandidato() + " / " + c.getNomeUrnaCandidato() + " (" + p.getSiglaPartido() + ", " + c.getVotosNominaisCandidato() + " votos)");
+                myfile << help.return_int(posicaoRanking, posicaoCandidato) << " - " << c.getNomeCandidato() << " / " << c.getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << c.getVotosNominaisCandidato() << " votos)" << endl;
+                // myfile << posicaoRanking.get(posicaoCandidato) + " - " + c.getNomeCandidato() + " / " + c.getNomeUrnaCandidato() + " (" + p.getSiglaPartido() + ", " + c.getVotosNominaisCandidato() + " votos)");
                 posicaoCandidato++;
 			}
 
@@ -301,7 +303,7 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 
             int encontrados = 0;
 			while (encontrados < candidatosEleitosMajoritariamente.size()){
-				candidato c = candidatosEleitos.get(candidatosEleitosMajoritariamente.size() - encontrados -1);
+				candidato c = help.return_candidato(candidatosEleitos, (candidatosEleitosMajoritariamente.size() - encontrados -1));
 				int pos = -qtdVagas;
 
                 for(it2 = candidatosMaisVotados.begin(); it2 != candidatosMaisVotados.end(); ++it2){
@@ -457,7 +459,7 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 
                         Collections.sort(menosVotados, new votosComparator());
 
-                        myfile << menosVotados.get(0).getNomeUrnaCandidato() << " (" << menosVotados.get(0).getNumeroCandidato() << ", " << menosVotados.get(0).getVotosNominaisCandidato() <<" voto" << (menosVotados.get(0).getVotosNominaisCandidato() > 1 ? "s" : "") << ")" << endl;						
+                        myfile << help.return_candidato(menosVotados,0).getNomeUrnaCandidato() << " (" << help.return_candidato(menosVotados,0).getNumeroCandidato() << ", " << help.return_candidato(menosVotados,0).getVotosNominaisCandidato() <<" voto" << (help.return_candidato(menosVotados,0).getVotosNominaisCandidato() > 1 ? "s" : "") << ")" << endl;						
 						
                         if(cont <= aux2){
 							break;
