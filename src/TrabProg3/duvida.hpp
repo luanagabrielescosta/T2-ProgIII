@@ -1,4 +1,4 @@
-	bool escrita::escreveArquivo(string Caminho, date dataeleicao, eleicao vereadores) {
+	// bool escrita::escreveArquivo(string Caminho, date dataeleicao, eleicao vereadores) {
 		// try {
 			// PrintWriter escreverArquivo = new PrintWriter(new OutputStreamWriter (new FileOutputStream (Caminho), "UTF-8")); 
 			// list<partido> listaPartidos = vereadores.getPartidoseleicao(); 
@@ -392,4 +392,4 @@
 		// 	return false;
 		// }
 		
-	}
+	// }

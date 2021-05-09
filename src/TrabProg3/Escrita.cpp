@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <iomanip> 
 #include <list>
 #include "escrita.hpp"
 #include "lib.hpp"
@@ -124,37 +125,44 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 
 					if(qtdVagas == aux){
 						
-						Calendar dataNascimento = Calendar.getInstance();
-						dataNascimento.setTime(c.getDataNascimentoCandidato());
-						Calendar dataeleicaoAux = Calendar.getInstance();
-						dataeleicaoAux.setTime(dataeleicao);
+						// Calendar dataNascimento = Calendar.getInstance();
+						// dataNascimento.setTime(c.getDataNascimentoCandidato());
+						// Calendar dataeleicaoAux = Calendar.getInstance();
+						// dataeleicaoAux.setTime(dataeleicao);
 
-						Integer diferencaMes = dataeleicaoAux.get(Calendar.MONTH) - dataNascimento.get(Calendar.MONTH);
-						Integer diferencaDia = dataeleicaoAux.get(Calendar.DAY_OF_MONTH) - dataNascimento.get(Calendar.DAY_OF_MONTH);
-						Integer idade = (dataeleicaoAux.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR));
+                        int idade = c.getDataNascimentoCandidato().idade(dataeleicao);
 
-						if(diferencaMes < 0 || (diferencaMes == 0 && diferencaDia < 0)){
-							idade--;
-						}
+						// Integer diferencaMes = dataeleicaoAux.get(Calendar.MONTH) - dataNascimento.get(Calendar.MONTH);
+						// Integer diferencaDia = dataeleicaoAux.get(Calendar.DAY_OF_MONTH) - dataNascimento.get(Calendar.DAY_OF_MONTH);
+						// Integer idade = (dataeleicaoAux.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR));
+                        // if(c.getDataNascimentoCandidato().return_month() != dataeleicao.return_month()){
+						// // if(diferencaMes < 0 || (diferencaMes == 0 && diferencaDia < 0)){
+						// 	idade--;
+						// } else if(c.getDataNascimentoCandidato().return_day() != dataeleicao.return_day()){
+                        //     idade--;
+                        // }
 						
 						if(idade < 30){
 							idadeAbaixoTrinta++;
-						} else if (idade < 40){
+						} else if(idade < 40){
 							idadeAbaixoQuarenta++;
-						} else if (idade < 50){
+						} else if(idade < 50){
 							idadeAbaixoCinquenta++;
-						} else if (idade < 60){
+						} else if(idade < 60){
 							idadeAbaixoSessenta++;
-						}else {
+						}else{
 							idadeAcimaSessenta++;
 						}
 						
-						partido p = vereadores.retornaPartidoPeloNum(c.getNumeroPartidoCandidato()); 
+						partido p = vereadores.retornaPartidoPeloNum(c.getNumeroPartidoCandidato());
+
 						myfile << posicaoCandidato << " - " << c.getNomeCandidato() << " / " << c.getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << c.getVotosNominaisCandidato() << " votos)" << endl;   
-						aux=aux2-1;
+						
+                        aux = aux2 - 1;
 						cont++;						
 						qtdVagas = 0;
 						posicaoCandidato++;
+
 						if(cont == aux2){
 							break;
 						}
@@ -348,7 +356,7 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
                             }
                         }
 
-                    myfile << cont+1 << " - " <<p.getSiglaPartido() << " - " << p.getNumeroPartido() << ", " << p.getVotosTotaisPartido() << " voto" << (p.getVotosTotaisPartido() > 1 ? "s" : "") <<  " (" << p.getVotosNominaisTotaisPartido() << (p.getVotosNominaisTotaisPartido() > 1 ? " nominais" : " nominal") << " e " << p.getVotosLegendaPartido() << " de legenda), " << qtdEleitosPartido << " candidato" << (qtdEleitosPartido > 1 ? "s": "") << " eleito" << (qtdEleitosPartido > 1 ? "s": "" << endl; 
+                    myfile << cont+1 << " - " <<p.getSiglaPartido() << " - " << p.getNumeroPartido() << ", " << p.getVotosTotaisPartido() << " voto" << (p.getVotosTotaisPartido() > 1 ? "s" : "") <<  " (" << p.getVotosNominaisTotaisPartido() << (p.getVotosNominaisTotaisPartido() > 1 ? " nominais" : " nominal") << " e " << p.getVotosLegendaPartido() << " de legenda), " << qtdEleitosPartido << " candidato" << (qtdEleitosPartido > 1 ? "s": "") << " eleito" << (qtdEleitosPartido > 1 ? "s": "") << endl; 
                     qtdEleitosPartido = 0;
                     aux2++;
                     cont = (qtdPartidos-1)+aux2;
@@ -394,7 +402,7 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
                     candidato c = *it2;
 
 					if(c.getVotosNominaisCandidato() == candidatoMaisVotado){
-						maisVotadoPartido.add(c);
+						maisVotadoPartido.insert(maisVotadoPartido.end(), c);
 					}
 				}
 				
@@ -402,7 +410,7 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
                     candidato c = *it2;
 
 					if(c.getVotosNominaisCandidato() == candidatoMenosVotado){						
-							menosVotadoPartido.add(c);						
+							menosVotadoPartido.insert(menosVotadoPartido.end(), c);						
 						//myfile << c.getNomeCandidato() + " (" + c.getNumeroCandidato() + ", " + c.getVotosNominaisCandidato() +" votos)");
 					}
 				}
@@ -415,10 +423,11 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 
             qtdPartidos=cont;
 			aux2 = cont;
-			aux =0;cont=0; 
+			aux = 0;
+            cont = 0; 
 		
 			while(cont < aux2){
-                for(it2 = p.maisVotadoPartido().begin(); it2 != p.maisVotadoPartido().end(); ++it2){ // nao seii
+                for(it2 = maisVotadoPartido.begin(); it2 != maisVotadoPartido.end(); ++it2){ // nao seii
                     candidato c = *it2;
 
 					if(qtdPartidos != aux && cont == 0){
@@ -438,11 +447,11 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 
 						list<candidato> menosVotados;
 
-                        for(it2 = p.menosVotadoPartido().begin(); it2 != p.menosVotadoPartido().end(); ++it2){ // nao seii
+                        for(it2 = menosVotadoPartido.begin(); it2 != menosVotadoPartido.end(); ++it2){ // nao seii
                             candidato x = *it2;
 
 							if(comparaPartido == x.getNumeroPartidoCandidato()){								
-								menosVotados.add(x);								
+								menosVotados.insert(menosVotados.end(), x);								
 							}
 						}	
 
@@ -457,14 +466,22 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 				}
             }
 
-            DecimalFormat df = new DecimalFormat("0.00");
+            // DecimalFormat df = new DecimalFormat("0.00");
 			myfile << endl;
-			myfile << "Eleitos, por faixa etária (na data da eleição):");
-			myfile << "      Idade < 30: " << idadeAbaixoTrinta << " (" << df.format((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "30 <= Idade < 40: " << idadeAbaixoQuarenta << " (" << df.format((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "40 <= Idade < 50: " << idadeAbaixoCinquenta << " (" << df.format((idadeAbaixoCinquenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "50 <= Idade < 60: " << idadeAbaixoSessenta << " (" << df.format((idadeAbaixoSessenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "60 <= Idade     : " << idadeAcimaSessenta << " (" << df.format((idadeAcimaSessenta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "Eleitos, por faixa etária (na data da eleição):" << endl;
+			// myfile << "      Idade < 30: " << idadeAbaixoTrinta << " (" << df.format((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
+			// myfile << "30 <= Idade < 40: " << idadeAbaixoQuarenta << " (" << df.format((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;
+			// myfile << "40 <= Idade < 50: " << idadeAbaixoCinquenta << " (" << df.format((idadeAbaixoCinquenta/(double)qtdVagas)*100) << "%)" << endl;
+			// myfile << "50 <= Idade < 60: " << idadeAbaixoSessenta << " (" << df.format((idadeAbaixoSessenta/(double)qtdVagas)*100) << "%)" << endl;
+			// myfile << "60 <= Idade     : " << idadeAcimaSessenta << " (" << df.format((idadeAcimaSessenta/(double)qtdVagas)*100) << "%)" << endl;
+
+            myfile << "      Idade < 30: " << idadeAbaixoTrinta << " (" << setprecision(2) <<((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "30 <= Idade < 40: " << idadeAbaixoQuarenta << " (" << setprecision(2) <<((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "40 <= Idade < 50: " << idadeAbaixoCinquenta << " (" << setprecision(2) <<((idadeAbaixoCinquenta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "50 <= Idade < 60: " << idadeAbaixoSessenta << " (" << setprecision(2) <<((idadeAbaixoSessenta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "60 <= Idade     : " << idadeAcimaSessenta << " (" << setprecision(2) <<((idadeAcimaSessenta/(double)qtdVagas)*100) << "%)" << endl;
+
+            // setprecision(5)
 			myfile << endl;
 			
 			
@@ -472,8 +489,8 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 			porcentagemEleitosM = (qtdHomensEleitos/(double)qtdVagas)*100; 
 
 			myfile << "Eleitos, por sexo:" << endl; 
-			myfile << "Feminino:  " << qtdMulheresEleitas << " (" << df.format(porcentagemEleitasF) << "%)" << endl;
-			myfile << "Masculino: " << qtdHomensEleitos << " (" << df.format(porcentagemEleitosM) << "%)" << endl;
+			myfile << "Feminino:  " << qtdMulheresEleitas << " (" << setprecision(2) << porcentagemEleitasF << "%)" << endl;
+			myfile << "Masculino: " << qtdHomensEleitos << " (" << setprecision(2) << porcentagemEleitosM << "%)" << endl;
 			myfile << endl;
 
 			totalVotos = totalVotosLegenda + totalVotosNominais; 
@@ -483,8 +500,8 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 			porcentagemVnominais = (totalVotosNominais/(double)totalVotos)*100; 
 			porcentagemVlegenda = (totalVotosLegenda/(double)totalVotos)*100; 
 
-			myfile << "Total de votos nominais:   " << totalVotosNominais << " (" << df.format(porcentagemVnominais) << "%)" << endl; 
-			myfile << "Total de votos de Legenda: " << totalVotosLegenda << " (" << df.format(porcentagemVlegenda) << "%)\n" << endl; 
+			myfile << "Total de votos nominais:   " << totalVotosNominais << " (" << setprecision(2) << porcentagemVnominais << "%)" << endl; 
+			myfile << "Total de votos de Legenda: " << totalVotosLegenda << " (" << setprecision(2) << porcentagemVlegenda << "%)\n" << endl; 
 
             myfile.close();
 
