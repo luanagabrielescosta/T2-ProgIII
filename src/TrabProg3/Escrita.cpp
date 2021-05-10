@@ -5,26 +5,26 @@
 #include <algorithm>
 #include <iomanip> 
 #include <list>
-#include "escrita.hpp"
-#include "lib.hpp"
+#include "Escrita.hpp"
+#include "Lib.hpp"
 #include "votosComparator.hpp"
 
 using namespace std;
 
-escrita::escrita(){
+Escrita::Escrita(){
 }
 
-bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
+bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
     try{
         // Listas 
-        list<partido> listaPartidos = vereadores.getpartidoeleicao(); 
+        list<Partido> listaPartidos = vereadores.getpartidoeleicao(); 
         list<string> infoCandidatoEleito; 
-        list<candidato> candidatosEleitos;
-        list<candidato> candidatosVotos;
-        list<candidato> candidatosMaisVotados; 
-        list<candidato> candidatosEleitosMajoritariamente; 
-        list<candidato> maisVotadoPartido; 
-        list<candidato> menosVotadoPartido;			
+        list<Candidato> candidatosEleitos;
+        list<Candidato> candidatosVotos;
+        list<Candidato> candidatosMaisVotados; 
+        list<Candidato> candidatosEleitosMajoritariamente; 
+        list<Candidato> maisVotadoPartido; 
+        list<Candidato> menosVotadoPartido;			
         list<int> posicaoRanking;
         list<int> posicaoRankingMenosVotadosEleitos;
 
@@ -70,8 +70,8 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
         lib library = lib();
         votosComparator comparator = votosComparator();
 
-        list<partido> :: iterator it;
-        list<candidato> :: iterator it2;
+        list<Partido> :: iterator it;
+        list<Candidato> :: iterator it2;
 
         for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
             qtdPartidos++;
@@ -88,7 +88,7 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
                 string vNomeCandidato = c.getNomeCandidato();
                 string vNomeUrnaCandidato = c.getNomeUrnaCandidato();
                 char vSexoCandidato = c.getSexoCandidato();
-                date vDataNascimentoCandidato = c.getDataNascimentoCandidato();
+                Date vDataNascimentoCandidato = c.getDataNascimentoCandidato();
                 string vDestinoVoto = c.getDestinoVoto();
                 int vNumeroPartidoCandidato = c.getNumeroPartidoCandidato();
 
@@ -464,7 +464,7 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
 						
                         comparaPartido = c.getNumeroPartidoCandidato();
 
-						list<candidato> menosVotados;
+						list<Candidato> menosVotados;
 
                         for(it2 = menosVotadoPartido.begin(); it2 != menosVotadoPartido.end(); ++it2){ // nao seii
                             candidato x = *it2;

@@ -2,13 +2,13 @@
 #define partido_hpp_
 
 #include <list>
-#include "candidato.hpp"
+#include "Candidato.hpp"
 
 using namespace std;
 
-class partido{
+class Partido{
 	// Atributos
-	list<candidato> candidatoPartido; 
+	list<Candidato> candidatoPartido; 
 	int numeroPartido; 
 	int votosLegendaPartido; 
 	string nomePartido; 
@@ -17,7 +17,7 @@ class partido{
 
 	public:
 	// Constructor
-	partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido);
+	Partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido);
 
 	// Metodos 
 	int getVotosNominaisTotaisPartido();
@@ -30,7 +30,7 @@ class partido{
 
 	void setVotosTotaisPartido(int votosTotaisPartido);
 
-	list<candidato> getcandidatoPartido();
+	list<Candidato> getcandidatoPartido();
 
 	int getNumeroPartido();
 
@@ -40,7 +40,7 @@ class partido{
 
 	string getSiglaPartido();
 	
-	void addCandidato(candidato c);
+	void addCandidato(Candidato c);
 };
 
 #endif /* partido_hpp_ */

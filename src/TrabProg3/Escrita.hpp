@@ -1,13 +1,13 @@
 #ifndef escrita_hpp_
 #define escrita_hpp_
 
-#include "eleicao.hpp"
+#include "Eleicao.hpp"
 
-class escrita {
+class Escrita {
 	public:
-    escrita();
+    Escrita();
 
-	bool escreveArquivo(string Caminho, date dataeleicao, eleicao vereadores);
+	bool escreveArquivo(string Caminho, Date dataeleicao, Eleicao vereadores);
 };
 
 #endif /* escrita_hpp_ */

@@ -3,12 +3,12 @@
 
 #include <string>
 #include <list>
-#include "date.hpp"
-#include "candidato.hpp"
+#include "Date.hpp"
+#include "Candidato.hpp"
 
-class lib{
+class Lib{
     public:
-    lib();
+    Lib();
     int string_to_int(std::string old);
     date string_to_date(std:: string old);
     char string_to_char(std:: string old);

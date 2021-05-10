@@ -1,39 +1,39 @@
 #include <iostream>
 #include <string>
-#include "date.hpp"
+#include "Date.hpp"
 
 using namespace std;
 
-date::date(){
+Date::Date(){
 }
 
-void date::enter_date(int d, int m, int y){
+void Date::enter_date(int d, int m, int y){
     day = d;
     month = m;
     year = y;
 }
 
-void date::print_date(){
+void Date::print_date(){
     cout<<this->day<<"/"<<this->month<<"/"<<year<<endl;
 }
 
-int date::bi(int year){
+int Date::bi(int year){
     return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
 }   
 
-int date::return_day(){
+int Date::return_day(){
     return this->day;
 }
 
-int date::return_month(){
+int Date::return_month(){
     return this->month;
 }
 
-int date::return_year(){
+int Date::return_year(){
     return this->year;
 }
 
-unsigned int date::distance_years(date end){
+unsigned int Date::distance_years(Date end){
     int days_month[2][13] = {{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},{0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}};
     unsigned int idays;
     unsigned int fdays;	
@@ -59,13 +59,13 @@ unsigned int date::distance_years(date end){
     return def_years - idays + fdays;
 }
 
-void date::turn_into(date new_date){
+void Date::turn_into(Date new_date){
     this->day = new_date.return_day();
     this->month = new_date.return_month();
     this->year = new_date.return_year();
 }
 
-int date::compare_date(date other, date another){
+int Date::compare_date(Date other, Date another){
     if(other.return_year() == another.return_year()){
         if(other.return_month() == another.return_month()){
             if(other.return_day() == another.return_day()){
@@ -85,7 +85,7 @@ int date::compare_date(date other, date another){
     return 1;
 }
 
-int date::idade(date other){
+int Date::idade(Date other){
     int idade = other.return_year() - this->year;
 
     if(other.return_month() > this->month){

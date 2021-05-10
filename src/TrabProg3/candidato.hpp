@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <string>
-#include "date.hpp"
+#include "Date.hpp"
 
 using namespace std;
 class candidato{

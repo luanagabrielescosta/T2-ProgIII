@@ -1,14 +1,14 @@
-#include "lib.hpp"
+#include "Lib.hpp"
 #include <string>
 #include <iostream>
 #include <cmath>
 
 using namespace std;
 
-lib::lib(){
+Lib::Lib(){
 }
 
-int lib::string_to_int(string old){
+int Lib::string_to_int(string old){
     int count;
 
     for(int i = 0; i < old.size(); i++){
@@ -22,7 +22,7 @@ int lib::string_to_int(string old){
     return count;
 }
 
-date lib::string_to_date(std:: string old){
+date Lib::string_to_date(std:: string old){
     int d, m, y;
     date a = date();
 
@@ -35,15 +35,15 @@ date lib::string_to_date(std:: string old){
     return a;
 }
 
-char lib::string_to_char(std:: string old){
+char Lib::string_to_char(std:: string old){
     return old[0];
 }
 
-char lib::int_to_char(int old){
+char Lib::int_to_char(int old){
     return (old +'0');
 }
 
-int lib::return_int(list<int> lista, int one){
+int Lib::return_int(list<int> lista, int one){
     int count;
     list<int> :: iterator it;
 
@@ -59,7 +59,7 @@ int lib::return_int(list<int> lista, int one){
     return 0;
 }
 
-candidato lib::return_candidato(list<candidato> lista, int one){
+candidato Lib::return_candidato(list<candidato> lista, int one){
     int count;
     date a = date();
     a.enter_date(0, 0, 0);

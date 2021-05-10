@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class date{
+class Date{
     private:
     int day;
     int month;
@@ -14,7 +14,7 @@ class date{
     
     public:
     // date(int &d, int &m, int &y);
-    date();
+    Date();
     
     void enter_date(int d, int m, int y);
 
@@ -28,13 +28,13 @@ class date{
 
     int return_year();
 
-    unsigned int distance_years(date end);
+    unsigned int distance_years(Date end);
 
-    void turn_into(date new_date);
+    void turn_into(Date new_date);
 
-    int compare_date(date other, date another);
+    int compare_date(Date other, Date another);
 
-    int idade(date other);
+    int idade(Date other);
 };
 
 #endif /* date_h_ */
