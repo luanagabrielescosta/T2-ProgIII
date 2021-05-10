@@ -25,7 +25,7 @@ int main(int argc, char** argv){
 		lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
 		Escrita escreveArquivoSaida = Escrita();
         Date data = help.string_to_date(dataString);
-		escreveArquivoSaida.escreveArquivo("out.txt",data,vereador);		
+		// escreveArquivoSaida.escreveArquivo("out",data,vereador);		
 		cout << "aaaa" << endl;
 		
 		return 0;
