@@ -4,64 +4,64 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include "date.hpp"
 
-#include "candidato.hpp"
-#include "partido.hpp"
+#include "Date.hpp"
+#include "Candidato.hpp"
+#include "Partido.hpp"
 
 using namespace std;
 
-class eleicao {
+class Eleicao{
 	private:
 	int numeroVagaseleicao; 
 	// ArrayList <partido> partidoeleicao;
-	list<partido> partidoeleicao;
+	list<Partido> partidoeleicao;
 	// ArrayList <candidato> eleitosProporcionalmente;
-	list<candidato> eleitosProporcionalmente;
-	// ArrayList <candidato> maisVotados;
-	list<candidato> maisVotados;
-	// ArrayList <candidato> eleitosMajoritariamente;
-	list<candidato> eleitosMajoritariamente;
-	// ArrayList <candidato> naoEleitosMajoritariamente; 
-	list<candidato> naoEleitosMajoritariamente;
-	date dataeleicao;
+	list<Candidato> eleitosProporcionalmente;
+	// ArrayList <Candidato> maisVotados;
+	list<Candidato> maisVotados;
+	// ArrayList <Candidato> eleitosMajoritariamente;
+	list<Candidato> eleitosMajoritariamente;
+	// ArrayList <Candidato> naoEleitosMajoritariamente; 
+	list<Candidato> naoEleitosMajoritariamente;
+	Date dataeleicao;
 	int qtdVagas; 
 	
 
 	public:
-	eleicao();
+	Eleicao();
 
 	int getNumeroVagaseleicao();
 
 	void setNumeroVagaseleicao(int numeroVagaseleicao);
 
-	list<partido> getpartidoeleicao();
+	list<Partido> getpartidoeleicao();
 
-	void setpartidoeleicao(list<partido> partidoeleicao);
+	void setpartidoeleicao(list<Partido> partidoeleicao);
 
-	list<candidato> getEleitosProporcionalmente();
+	list<Candidato> getEleitosProporcionalmente();
 
-	void setEleitosProporcionalmente(list<candidato> eleitosProporcionalmente);
+	void setEleitosProporcionalmente(list<Candidato> eleitosProporcionalmente);
 
-	list<candidato> getMaisVotados();
+	list<Candidato> getMaisVotados();
 
-	void setMaisVotados(list<candidato> maisVotados);
+	void setMaisVotados(list<Candidato> maisVotados);
 
-	list<candidato> getEleitosMajoritariamente();
+	list<Candidato> getEleitosMajoritariamente();
 
-	void setEleitosMajoritariamente(list<candidato> eleitosMajoritariamente);
+	void setEleitosMajoritariamente(list<Candidato> eleitosMajoritariamente);
 
-	list<candidato> getNaoEleitosMajoritariamente();
+	list<Candidato> getNaoEleitosMajoritariamente();
 
-	void setNaoEleitosMajoritariamente(list<candidato> naoEleitosMajoritariamente);
+	void setNaoEleitosMajoritariamente(list<Candidato> naoEleitosMajoritariamente);
 
-	date getDataeleicao();
+	Date getDataeleicao();
 
-	void setDataeleicao(date dataeleicao);
+	void setDataeleicao(Date dataeleicao);
 
-	void addPartido(partido p);
+	void addPartido(Partido p);
 	
-	partido retornaPartidoPeloNum(int x);
+	Partido retornaPartidoPeloNum(int x);
 
 	int getQtdVagas();
 
