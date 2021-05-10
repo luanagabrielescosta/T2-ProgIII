@@ -1,15 +1,15 @@
 #ifndef votos_comparator_hpp_
 #define votos_comparator_hpp_
 
-#include "candidato.hpp"
-#include "partido.hpp"
+#include "Candidato.hpp"
+#include "Partido.hpp"
 
-class votosComparator{
+class VotosComparator{
 	// @Override
 	public: 
-	bool compare(candidato first, candidato second);
-	bool compare2(candidato o1, candidato o2);
-	bool comparePartido(partido o1, partido o2);
+	bool compare(Candidato first, Candidato second);
+	bool compare2(Candidato o1, Candidato o2);
+	bool comparePartido(Partido o1, Partido o2);
 };
 
 #endif /* votos_comparator_hpp_ */
