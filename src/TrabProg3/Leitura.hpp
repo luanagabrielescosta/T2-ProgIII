@@ -2,9 +2,9 @@
 #define leitura_hpp_
 
 #include <string>
-#include "eleicao.hpp"
+#include "Eleicao.hpp"
 
-class leitura {
+class Leitura{
 	// Atributos
 	// Partidos 
 	string nPartido;
@@ -34,12 +34,12 @@ class leitura {
 	
 	public:
 	// Constructor
-    leitura();
+    Leitura();
 	
 	// Métodos
-    void lePartidos(eleicao vereadores, string path);
+    void lePartidos(Eleicao vereadores, string path);
 	
-	void leCandidatos(eleicao vereadores, string path);
+	void leCandidatos(Eleicao vereadores, string path);
 };
 
 #endif /* leitura_hpp_ */

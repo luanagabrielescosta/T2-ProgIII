@@ -4,14 +4,14 @@
 #include <sstream>
 #include <list>
 #include <iterator>
-#include "leitura.hpp"
-#include "lib.hpp"
-#include "eleicao.hpp"
-#include "date.hpp"
+
+#include "Leitura.hpp"
+#include "Lib.hpp"
+#include "Date.hpp"
 
 using namespace std;
 
-leitura::leitura(){
+Leitura::Leitura(){
     this->comparaSituacao = "Eleito";
     this->comparaSexof = 'F';
     this->comparaSexom = 'M';
@@ -23,7 +23,7 @@ leitura::leitura(){
     this->totalVotosLegenda = 0;
 }
 
-void leitura::lePartidos(eleicao vereadores, string path){
+void Leitura::lePartidos(Eleicao vereadores, string path){
     string line;
     ifstream myfile (path); // ifstream = padrão ios:in
     int bit = 0;
@@ -52,7 +52,7 @@ void leitura::lePartidos(eleicao vereadores, string path){
                 string siglaPartido;
 
                 for(it = tokens.begin(); it != tokens.end(); ++it){
-                    lib help = lib();
+                    Lib help = Lib();
 
                     nPartido = help.string_to_int(*it);
                     // cout << nPartido;
@@ -73,7 +73,7 @@ void leitura::lePartidos(eleicao vereadores, string path){
                     // cout << siglaPartido;
                 }
 
-                partido x = partido(nPartido, vLegenda, nomePartido, siglaPartido); 
+                Partido x = Partido(nPartido, vLegenda, nomePartido, siglaPartido); 
                 vereadores.addPartido(x);
                 cout << endl;
             }
@@ -85,7 +85,7 @@ void leitura::lePartidos(eleicao vereadores, string path){
     }
 }
 
-void leitura::leCandidatos(eleicao vereadores, string path){
+void Leitura::leCandidatos(Eleicao vereadores, string path){
     string line;
     ifstream myfile (path); // ifstream = padrão ios:in
     int bit = 0;
@@ -114,12 +114,12 @@ void leitura::leCandidatos(eleicao vereadores, string path){
                 string noCandidato;
                 string noUrnaCandidato;
                 char sexCandidato;
-                date datNascCandidato;
+                Date datNascCandidato;
                 string destVotoCandidato;
                 int nPartidoCandidato;
 
                 for(it = tokens.begin(); it != tokens.end(); ++it){
-                    lib help = lib();
+                    Lib help = Lib();
 
                     numCandidato = help.string_to_int(*it);
                     // cout << numCandidato << " ";
@@ -169,8 +169,8 @@ void leitura::leCandidatos(eleicao vereadores, string path){
                     // cout << nPartidoCandidato;
 
                 }
-                partido p = vereadores.retornaPartidoPeloNum(nPartidoCandidato); 
-                candidato c = candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato, nPartidoCandidato); 
+                Partido p = vereadores.retornaPartidoPeloNum(nPartidoCandidato); 
+                Candidato c = Candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato, nPartidoCandidato); 
                 p.addCandidato(c);
 
             }
