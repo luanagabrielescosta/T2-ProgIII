@@ -22,9 +22,9 @@ int Lib::string_to_int(string old){
     return count;
 }
 
-date Lib::string_to_date(std:: string old){
+Date Lib::string_to_date(std:: string old){
     int d, m, y;
-    date a = date();
+    Date a = Date();
 
     d = (old[0] - 48) * 10 + (old[1] - 48);
     m = (old[3] - 48) * 10 + (old[4] - 48);
@@ -59,14 +59,14 @@ int Lib::return_int(list<int> lista, int one){
     return 0;
 }
 
-candidato Lib::return_candidato(list<candidato> lista, int one){
+Candidato Lib::return_candidato(list<Candidato> lista, int one){
     int count;
-    date a = date();
+    Date a = Date();
     a.enter_date(0, 0, 0);
     string b = " ";
     char c = ' ';
-    candidato retorno = candidato(0, 0, b, b, b, c, a, b, 0);
-    list<candidato> :: iterator it;
+    Candidato retorno = Candidato(0, 0, b, b, b, c, a, b, 0);
+    list<Candidato> :: iterator it;
 
     for(it = lista.begin(); it != lista.end();it++){
 		//printa os numeros pares

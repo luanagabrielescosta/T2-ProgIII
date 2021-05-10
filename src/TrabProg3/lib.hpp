@@ -10,11 +10,11 @@ class Lib{
     public:
     Lib();
     int string_to_int(std::string old);
-    date string_to_date(std:: string old);
+    Date string_to_date(std:: string old);
     char string_to_char(std:: string old);
     char int_to_char(int old);
     int return_int(list<int> list, int one);
-    candidato return_candidato(list<candidato> list, int one);
+    Candidato return_candidato(list<Candidato> list, int one);
 };
 
 
