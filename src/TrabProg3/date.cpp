@@ -96,3 +96,15 @@ int Date::idade(Date other){
 
     return idade;
 }
+
+bool Date::compareTo(Date other){
+    if(this->return_year() > other.return_year()){
+        return true;
+    } else if((this->return_year() == other.return_year()) && (this->return_month() > other.return_month())){
+        return true;
+    } else if((this->return_year() == other.return_year()) && (this->return_month() == other.return_month()) && (this->return_day() > other.return_day())){
+        return true;
+    }
+
+    return false;
+}

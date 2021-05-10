@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <list>
 #include "Date.hpp"
 
 using namespace std;
@@ -46,6 +47,7 @@ class Candidato{
 
 	int compare_candidato(Candidato o);
 
+	list<const Candidato> retornaConst(list<Candidato> o);
 };
 
 #endif /* candidato_hpp_ */

@@ -1,6 +1,7 @@
 // package TrabProg3;
 
 #include <iostream>
+#include <istream>
 #include <string>
 #include "Candidato.hpp"
 // #include "date.hpp"
@@ -78,4 +79,15 @@ int Candidato::compare_candidato(Candidato o){
 		}
 	} 
 	return 1;
+}
+
+list<const Candidato> Candidato::retornaConst(list<Candidato> o){
+	list<const Candidato> retorno;
+	list<Candidato> :: iterator it;
+
+	for(it = o.begin(); it != o.end(); ++it){
+		retorno.insert(retorno.end(), *it);
+	}
+
+	return retorno;
 }

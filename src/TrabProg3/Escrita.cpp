@@ -8,11 +8,30 @@
 
 #include "Escrita.hpp"
 #include "Lib.hpp"
-#include "VotosComparator.hpp"
 
 using namespace std;
 
 Escrita::Escrita(){
+}
+
+bool compare(Candidato first, Candidato second){
+	if (first.getVotosNominaisCandidato() == first.getVotosNominaisCandidato()){
+		return first.getDataNascimentoCandidato().compareTo(second.getDataNascimentoCandidato());
+	} 
+
+	return first.getVotosNominaisCandidato() > second.getVotosNominaisCandidato();	
+}
+
+bool compare2(Candidato o1, Candidato o2) {
+		if(o1.getVotosNominaisCandidato() == o2.getVotosNominaisCandidato()) {
+			return o2.getNumeroPartidoCandidato() > o1.getNumeroPartidoCandidato();
+		}else {
+			return o1.getVotosNominaisCandidato() > o2.getVotosNominaisCandidato();	
+		}
+}
+
+bool comparePartido(Partido o1, Partido o2) {
+		return o1.getVotosTotaisPartido() > o2.getVotosTotaisPartido();
 }
 
 bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
@@ -69,7 +88,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
         string line;
 
         Lib library = Lib();
-        VotosComparator comparator = VotosComparator();
+        // VotosComparator comparator = VotosComparator();
 
         list<Partido> :: iterator it;
         list<Candidato> :: iterator it2;
@@ -114,8 +133,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
         }
 
         // PERGUNTAR
-        candidatosEleitos.sort(comparator.compare);
-        // Collections.sort(candidatosEleitos, new votosComparator());
+        candidatosEleitos.sort(compare);
 
         int aux2 = qtdVagas; 
 
@@ -191,10 +209,8 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
             posicaoCandidato = 1;
 			aux2 = totalCandidatos;
 
-            candidatosVotos.sort(comparator.compare());
-            // Collections.sort(candidatosVotos, new votosComparator());
+            candidatosVotos.sort(compare);
 			candidatosVotos.reverse();
-			// Collections.sort(candidatosVotos,Collections.reverseOrder());
 
             myfile << endl;
             myfile << "Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
@@ -355,8 +371,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 				p.setVotosTotaisPartido(totalVotosPartido);
 			}
 			
-			listaPartidos.sort(comparator.comparePartido());
-			// Collections.sort(listaPartidos, new votosPartidosComparator());
+			listaPartidos.sort(comparePartido);
 
             cont = qtdPartidos;
 			aux2 = 0;
@@ -438,8 +453,9 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 				candidatoMenosVotado = 10000;
 			}
 			
-			maisVotadoPartido.sort(comparator.compare2());
-			// Collections.sort(maisVotadoPartido, new votosComparator2());
+
+			maisVotadoPartido.sort(compare2);
+			menosVotadoPartido.sort(compare2);
 
             qtdPartidos=cont;
 			aux2 = cont;
@@ -475,8 +491,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 							}
 						}	
 
-                        menosVotados.sort(comparator.compare());
-                        // Collections.sort(menosVotados, new votosComparator());
+                        menosVotados.sort(compare);
 
                         myfile << library.return_candidato(menosVotados,0).getNomeUrnaCandidato() << " (" << library.return_candidato(menosVotados,0).getNumeroCandidato() << ", " << library.return_candidato(menosVotados,0).getVotosNominaisCandidato() <<" voto" << (library.return_candidato(menosVotados,0).getVotosNominaisCandidato() > 1 ? "s" : "") << ")" << endl;						
 						

@@ -35,6 +35,8 @@ class Date{
     int compare_date(Date other, Date another);
 
     int idade(Date other);
+
+    bool compareTo(Date other);
 };
 
 #endif /* date_h_ */
