@@ -3,7 +3,7 @@
 
 #include "Eleicao.hpp"
 
-class Escrita {
+class Escrita{
 	public:
     Escrita();
 
