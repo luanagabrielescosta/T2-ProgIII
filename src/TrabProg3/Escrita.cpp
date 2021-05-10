@@ -82,9 +82,18 @@ bool escrita::escreveArquivo(string path, date dataeleicao, eleicao vereadores){
             for(it2 = p.getcandidatoPartido().begin(); it2 != p.getcandidatoPartido().end(); ++it2){
                 totalCandidatos++;
                 candidato c = *it2;
+                int vNumeroCandidato = c.getNumeroCandidato();
+                int vVotosNominaisCandidato = c.getVotosNominaisCandidato();
+                string vSituacaoCandidato = c.getSituacaoCandidato();
+                string vNomeCandidato = c.getNomeCandidato();
+                string vNomeUrnaCandidato = c.getNomeUrnaCandidato();
+                char vSexoCandidato = c.getSexoCandidato();
+                date vDataNascimentoCandidato = c.getDataNascimentoCandidato();
+                string vDestinoVoto = c.getDestinoVoto();
+                int vNumeroPartidoCandidato = c.getNumeroPartidoCandidato();
 
+                candidato pessoa = candidato(vNumeroCandidato, vVotosNominaisCandidato, vSituacaoCandidato, vNomeCandidato, vNomeUrnaCandidato, vSexoCandidato, vDataNascimentoCandidato, vDestinoVoto, vNumeroPartidoCandidato);
                 // candidato pessoa = candidato(c.getNumeroCandidato(), c.getVotosNominaisCandidato(), c.getSituacaoCandidato(), c.getNomeCandidato(), c.getNomeUrnaCandidato(), c.getSexoCandidato(), c.getDataNascimentoCandidato(), c.getDestinoVoto(), c.getNumeroPartidoCandidato());
-                candidato pessoa = candidato(c.getNumeroCandidato(), c.getVotosNominaisCandidato(), c.getSituacaoCandidato(), c.getNomeCandidato(), c.getNomeUrnaCandidato(), c.getSexoCandidato(), c.getDataNascimentoCandidato(), c.getDestinoVoto(), c.getNumeroPartidoCandidato());
                 candidatosVotos.insert(candidatosVotos.end(), pessoa); 
 
                 if(c.getSituacaoCandidato().compare(comparaSituacao)){
