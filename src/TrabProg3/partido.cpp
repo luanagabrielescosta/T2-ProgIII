@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include "candidato.hpp"
-#include "partido.hpp"
+#include "Candidato.hpp"
+#include "Partido.hpp"
 
 using namespace std;
 
-partido::partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido){
+Partido::Partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido){
 	// this->candidatoPartido = candidatoPartido;
 	this->numeroPartido = numeroPartido;
 	this->votosLegendaPartido = votosLegendaPartido;
@@ -14,45 +14,45 @@ partido::partido(int numeroPartido, int votosLegendaPartido, string &nomePartido
 	this->siglaPartido = siglaPartido;
 }
 
-int partido::getVotosNominaisTotaisPartido() {
+int Partido::getVotosNominaisTotaisPartido() {
 	return votosNominaisTotaisPartido;
 }
 
-void partido::setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
+void Partido::setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
 	this->votosNominaisTotaisPartido = votosNominaisTotaisPartido;
 }
 
 int votosTotaisPartido;
 //int qtdcandidatoEleitos
 
-int partido::getVotosTotaisPartido() {
+int Partido::getVotosTotaisPartido() {
 	return votosTotaisPartido;
 }
 
-void partido::setVotosTotaisPartido(int votosTotaisPartido) {
+void Partido::setVotosTotaisPartido(int votosTotaisPartido) {
 	this->votosTotaisPartido = votosTotaisPartido;
 }
 
-list<candidato> partido::getcandidatoPartido() {
+list<Candidato> Partido::getcandidatoPartido() {
 	return candidatoPartido;
 }
 
-int partido::getNumeroPartido() {
+int Partido::getNumeroPartido() {
 	return numeroPartido;
 }
 
-int partido::getVotosLegendaPartido() {
+int Partido::getVotosLegendaPartido() {
 	return votosLegendaPartido;
 }
 
-string partido::getNomePartido() {
+string Partido::getNomePartido() {
 	return nomePartido;
 }
 
-string partido::getSiglaPartido() {
+string Partido::getSiglaPartido() {
 	return siglaPartido;
 }
 
-void partido::addCandidato(candidato c){
+void Partido::addCandidato(Candidato c){
 	this->candidatoPartido.insert(this->candidatoPartido.end(), c);
 }
