@@ -7,7 +7,7 @@
 #include "Date.hpp"
 
 using namespace std;
-class candidato{
+class Candidato{
 	private:
 	// Atributos
 	int numeroCandidato;
@@ -16,14 +16,14 @@ class candidato{
 	string nomeCandidato;
 	string nomeUrnaCandidato;
 	char sexoCandidato; 
-	date dataNascimentoCandidato; 
+	Date dataNascimentoCandidato; 
 	string destinoVoto; 
 	int numeroPartidoCandidato;
 	
 	public:
 	// Constructor
-	candidato(int numeroCandidato, int votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
-			char &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int numeroPartidoCandidato);
+	Candidato(int numeroCandidato, int votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
+			char &sexoCandidato, Date &dataNascimentoCandidato, string &destinoVoto, int numeroPartidoCandidato);
 
 	// Métodos
 	int getNumeroCandidato();
@@ -38,13 +38,13 @@ class candidato{
 
 	char getSexoCandidato();
 
-	date getDataNascimentoCandidato();
+	Date getDataNascimentoCandidato();
 
 	string getDestinoVoto();
 
 	int getNumeroPartidoCandidato();
 
-	int compare_candidato(candidato o);
+	int compare_candidato(Candidato o);
 
 };
 

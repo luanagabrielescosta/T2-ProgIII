@@ -2,62 +2,62 @@
 
 #include <iostream>
 #include <string>
-#include "candidato.hpp"
+#include "Candidato.hpp"
 // #include "date.hpp"
 
 using namespace std;
 
-candidato::candidato(int numeroCandidato, int votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
-		char &sexoCandidato, date &dataNascimentoCandidato, string &destinoVoto, int numeroPartidoCandidato){
+Candidato::Candidato(int numeroCandidato, int votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
+		char &sexoCandidato, Date &dataNascimentoCandidato, string &destinoVoto, int numeroPartidoCandidato){
 	this->numeroCandidato = numeroCandidato;
 	this->votosNominaisCandidato = votosNominaisCandidato;
 	this->situacaoCandidato = situacaoCandidato;
 	this->nomeCandidato = nomeCandidato;
 	this->nomeUrnaCandidato = nomeUrnaCandidato;
 	this->sexoCandidato = sexoCandidato;
-	this->dataNascimentoCandidato = date();
+	this->dataNascimentoCandidato = Date();
 	this->dataNascimentoCandidato.turn_into(dataNascimentoCandidato);
 	this->destinoVoto = destinoVoto;
 	this->numeroPartidoCandidato = numeroPartidoCandidato;
 }
 
-int candidato::getNumeroCandidato(){
+int Candidato::getNumeroCandidato(){
 	return numeroCandidato;
 }
 
-int candidato::getVotosNominaisCandidato(){
+int Candidato::getVotosNominaisCandidato(){
 	return votosNominaisCandidato;
 }
 
-string candidato::getSituacaoCandidato(){
+string Candidato::getSituacaoCandidato(){
 	return situacaoCandidato;
 }
 
-string candidato::getNomeCandidato(){
+string Candidato::getNomeCandidato(){
 	return nomeCandidato;
 }
 
-string candidato::getNomeUrnaCandidato(){
+string Candidato::getNomeUrnaCandidato(){
 	return nomeUrnaCandidato;
 }
 
-char candidato::getSexoCandidato(){
+char Candidato::getSexoCandidato(){
 	return sexoCandidato;
 }
 
-date candidato::getDataNascimentoCandidato(){
+Date Candidato::getDataNascimentoCandidato(){
 	return dataNascimentoCandidato;
 }
 
-string candidato::getDestinoVoto(){
+string Candidato::getDestinoVoto(){
 	return destinoVoto;
 }
 
-int candidato::getNumeroPartidoCandidato(){
+int Candidato::getNumeroPartidoCandidato(){
 	return numeroPartidoCandidato;
 }
 
-int candidato::compare_candidato(candidato o){
+int Candidato::compare_candidato(Candidato o){
 	if(this->numeroCandidato == o.getNumeroCandidato()){
 		if(this->votosNominaisCandidato == o.getVotosNominaisCandidato()){
 			if(this->situacaoCandidato.compare(o.getSituacaoCandidato()) == 0){
