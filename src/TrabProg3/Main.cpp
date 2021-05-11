@@ -23,8 +23,10 @@ int main(int argc, char** argv){
 		lerPartidos.lePartidos(vereador,arquivoPartidos);
 		Leitura lerCandidatos = Leitura(); 
 		lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
+
+
 		cout << "SOCORRO" << endl;
-		// vereador.printEleicao();
+		vereador.printEleicao();
 
 		Escrita escreveArquivoSaida = Escrita();
         Date data = help.string_to_date(dataString);

@@ -24,12 +24,12 @@ void Eleicao::setNumeroVagaseleicao(int numeroVagaseleicao){
 	this->numeroVagaseleicao = numeroVagaseleicao;
 }
 
-list< Partido, allocator<Partido> > Eleicao::getpartidoeleicao(){
-	return partidoeleicao;
+list< Partido, allocator<Partido> > *Eleicao::getPartidoEleicao(){
+	return &partidoeleicao;
 }
 
-void Eleicao::setpartidoeleicao(list< Partido, allocator<Partido> > &partidoeleicao){
-	this->partidoeleicao = partidoeleicao;
+void Eleicao::setpartidoeleicao(list< Partido, allocator<Partido> > *partidoeleicao){
+	this->partidoeleicao = *partidoeleicao;
 }
 
 list< Candidato, allocator<Candidato> > Eleicao::getEleitosProporcionalmente(){
@@ -100,18 +100,28 @@ void Eleicao::printEleicao(){
 
 }
 
-void Eleicao::insereCandidatos(int numero, list<Candidato> &c){
-	list< Partido, allocator<Partido> > :: iterator it;
-	// string a = "inexistente";
-	// Partido trash = Partido(0, 0, a, a);
+void Eleicao::insereCandidatos(Candidato* c){
+	list<Partido> :: iterator it;
 
 	for(it = partidoeleicao.begin(); it != partidoeleicao.end(); ++it){
-		Partido aux = *it;
-		if(numero == aux.getNumeroPartido()){
-			// aux.getcandidatoPartido() = aux.addCandidato(c);
-			// // aux.getcandidatoPartido().insert(aux.getcandidatoPartido().end(), c);
-			// aux.printPartido();
-			aux.setcandidatoPartido(c);
+		Partido p = *it;
+		if(c->getNumeroPartidoCandidato() == p.getNumeroPartido()){
+			// p.getcandidatoPartido().insert(p.getcandidatoPartido().end(), c);
+			p.addCandidato(c);
+	// 		// aux.getcandidatoPartido() = aux.addCandidato(c);
+	// 		// aux.printPartido();
+	// 		// aux.setcandidatoPartido(c);
 		}
 	}
+}
+
+int Eleicao::retornaNumeroPartidos(){
+	list< Partido, allocator<Partido> > :: iterator it;
+	int count = 0;
+
+	for(it = partidoeleicao.begin(); it != partidoeleicao.end(); ++it){
+		count++;
+	}
+	
+	return count;
 }

@@ -37,7 +37,7 @@ bool comparePartido(Partido o1, Partido o2) {
 bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
     try{
         // Listas 
-        list< Partido, allocator<Partido> > listaPartidos = vereadores.getpartidoeleicao(); 
+        list< Partido, allocator<Partido> > listaPartidos = *vereadores.getPartidoEleicao(); 
         list< string, allocator<string> > infoCandidatoEleito; 
         list< Candidato, allocator<Candidato> > candidatosEleitos;
         list< Candidato, allocator<Candidato> > candidatosVotos;
@@ -99,38 +99,38 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
 
             p.printPartido();
-            for(it2 = p.getcandidatoPartido().begin(); it2 != p.getcandidatoPartido().end(); ++it2){
-                totalCandidatos++;
-                Candidato c = *it2;
-                cout << "here i am" << endl;
-                int vNumeroCandidato = c.getNumeroCandidato();
-                int vVotosNominaisCandidato = c.getVotosNominaisCandidato();
-                string vSituacaoCandidato = c.getSituacaoCandidato();
-                string vNomeCandidato = c.getNomeCandidato();
-                string vNomeUrnaCandidato = c.getNomeUrnaCandidato();
-                char vSexoCandidato = c.getSexoCandidato();
-                Date vDataNascimentoCandidato = c.getDataNascimentoCandidato();
-                string vDestinoVoto = c.getDestinoVoto();
-                int vNumeroPartidoCandidato = c.getNumeroPartidoCandidato();
+            // for(it2 = p.getcandidatoPartido().begin(); it2 != p.getcandidatoPartido().end(); ++it2){
+            //     totalCandidatos++;
+            //     Candidato c = *it2;
+            //     cout << "here i am" << endl;
+            //     int vNumeroCandidato = c.getNumeroCandidato();
+            //     int vVotosNominaisCandidato = c.getVotosNominaisCandidato();
+            //     string vSituacaoCandidato = c.getSituacaoCandidato();
+            //     string vNomeCandidato = c.getNomeCandidato();
+            //     string vNomeUrnaCandidato = c.getNomeUrnaCandidato();
+            //     char vSexoCandidato = c.getSexoCandidato();
+            //     Date vDataNascimentoCandidato = c.getDataNascimentoCandidato();
+            //     string vDestinoVoto = c.getDestinoVoto();
+            //     int vNumeroPartidoCandidato = c.getNumeroPartidoCandidato();
 
-                Candidato pessoa = Candidato(vNumeroCandidato, vVotosNominaisCandidato, vSituacaoCandidato, vNomeCandidato, vNomeUrnaCandidato, vSexoCandidato, vDataNascimentoCandidato, vDestinoVoto, vNumeroPartidoCandidato);
+            //     Candidato pessoa = Candidato(vNumeroCandidato, vVotosNominaisCandidato, vSituacaoCandidato, vNomeCandidato, vNomeUrnaCandidato, vSexoCandidato, vDataNascimentoCandidato, vDestinoVoto, vNumeroPartidoCandidato);
 
-                candidatosVotos.insert(candidatosVotos.end(), pessoa); 
+            //     candidatosVotos.insert(candidatosVotos.end(), pessoa); 
 
-                if(c.getSituacaoCandidato().compare(comparaSituacao)){
-                    candidatosEleitos.insert(candidatosEleitos.end(), pessoa);
-                    qtdVagas++; 
-                    infoCandidatoEleito.insert(infoCandidatoEleito.end(), c.getNomeCandidato() + " / " + c.getNomeUrnaCandidato() + " (" + p.getSiglaPartido() + ", " + library.int_to_char(c.getVotosNominaisCandidato()) + " votos)");
+            //     if(c.getSituacaoCandidato().compare(comparaSituacao)){
+            //         candidatosEleitos.insert(candidatosEleitos.end(), pessoa);
+            //         qtdVagas++; 
+            //         infoCandidatoEleito.insert(infoCandidatoEleito.end(), c.getNomeCandidato() + " / " + c.getNomeUrnaCandidato() + " (" + p.getSiglaPartido() + ", " + library.int_to_char(c.getVotosNominaisCandidato()) + " votos)");
                     
-                    if(c.getSexoCandidato() == comparaSexoF){
-                        qtdMulheresEleitas++; 
-                    } else if(c.getSexoCandidato() == comparaSexoM){
-                        qtdHomensEleitos++;
-                    }   
-                } else{
-                    totalVotosNominais += c.getVotosNominaisCandidato();	
-                }
-            }
+            //         if(c.getSexoCandidato() == comparaSexoF){
+            //             qtdMulheresEleitas++; 
+            //         } else if(c.getSexoCandidato() == comparaSexoM){
+            //             qtdHomensEleitos++;
+            //         }   
+            //     } else{
+            //         totalVotosNominais += c.getVotosNominaisCandidato();	
+            //     }
+            // }
         }
         // leituraVagas(listaPartidos, qtdPartidos, totalVotosLegenda, totalCandidatos, candidatosVotos, candidatosEleitos, qtdVagas, 
         //         infoCandidatoEleito, qtdMulheresEleitas, qtdHomensEleitos, totalVotosNominais, library);

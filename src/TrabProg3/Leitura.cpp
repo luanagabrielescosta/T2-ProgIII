@@ -91,8 +91,11 @@ void Leitura::leCandidatos(Eleicao &vereadores, string &path){
     string line;
     ifstream myfile (path); // ifstream = padrão ios:in
     int bit = 0;
+    int counter = 0;
     int deleteAfter = 0;
-    list<Candidato> desespero;
+    int countPartidos = vereadores.retornaNumeroPartidos();
+    cout << countPartidos << endl;
+    vector<Candidato> lista;
 
     if (myfile.is_open()){
         while (! myfile.eof()){ //enquanto end of file for false continua
@@ -175,37 +178,17 @@ void Leitura::leCandidatos(Eleicao &vereadores, string &path){
 
                 }
 
-                // desespero = vereadores.retornaPartidoPeloNum(nPartidoCandidato).getcandidatoPartido();
                 Candidato c = Candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato, nPartidoCandidato); 
-                // vereadores.insereCandidatos(nPartidoCandidato, c);
-                // desespero.insert(desespero.end(), c);
-                // desespero.insert(desespero.end(), c);
-
-                // list< Candidato, allocator<Candidato> > :: iterator it3;
-
-                // cout << desespero.size() << endl;
-                // for(it3 = desespero.begin(); it3 != desespero.end(); ++it3){
-                //     Candidato a = *it3;
-                //     a.printCandidato();
-                // }
-
-                // vereadores.insereCandidatos(nPartidoCandidato, desespero);
-
-
-                // p.addCandidato(c);
-                // Partido p = vereadores.retornaPartidoPeloNum(nPartidoCandidato); 
-                // c.printCandidato();
-                
-                // p.printPartido();
-	            // cout << p.getNumeroPartido();
-	            // cout << endl;
-                deleteAfter++;
-                if(deleteAfter == 2) break;
+             
+                vereadores.insereCandidatos(&c);
+                // lista.insert(lista.end(), c);
+               
             }
         }
         myfile.close();
         totalVotos = totalVotosLegenda + totalVotosNominais; 
-        // vereadores.printEleicao();
+
+                // vereadores.printEleicao();
 
     } else{ 
         cout << "Unable to open file";

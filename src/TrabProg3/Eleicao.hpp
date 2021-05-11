@@ -35,9 +35,9 @@ class Eleicao{
 
 	void setNumeroVagaseleicao(int numeroVagaseleicao);
 
-	list<Partido> getpartidoeleicao();
+	list<Partido> *getPartidoEleicao();
 
-	void setpartidoeleicao(list<Partido> &partidoeleicao);
+	void setpartidoeleicao(list<Partido> *partidoeleicao);
 
 	list<Candidato> getEleitosProporcionalmente();
 
@@ -69,8 +69,9 @@ class Eleicao{
 
 	void printEleicao();
 
-	void insereCandidatos(int numero, list<Candidato> &c);
+	void insereCandidatos(Candidato* c);
 
+	int retornaNumeroPartidos();
 };
 
 

@@ -14,70 +14,68 @@ Partido::Partido(int numeroPartido, int votosLegendaPartido, string &nomePartido
 	this->siglaPartido = siglaPartido;
 }
 
-int Partido::getVotosNominaisTotaisPartido() {
+int Partido::getVotosNominaisTotaisPartido(){
 	return votosNominaisTotaisPartido;
 }
 
-void Partido::setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido) {
+void Partido::setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido){
 	this->votosNominaisTotaisPartido = votosNominaisTotaisPartido;
 }
 
 int votosTotaisPartido;
 //int qtdcandidatoEleitos
 
-int Partido::getVotosTotaisPartido() {
+int Partido::getVotosTotaisPartido(){
 	return votosTotaisPartido;
 }
 
-void Partido::setVotosTotaisPartido(int votosTotaisPartido) {
+void Partido::setVotosTotaisPartido(int votosTotaisPartido){
 	this->votosTotaisPartido = votosTotaisPartido;
 }
 
-list< Candidato, allocator<Candidato> > Partido::getcandidatoPartido(){
+list<Candidato*> Partido::getcandidatoPartido(){
 	return candidatoPartido;
 }
 
-void Partido::setcandidatoPartido(list<Candidato> &lista){
+void Partido::setcandidatoPartido(list<Candidato*> lista){
 	this->candidatoPartido = lista;
 }
 
 
-int Partido::getNumeroPartido() {
+int Partido::getNumeroPartido(){
 	return numeroPartido;
 }
 
-int Partido::getVotosLegendaPartido() {
+int Partido::getVotosLegendaPartido(){
 	return votosLegendaPartido;
 }
 
-string Partido::getNomePartido() {
+string Partido::getNomePartido(){
 	return nomePartido;
 }
 
-string Partido::getSiglaPartido() {
+string Partido::getSiglaPartido(){
 	return siglaPartido;
 }
 
-list<Candidato> Partido::addCandidato(Candidato &c){
+void Partido::addCandidato(Candidato *c){
 	list<Candidato> lista;
 	
-	lista = this->candidatoPartido;
-	lista.insert(lista.end(), c);
-	// printPartido();
-	// cout << endl;
-	return lista;
+	this->candidatoPartido.insert(this->candidatoPartido.end(), c);
 }
 
 void Partido::printPartido(){
 	list< Candidato, allocator<Candidato> > :: iterator it;
 
-	for(it = this->candidatoPartido.begin(); it != this->candidatoPartido.end(); ++it){
+	// for(it = this->candidatoPartido.begin(); it != this->candidatoPartido.end(); ++it){
+	for(int i = 0; i < candidatoPartido.size(); i++){
+		cout <<  "to aqui"<< endl;
 		Candidato a = *it;
 		a.printCandidato();
 	}
 
 	cout << this->numeroPartido << endl;
-	cout << this->votosLegendaPartido << endl;
+	// cout << this->votosLegendaPartido << endl;
 	cout << this->nomePartido << endl;
-	cout << this->siglaPartido << endl;
+	// cout << this->siglaPartido << endl;
 }
