@@ -24,51 +24,51 @@ void Eleicao::setNumeroVagaseleicao(int numeroVagaseleicao){
 	this->numeroVagaseleicao = numeroVagaseleicao;
 }
 
-list<Partido> Eleicao::getpartidoeleicao(){
+list< Partido, allocator<Partido> > Eleicao::getpartidoeleicao(){
 	return partidoeleicao;
 }
 
-void Eleicao::setpartidoeleicao(list<Partido> partidoeleicao){
+void Eleicao::setpartidoeleicao(list< Partido, allocator<Partido> > &partidoeleicao){
 	this->partidoeleicao = partidoeleicao;
 }
 
-list<Candidato> Eleicao::getEleitosProporcionalmente(){
+list< Candidato, allocator<Candidato> > Eleicao::getEleitosProporcionalmente(){
 	return eleitosProporcionalmente;
 }
-void Eleicao::setEleitosProporcionalmente(list<Candidato> eleitosProporcionalmente){
+void Eleicao::setEleitosProporcionalmente(list< Candidato, allocator<Candidato> > &eleitosProporcionalmente){
 	this->eleitosProporcionalmente = eleitosProporcionalmente;
 }
-list<Candidato> Eleicao::getMaisVotados(){
+list< Candidato, allocator<Candidato> > Eleicao::getMaisVotados(){
 	return maisVotados;
 }
-void Eleicao::setMaisVotados(list<Candidato> maisVotados){
+void Eleicao::setMaisVotados(list< Candidato, allocator<Candidato> > &maisVotados){
 	this->maisVotados = maisVotados;
 }
-list<Candidato> Eleicao::getEleitosMajoritariamente(){
+list< Candidato, allocator<Candidato> > Eleicao::getEleitosMajoritariamente(){
 	return eleitosMajoritariamente;
 }
-void Eleicao::setEleitosMajoritariamente(list<Candidato> eleitosMajoritariamente){
+void Eleicao::setEleitosMajoritariamente(list< Candidato, allocator<Candidato> > &eleitosMajoritariamente){
 	this->eleitosMajoritariamente = eleitosMajoritariamente;
 }
-list<Candidato> Eleicao::getNaoEleitosMajoritariamente(){
+list< Candidato, allocator<Candidato> > Eleicao::getNaoEleitosMajoritariamente(){
 	return naoEleitosMajoritariamente;
 }
-void Eleicao::setNaoEleitosMajoritariamente(list<Candidato> naoEleitosMajoritariamente){
+void Eleicao::setNaoEleitosMajoritariamente(list< Candidato, allocator<Candidato> > &naoEleitosMajoritariamente){
 	this->naoEleitosMajoritariamente = naoEleitosMajoritariamente;
 }
 Date Eleicao::getDataeleicao(){
 	return dataeleicao;
 }
-void Eleicao::setDataeleicao(Date dataeleicao){
+void Eleicao::setDataeleicao(Date &dataeleicao){
 	this->dataeleicao = dataeleicao;
 }
 
-void Eleicao::addPartido(Partido p){
+void Eleicao::addPartido(Partido &p){
 	this->partidoeleicao.insert(this->partidoeleicao.end(), p);	
 }
 
 Partido Eleicao::retornaPartidoPeloNum(int x){
-	list<Partido> :: iterator it;
+	list< Partido, allocator<Partido> > :: iterator it;
 	string a = "inexistente";
 	Partido trash = Partido(0, 0, a, a);
 
@@ -88,4 +88,30 @@ int Eleicao::getQtdVagas(){
 
 void Eleicao::setQtdVagas(int qtdVagas){
 	this->qtdVagas = qtdVagas;
+}
+
+void Eleicao::printEleicao(){
+	list< Partido, allocator<Partido> > :: iterator it;
+
+	for(it = this->partidoeleicao.begin(); it != this->partidoeleicao.end(); ++it){
+		Partido a = *it;
+		a.printPartido();
+	}
+
+}
+
+void Eleicao::insereCandidatos(int numero, list<Candidato> &c){
+	list< Partido, allocator<Partido> > :: iterator it;
+	// string a = "inexistente";
+	// Partido trash = Partido(0, 0, a, a);
+
+	for(it = partidoeleicao.begin(); it != partidoeleicao.end(); ++it){
+		Partido aux = *it;
+		if(numero == aux.getNumeroPartido()){
+			// aux.getcandidatoPartido() = aux.addCandidato(c);
+			// // aux.getcandidatoPartido().insert(aux.getcandidatoPartido().end(), c);
+			// aux.printPartido();
+			aux.setcandidatoPartido(c);
+		}
+	}
 }

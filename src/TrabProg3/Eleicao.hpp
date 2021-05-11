@@ -37,35 +37,40 @@ class Eleicao{
 
 	list<Partido> getpartidoeleicao();
 
-	void setpartidoeleicao(list<Partido> partidoeleicao);
+	void setpartidoeleicao(list<Partido> &partidoeleicao);
 
 	list<Candidato> getEleitosProporcionalmente();
 
-	void setEleitosProporcionalmente(list<Candidato> eleitosProporcionalmente);
+	void setEleitosProporcionalmente(list<Candidato> &eleitosProporcionalmente);
 
 	list<Candidato> getMaisVotados();
 
-	void setMaisVotados(list<Candidato> maisVotados);
+	void setMaisVotados(list<Candidato> &maisVotados);
 
 	list<Candidato> getEleitosMajoritariamente();
 
-	void setEleitosMajoritariamente(list<Candidato> eleitosMajoritariamente);
+	void setEleitosMajoritariamente(list<Candidato> &eleitosMajoritariamente);
 
 	list<Candidato> getNaoEleitosMajoritariamente();
 
-	void setNaoEleitosMajoritariamente(list<Candidato> naoEleitosMajoritariamente);
+	void setNaoEleitosMajoritariamente(list<Candidato> &naoEleitosMajoritariamente);
 
 	Date getDataeleicao();
 
-	void setDataeleicao(Date dataeleicao);
+	void setDataeleicao(Date &dataeleicao);
 
-	void addPartido(Partido p);
+	void addPartido(Partido &p);
 	
 	Partido retornaPartidoPeloNum(int x);
 
 	int getQtdVagas();
 
 	void setQtdVagas(int qtdVagas);
+
+	void printEleicao();
+
+	void insereCandidatos(int numero, list<Candidato> &c);
+
 };
 
 

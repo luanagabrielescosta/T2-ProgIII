@@ -14,7 +14,7 @@ void Date::enter_date(int d, int m, int y){
 }
 
 void Date::print_date(){
-    cout<<this->day<<"/"<<this->month<<"/"<<year<<endl;
+    cout<<this->day<<"/"<<this->month<<"/"<<year;
 }
 
 int Date::bi(int year){
@@ -33,7 +33,7 @@ int Date::return_year(){
     return this->year;
 }
 
-unsigned int Date::distance_years(Date end){
+unsigned int Date::distance_years(Date &end){
     int days_month[2][13] = {{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},{0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}};
     unsigned int idays;
     unsigned int fdays;	
@@ -59,7 +59,7 @@ unsigned int Date::distance_years(Date end){
     return def_years - idays + fdays;
 }
 
-void Date::turn_into(Date new_date){
+void Date::turn_into(Date &new_date){
     this->day = new_date.return_day();
     this->month = new_date.return_month();
     this->year = new_date.return_year();
@@ -74,18 +74,10 @@ int Date::compare_date(Date other, Date another){
         }
     }
 
-    // if(other.return_year() >= another.return_year()){
-    //     if(other.return_month() >= another.return_month()){
-    //         if(other.return_day() >= another.return_day()){
-    //             return 0;
-    //         }
-    //     }
-    // }
-
     return 1;
 }
 
-int Date::idade(Date other){
+int Date::idade(Date &other){
     int idade = other.return_year() - this->year;
 
     if(other.return_month() > this->month){

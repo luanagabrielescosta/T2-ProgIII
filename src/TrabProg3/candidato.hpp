@@ -45,9 +45,10 @@ class Candidato{
 
 	int getNumeroPartidoCandidato();
 
-	int compare_candidato(Candidato o);
+	int compare_candidato(Candidato &o);
 
-	list<const Candidato> retornaConst(list<Candidato> o);
+	void printCandidato();
+
 };
 
 #endif /* candidato_hpp_ */

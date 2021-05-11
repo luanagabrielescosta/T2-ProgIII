@@ -13,7 +13,6 @@ class Date{
     int year;
     
     public:
-    // date(int &d, int &m, int &y);
     Date();
     
     void enter_date(int d, int m, int y);
@@ -28,13 +27,13 @@ class Date{
 
     int return_year();
 
-    unsigned int distance_years(Date end);
+    unsigned int distance_years(Date &end);
 
-    void turn_into(Date new_date);
+    void turn_into(Date &new_date);
 
     int compare_date(Date other, Date another);
 
-    int idade(Date other);
+    int idade(Date &other);
 
     bool compareTo(Date other);
 };

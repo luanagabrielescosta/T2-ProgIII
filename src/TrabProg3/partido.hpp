@@ -8,7 +8,7 @@ using namespace std;
 
 class Partido{
 	// Atributos
-	list<Candidato> candidatoPartido; 
+	list< Candidato, allocator<Candidato> > candidatoPartido; 
 	int numeroPartido; 
 	int votosLegendaPartido; 
 	string nomePartido; 
@@ -32,6 +32,8 @@ class Partido{
 
 	list<Candidato> getcandidatoPartido();
 
+	void setcandidatoPartido(list<Candidato> &lista);
+
 	int getNumeroPartido();
 
 	int getVotosLegendaPartido();
@@ -40,7 +42,9 @@ class Partido{
 
 	string getSiglaPartido();
 	
-	void addCandidato(Candidato c);
+	list<Candidato> addCandidato(Candidato &c);
+
+	void printPartido();
 };
 
 #endif /* partido_hpp_ */

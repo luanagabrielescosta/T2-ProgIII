@@ -37,9 +37,9 @@ class Leitura{
     Leitura();
 	
 	// Métodos
-    void lePartidos(Eleicao vereadores, string path);
+    void lePartidos(Eleicao &vereadores, string &path);
 	
-	void leCandidatos(Eleicao vereadores, string path);
+	void leCandidatos(Eleicao &vereadores, string &path);
 };
 
 #endif /* leitura_hpp_ */

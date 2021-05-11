@@ -8,7 +8,7 @@ using namespace std;
 Lib::Lib(){
 }
 
-int Lib::string_to_int(string old){
+int Lib::string_to_int(string &old){
     int count;
 
     for(int i = 0; i < old.size(); i++){
@@ -22,7 +22,7 @@ int Lib::string_to_int(string old){
     return count;
 }
 
-Date Lib::string_to_date(std:: string old){
+Date Lib::string_to_date(string &old){
     int d, m, y;
     Date a = Date();
 
@@ -35,7 +35,7 @@ Date Lib::string_to_date(std:: string old){
     return a;
 }
 
-char Lib::string_to_char(std:: string old){
+char Lib::string_to_char(string &old){
     return old[0];
 }
 
@@ -43,9 +43,9 @@ char Lib::int_to_char(int old){
     return (old +'0');
 }
 
-int Lib::return_int(list<int> lista, int one){
+int Lib::return_int(list< int, allocator<int> > &lista, int one){
     int count;
-    list<int> :: iterator it;
+    list< int, allocator<int> > :: iterator it;
 
     for(it = lista.begin(); it != lista.end();it++){
 		//printa os numeros pares
@@ -59,14 +59,14 @@ int Lib::return_int(list<int> lista, int one){
     return 0;
 }
 
-Candidato Lib::return_candidato(list<Candidato> lista, int one){
+Candidato Lib::return_candidato(list< Candidato, allocator<Candidato> > &lista, int one){
     int count;
     Date a = Date();
     a.enter_date(0, 0, 0);
     string b = " ";
     char c = ' ';
     Candidato retorno = Candidato(0, 0, b, b, b, c, a, b, 0);
-    list<Candidato> :: iterator it;
+    list< Candidato, allocator<Candidato> > :: iterator it;
 
     for(it = lista.begin(); it != lista.end();it++){
 		//printa os numeros pares

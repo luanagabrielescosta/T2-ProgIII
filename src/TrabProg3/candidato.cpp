@@ -1,10 +1,7 @@
-// package TrabProg3;
-
 #include <iostream>
 #include <istream>
 #include <string>
 #include "Candidato.hpp"
-// #include "date.hpp"
 
 using namespace std;
 
@@ -58,7 +55,7 @@ int Candidato::getNumeroPartidoCandidato(){
 	return numeroPartidoCandidato;
 }
 
-int Candidato::compare_candidato(Candidato o){
+int Candidato::compare_candidato(Candidato &o){
 	if(this->numeroCandidato == o.getNumeroCandidato()){
 		if(this->votosNominaisCandidato == o.getVotosNominaisCandidato()){
 			if(this->situacaoCandidato.compare(o.getSituacaoCandidato()) == 0){
@@ -81,13 +78,15 @@ int Candidato::compare_candidato(Candidato o){
 	return 1;
 }
 
-list<const Candidato> Candidato::retornaConst(list<Candidato> o){
-	list<const Candidato> retorno;
-	list<Candidato> :: iterator it;
-
-	for(it = o.begin(); it != o.end(); ++it){
-		retorno.insert(retorno.end(), *it);
-	}
-
-	return retorno;
+void Candidato::printCandidato(){
+	cout << this->numeroCandidato << " - ";
+	cout << this->votosNominaisCandidato << " - "; 
+	cout << this->situacaoCandidato << " - "; 
+	cout << this->nomeCandidato << " - ";
+	cout << this->nomeUrnaCandidato << " - ";
+	cout << this->sexoCandidato << " - "; 
+	this->dataNascimentoCandidato.print_date();
+	cout << " - ";
+	cout << this->destinoVoto << " - "; 
+	cout << this->numeroPartidoCandidato << endl;
 }

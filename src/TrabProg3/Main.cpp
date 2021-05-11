@@ -23,12 +23,15 @@ int main(int argc, char** argv){
 		lerPartidos.lePartidos(vereador,arquivoPartidos);
 		Leitura lerCandidatos = Leitura(); 
 		lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
+		cout << "SOCORRO" << endl;
+		// vereador.printEleicao();
+
 		Escrita escreveArquivoSaida = Escrita();
         Date data = help.string_to_date(dataString);
-		// escreveArquivoSaida.escreveArquivo("out",data,vereador);		
+		escreveArquivoSaida.escreveArquivo("out",data,vereador);		
 		cout << "aaaa" << endl;
 		
 		return 0;
 }
-// g++ *.cpp -o main 
-// ./main afonso-cláudio-candidatos.csv afonso-claudio-partidos.csv 03/06/2000
+// g++ *.cpp -o vereadores 
+// ./vereadores afonso-cláudio-candidatos.csv afonso-claudio-partidos.csv 03/06/2000

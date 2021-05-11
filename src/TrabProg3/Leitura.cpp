@@ -23,7 +23,7 @@ Leitura::Leitura(){
     this->totalVotosLegenda = 0;
 }
 
-void Leitura::lePartidos(Eleicao vereadores, string path){
+void Leitura::lePartidos(Eleicao &vereadores, string &path){
     string line;
     ifstream myfile (path); // ifstream = padrão ios:in
     int bit = 0;
@@ -35,7 +35,7 @@ void Leitura::lePartidos(Eleicao vereadores, string path){
             if(bit == 0){
                 bit++;
             } else{
-                list<string> tokens;
+                list< string, allocator<string> > tokens;
                 // stringstream class check1
                 stringstream check1(line);
                 string intermediate;
@@ -45,7 +45,7 @@ void Leitura::lePartidos(Eleicao vereadores, string path){
                     tokens.push_back(intermediate);
                 }
                 
-                list <string> :: iterator it;
+                list < string, allocator<string> > :: iterator it;
                 int nPartido;
                 int vLegenda;
                 string nomePartido;
@@ -74,7 +74,9 @@ void Leitura::lePartidos(Eleicao vereadores, string path){
                 }
 
                 Partido x = Partido(nPartido, vLegenda, nomePartido, siglaPartido); 
+                
                 vereadores.addPartido(x);
+                // cout << x.getNumeroPartido() << " - " << x.getVotosLegendaPartido() << " - " << x.getNomePartido() << " - " << x.getSiglaPartido() << endl;
                 cout << endl;
             }
         }
@@ -85,10 +87,12 @@ void Leitura::lePartidos(Eleicao vereadores, string path){
     }
 }
 
-void Leitura::leCandidatos(Eleicao vereadores, string path){
+void Leitura::leCandidatos(Eleicao &vereadores, string &path){
     string line;
     ifstream myfile (path); // ifstream = padrão ios:in
     int bit = 0;
+    int deleteAfter = 0;
+    list<Candidato> desespero;
 
     if (myfile.is_open()){
         while (! myfile.eof()){ //enquanto end of file for false continua
@@ -97,7 +101,7 @@ void Leitura::leCandidatos(Eleicao vereadores, string path){
             if(bit == 0){
                 bit++;
             } else{
-                list<string> tokens;
+                list< string, allocator<string> > tokens;
                 // stringstream class check1
                 stringstream check1(line);
                 string intermediate;
@@ -107,7 +111,7 @@ void Leitura::leCandidatos(Eleicao vereadores, string path){
                     tokens.push_back(intermediate);
                 }
                 
-                list <string> :: iterator it;
+                list < string, allocator<string> > :: iterator it;
                 int numCandidato;
                 int vNominaisCandidato;
                 string situCandidato;
@@ -117,6 +121,7 @@ void Leitura::leCandidatos(Eleicao vereadores, string path){
                 Date datNascCandidato;
                 string destVotoCandidato;
                 int nPartidoCandidato;
+
 
                 for(it = tokens.begin(); it != tokens.end(); ++it){
                     Lib help = Lib();
@@ -169,14 +174,38 @@ void Leitura::leCandidatos(Eleicao vereadores, string path){
                     // cout << nPartidoCandidato;
 
                 }
-                Partido p = vereadores.retornaPartidoPeloNum(nPartidoCandidato); 
-                Candidato c = Candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato, nPartidoCandidato); 
-                p.addCandidato(c);
 
+                // desespero = vereadores.retornaPartidoPeloNum(nPartidoCandidato).getcandidatoPartido();
+                Candidato c = Candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato, nPartidoCandidato); 
+                // vereadores.insereCandidatos(nPartidoCandidato, c);
+                // desespero.insert(desespero.end(), c);
+                // desespero.insert(desespero.end(), c);
+
+                // list< Candidato, allocator<Candidato> > :: iterator it3;
+
+                // cout << desespero.size() << endl;
+                // for(it3 = desespero.begin(); it3 != desespero.end(); ++it3){
+                //     Candidato a = *it3;
+                //     a.printCandidato();
+                // }
+
+                // vereadores.insereCandidatos(nPartidoCandidato, desespero);
+
+
+                // p.addCandidato(c);
+                // Partido p = vereadores.retornaPartidoPeloNum(nPartidoCandidato); 
+                // c.printCandidato();
+                
+                // p.printPartido();
+	            // cout << p.getNumeroPartido();
+	            // cout << endl;
+                deleteAfter++;
+                if(deleteAfter == 2) break;
             }
         }
         myfile.close();
         totalVotos = totalVotosLegenda + totalVotosNominais; 
+        // vereadores.printEleicao();
 
     } else{ 
         cout << "Unable to open file";

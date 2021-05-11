@@ -33,9 +33,14 @@ void Partido::setVotosTotaisPartido(int votosTotaisPartido) {
 	this->votosTotaisPartido = votosTotaisPartido;
 }
 
-list<Candidato> Partido::getcandidatoPartido() {
+list< Candidato, allocator<Candidato> > Partido::getcandidatoPartido(){
 	return candidatoPartido;
 }
+
+void Partido::setcandidatoPartido(list<Candidato> &lista){
+	this->candidatoPartido = lista;
+}
+
 
 int Partido::getNumeroPartido() {
 	return numeroPartido;
@@ -53,6 +58,26 @@ string Partido::getSiglaPartido() {
 	return siglaPartido;
 }
 
-void Partido::addCandidato(Candidato c){
-	this->candidatoPartido.insert(this->candidatoPartido.end(), c);
+list<Candidato> Partido::addCandidato(Candidato &c){
+	list<Candidato> lista;
+	
+	lista = this->candidatoPartido;
+	lista.insert(lista.end(), c);
+	// printPartido();
+	// cout << endl;
+	return lista;
+}
+
+void Partido::printPartido(){
+	list< Candidato, allocator<Candidato> > :: iterator it;
+
+	for(it = this->candidatoPartido.begin(); it != this->candidatoPartido.end(); ++it){
+		Candidato a = *it;
+		a.printCandidato();
+	}
+
+	cout << this->numeroPartido << endl;
+	cout << this->votosLegendaPartido << endl;
+	cout << this->nomePartido << endl;
+	cout << this->siglaPartido << endl;
 }
