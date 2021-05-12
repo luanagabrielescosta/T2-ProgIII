@@ -55,7 +55,7 @@ bool compareVotosPartido(Partido first, Partido second){
     return false;
 }
 
-bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
+bool Escrita::escreveArquivo(Date dataeleicao, Eleicao vereadores){
     try{
         list<Partido> listaPartidos = vereadores.getPartidoEleicao(); 
         list<string> infoCandidatoEleito; 
@@ -145,325 +145,319 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
         candidatosEleitos.sort(compare);
 
         int aux2 = qtdVagas; 
-        ofstream myfile (path); // ifstream = padrão ios:in
 
-        if (myfile.is_open()){
-            //escrita da quantidade de vagas; 
-            myfile << "Número de vagas: " << qtdVagas << endl;
-            myfile << endl;
-            myfile << "Vereadores eleitos:" << endl;
+        cout << "Número de vagas: " << qtdVagas << endl;
+        cout << endl;
+        cout << "Vereadores eleitos:" << endl;
 
-            while(cont < aux2){
-				for(it2 = candidatosEleitos.begin(); it2 != candidatosEleitos.end(); ++it2){
-                    Candidato c = *it2;
-
-					if(qtdVagas != aux && cont == 0){
-					    qtdVagas--; 
-					} else if(qtdVagas != aux && cont > 0){
-						qtdVagas++;
-					}
-
-					if(qtdVagas == aux){
-                        int idade = c.getDataNascimentoCandidato().idade(dataeleicao);
-                        // c.getDataNascimentoCandidato().printDate();
-                        // cout << endl << idade << endl << endl;
-
-						if(idade < 30){
-							idadeAbaixoTrinta++;
-						} else if(idade < 40){
-							idadeAbaixoQuarenta++;
-						} else if(idade < 50){
-							idadeAbaixoCinquenta++;
-						} else if(idade < 60){
-							idadeAbaixoSessenta++;
-						}else{
-							idadeAcimaSessenta++;
-						}
-						
-						Partido p = vereadores.retornaPartidoPeloNum(c.getNumeroPartidoCandidato());
-
-						myfile << posicaoCandidato << " - " << c.getNomeCandidato() << " / " << c.getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << c.getVotosNominaisCandidato() << " votos)" << endl;   
-
-                        aux = aux2 - 1;
-						cont++;						
-						qtdVagas = 0;
-						posicaoCandidato++;
-
-						if(cont == aux2){
-							break;
-						}
-					}
-				}
-            }
-
-            qtdVagas = aux2; 
-            cont = 0;
-            aux = 0;
-            posicaoCandidato = 1;
-			aux2 = totalCandidatos;
-
-            candidatosVotos.sort(compare);
-
-            myfile << endl;
-            myfile << "Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
-			
-			comparaSituacao = "Eleito";
-
-            while(cont < qtdVagas){
-                for(it2 = candidatosVotos.begin(); it2 != candidatosVotos.end(); ++it2){
-                    if(totalCandidatos != aux && cont == 0){
-                        totalCandidatos--; 
-                    } else if(totalCandidatos != aux && cont > 0){
-                        totalCandidatos++;
-                    }
-                    if(totalCandidatos == aux){ 
-                        candidatosMaisVotados.push_back(*it2); 
-
-                        if(it2->getSituacaoCandidato().compare(comparaSituacao) != 0){
-                            candidatosEleitosMajoritariamente.push_back(*it2);
-                            posicaoRanking.push_back(posicaoCandidato);
-                        }
-
-                        Partido p = vereadores.retornaPartidoPeloNum(it2->getNumeroPartidoCandidato()); 
-
-                        myfile << posicaoCandidato << " - " << it2->getNomeCandidato() << " / " << it2->getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << it2->getVotosNominaisCandidato() << " votos)" << endl; 
-                        
-                        aux += aux2; 
-                        totalCandidatos+=1; 
-                        cont++;
-                        posicaoCandidato++;
-
-                        if(cont == qtdVagas){
-                            break;
-                        }
-                    }
-                }
-			}
-
-            posicaoCandidato = 0;
-
-			myfile << endl;
-			myfile << "Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:" << endl;
-			myfile << "(com sua posição no ranking de mais votados)" << endl;
-
-            for(it2 = candidatosEleitosMajoritariamente.begin(); it2 != candidatosEleitosMajoritariamente.end(); ++it2){
-				Partido p = vereadores.retornaPartidoPeloNum(it2->getNumeroPartidoCandidato());
-
-                myfile << posicaoRanking[posicaoCandidato] << " - " << it2->getNomeCandidato() << " / " << it2->getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << it2->getVotosNominaisCandidato() << " votos)" << endl;
-                posicaoCandidato++;
-			}
-
-            for(it2 = candidatosMaisVotados.begin(); it2 != candidatosMaisVotados.end(); ++it2){
-				if(it2->getVotosNominaisCandidato() < eleitoMenosVotos){
-					eleitoMenosVotos = it2->getVotosNominaisCandidato();
-				}
-			}
-
-            int naoEleitoMenosVotos = 2147483647;
-
-            for(it2 = candidatosEleitosMajoritariamente.begin(); it2 != candidatosEleitosMajoritariamente.end(); ++it2){
-				if(it2->getVotosNominaisCandidato() < naoEleitoMenosVotos && !it2->getSituacaoCandidato().compare("Eleito")){
-					naoEleitoMenosVotos = it2->getVotosNominaisCandidato();
-				}
-			}
-			
-			totalCandidatos = aux2;
-			aux = 0;
-            cont = 0;
-
-            while(cont < aux2){
-                for(it2 = candidatosVotos.begin(); it2 != candidatosVotos.end(); ++it2){
-                    Candidato c = *it2;
-					if(totalCandidatos != aux && cont == 0){
-					totalCandidatos--; 
-					}else if(totalCandidatos != aux && cont > 0){
-						totalCandidatos++;
-					}
-					if(totalCandidatos == aux){ 
-						candidatosMaisVotados.insert(candidatosMaisVotados.end(), c); 
-						cont++;
-						aux = aux2-cont; 
-						totalCandidatos = 0;
-
-						if(cont <= aux2){
-							break;
-						}
-					}
-				}
-            }
-
-            cont = 0; 
-            aux = totalCandidatos;
-
-            for(it2 = candidatosVotos.begin(); it2 != candidatosVotos.end(); ++it2){
+        while(cont < aux2){
+            for(it2 = candidatosEleitos.begin(); it2 != candidatosEleitos.end(); ++it2){
                 Candidato c = *it2;
-                cont=aux; 
-                aux--;
-            }
 
-            cont= -qtdVagas;
-			aux  = 0;
-			comparaSituacao = "Eleito";
+                if(qtdVagas != aux && cont == 0){
+                    qtdVagas--; 
+                } else if(qtdVagas != aux && cont > 0){
+                    qtdVagas++;
+                }
 
-			myfile << endl;
-			myfile << "Eleitos, que se beneficiaram do sistema proporcional:" << endl;
-			myfile << "(com sua posição no ranking de mais votados)" << endl;
-			
-			int numCandidatosMenosVotos = 0;
-            for(it2 = candidatosEleitos.begin(); it2 != candidatosEleitos.end(); ++it2){
-				if(it2->getVotosNominaisCandidato() < naoEleitoMenosVotos){
-					numCandidatosMenosVotos++;
-				}
-			}
+                if(qtdVagas == aux){
+                    int idade = c.getDataNascimentoCandidato().idade(dataeleicao);
+                    // c.getDataNascimentoCandidato().printDate();
+                    // cout << endl << idade << endl << endl;
 
-            int counterEleitos = 0;
-            int counter;
-            int notFound;
-
-            candidatosEleitos.reverse();
-            
-            for(it2 = candidatosEleitos.begin(); it2 != candidatosEleitos.end(); ++it2){
-                counter = 0;
-                for(it3 = candidatosMaisVotados.begin(); it3 != candidatosMaisVotados.end(); ++it3){
-
-                    if(it3->compare_candidato(*it2) == 0){
-                        notFound++;
+                    if(idade < 30){
+                        idadeAbaixoTrinta++;
+                    } else if(idade < 40){
+                        idadeAbaixoQuarenta++;
+                    } else if(idade < 50){
+                        idadeAbaixoCinquenta++;
+                    } else if(idade < 60){
+                        idadeAbaixoSessenta++;
+                    }else{
+                        idadeAcimaSessenta++;
                     }
+                    
+                    Partido p = vereadores.retornaPartidoPeloNum(c.getNumeroPartidoCandidato());
 
-                    counter++;
-                    if(counter == qtdVagas){
+                    cout << posicaoCandidato << " - " << c.getNomeCandidato() << " / " << c.getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << c.getVotosNominaisCandidato() << " votos)" << endl;   
+
+                    aux = aux2 - 1;
+                    cont++;						
+                    qtdVagas = 0;
+                    posicaoCandidato++;
+
+                    if(cont == aux2){
                         break;
                     }
                 }
+            }
+        }
 
-                if(notFound == 0){
-                    Partido p = vereadores.retornaPartidoPeloNum(it2->getNumeroPartidoCandidato());
-                    myfile << library.returnPosicao(candidatosMaisVotados, it2->getNomeCandidato()) - (qtdVagas - 1) << " - " << it2->getNomeCandidato() << " / " << it2->getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << it2->getVotosNominaisCandidato() << " votos)" << endl;
+        qtdVagas = aux2; 
+        cont = 0;
+        aux = 0;
+        posicaoCandidato = 1;
+        aux2 = totalCandidatos;
+
+        candidatosVotos.sort(compare);
+
+        cout << endl;
+        cout << "Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
+        
+        comparaSituacao = "Eleito";
+
+        while(cont < qtdVagas){
+            for(it2 = candidatosVotos.begin(); it2 != candidatosVotos.end(); ++it2){
+                if(totalCandidatos != aux && cont == 0){
+                    totalCandidatos--; 
+                } else if(totalCandidatos != aux && cont > 0){
+                    totalCandidatos++;
+                }
+                if(totalCandidatos == aux){ 
+                    candidatosMaisVotados.push_back(*it2); 
+
+                    if(it2->getSituacaoCandidato().compare(comparaSituacao) != 0){
+                        candidatosEleitosMajoritariamente.push_back(*it2);
+                        posicaoRanking.push_back(posicaoCandidato);
+                    }
+
+                    Partido p = vereadores.retornaPartidoPeloNum(it2->getNumeroPartidoCandidato()); 
+
+                    cout << posicaoCandidato << " - " << it2->getNomeCandidato() << " / " << it2->getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << it2->getVotosNominaisCandidato() << " votos)" << endl; 
+                    
+                    aux += aux2; 
+                    totalCandidatos+=1; 
+                    cont++;
                     posicaoCandidato++;
+
+                    if(cont == qtdVagas){
+                        break;
+                    }
+                }
+            }
+        }
+
+        posicaoCandidato = 0;
+
+        cout << endl;
+        cout << "Teriam sido eleitos se a votação fosse majoritária, e não foram eleitos:" << endl;
+        cout << "(com sua posição no ranking de mais votados)" << endl;
+
+        for(it2 = candidatosEleitosMajoritariamente.begin(); it2 != candidatosEleitosMajoritariamente.end(); ++it2){
+            Partido p = vereadores.retornaPartidoPeloNum(it2->getNumeroPartidoCandidato());
+
+            cout << posicaoRanking[posicaoCandidato] << " - " << it2->getNomeCandidato() << " / " << it2->getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << it2->getVotosNominaisCandidato() << " votos)" << endl;
+            posicaoCandidato++;
+        }
+
+        for(it2 = candidatosMaisVotados.begin(); it2 != candidatosMaisVotados.end(); ++it2){
+            if(it2->getVotosNominaisCandidato() < eleitoMenosVotos){
+                eleitoMenosVotos = it2->getVotosNominaisCandidato();
+            }
+        }
+
+        int naoEleitoMenosVotos = 2147483647;
+
+        for(it2 = candidatosEleitosMajoritariamente.begin(); it2 != candidatosEleitosMajoritariamente.end(); ++it2){
+            if(it2->getVotosNominaisCandidato() < naoEleitoMenosVotos && !it2->getSituacaoCandidato().compare("Eleito")){
+                naoEleitoMenosVotos = it2->getVotosNominaisCandidato();
+            }
+        }
+        
+        totalCandidatos = aux2;
+        aux = 0;
+        cont = 0;
+
+        while(cont < aux2){
+            for(it2 = candidatosVotos.begin(); it2 != candidatosVotos.end(); ++it2){
+                Candidato c = *it2;
+                if(totalCandidatos != aux && cont == 0){
+                totalCandidatos--; 
+                }else if(totalCandidatos != aux && cont > 0){
+                    totalCandidatos++;
+                }
+                if(totalCandidatos == aux){ 
+                    candidatosMaisVotados.insert(candidatosMaisVotados.end(), c); 
+                    cont++;
+                    aux = aux2-cont; 
+                    totalCandidatos = 0;
+
+                    if(cont <= aux2){
+                        break;
+                    }
+                }
+            }
+        }
+
+        cont = 0; 
+        aux = totalCandidatos;
+
+        for(it2 = candidatosVotos.begin(); it2 != candidatosVotos.end(); ++it2){
+            Candidato c = *it2;
+            cont=aux; 
+            aux--;
+        }
+
+        cont= -qtdVagas;
+        aux  = 0;
+        comparaSituacao = "Eleito";
+
+        cout << endl;
+        cout << "Eleitos, que se beneficiaram do sistema proporcional:" << endl;
+        cout << "(com sua posição no ranking de mais votados)" << endl;
+        
+        int numCandidatosMenosVotos = 0;
+        for(it2 = candidatosEleitos.begin(); it2 != candidatosEleitos.end(); ++it2){
+            if(it2->getVotosNominaisCandidato() < naoEleitoMenosVotos){
+                numCandidatosMenosVotos++;
+            }
+        }
+
+        int counterEleitos = 0;
+        int counter;
+        int notFound;
+
+        candidatosEleitos.reverse();
+        
+        for(it2 = candidatosEleitos.begin(); it2 != candidatosEleitos.end(); ++it2){
+            counter = 0;
+            for(it3 = candidatosMaisVotados.begin(); it3 != candidatosMaisVotados.end(); ++it3){
+
+                if(it3->compare_candidato(*it2) == 0){
+                    notFound++;
                 }
 
-                notFound = 0;
-                counterEleitos++;
-                if(counterEleitos == qtdVagas){
+                counter++;
+                if(counter == qtdVagas){
                     break;
                 }
             }
 
-			myfile << endl;
-			myfile << "Votação dos partidos e número de candidatos eleitos:" << endl;
-
-            for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
-				totalVotosNominaisPartido = it->countVotosNominais();
-				totalVotosPartido = totalVotosNominaisPartido + it->getVotosLegendaPartido();
-				it->setVotosNominaisTotaisPartido(totalVotosNominaisPartido);
-				it->setVotosTotaisPartido(totalVotosPartido);
-			}
-			
-			listaPartidos.sort(comparePartido);
-
-            cont = 1;
-
-            for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
-                qtdEleitosPartido = it->countEleitos();
-                myfile << cont << " - " <<it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << it->getVotosTotaisPartido() << " voto" << (it->getVotosTotaisPartido() > 1 ? "s" : "") <<  " (" << it->getVotosNominaisTotaisPartido() << (it->getVotosNominaisTotaisPartido() > 1 ? " nominais" : " nominal") << " e " << it->getVotosLegendaPartido() << " de legenda), " << qtdEleitosPartido << " candidato" << (qtdEleitosPartido > 1 ? "s": "") << " eleito" << (qtdEleitosPartido > 1 ? "s": "") << endl; 
-                cont++;
+            if(notFound == 0){
+                Partido p = vereadores.retornaPartidoPeloNum(it2->getNumeroPartidoCandidato());
+                cout << library.returnPosicao(candidatosMaisVotados, it2->getNomeCandidato()) - (qtdVagas - 1) << " - " << it2->getNomeCandidato() << " / " << it2->getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << it2->getVotosNominaisCandidato() << " votos)" << endl;
+                posicaoCandidato++;
             }
 
-            cont = 1;
+            notFound = 0;
+            counterEleitos++;
+            if(counterEleitos == qtdVagas){
+                break;
+            }
+        }
 
-			myfile << endl;
-			myfile << "Primeiro e último colocados de cada partido:" << endl;
+        cout << endl;
+        cout << "Votação dos partidos e número de candidatos eleitos:" << endl;
 
-            list<Candidato> auxPrintPartido;
+        for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
+            totalVotosNominaisPartido = it->countVotosNominais();
+            totalVotosPartido = totalVotosNominaisPartido + it->getVotosLegendaPartido();
+            it->setVotosNominaisTotaisPartido(totalVotosNominaisPartido);
+            it->setVotosTotaisPartido(totalVotosPartido);
+        }
+        
+        listaPartidos.sort(comparePartido);
 
-            listaPartidos.sort(compareVotosPartido);
+        cont = 1;
 
-            string singular = " voto)";
-            string plural = " votos)";
-            for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
-                auxPrintPartido = it->getCandidatoPartido();
-                auxPrintPartido.sort(compare);
-                auxPrintPartido.reverse();
+        for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
+            qtdEleitosPartido = it->countEleitos();
+            cout << cont << " - " <<it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << it->getVotosTotaisPartido() << " voto" << (it->getVotosTotaisPartido() > 1 ? "s" : "") <<  " (" << it->getVotosNominaisTotaisPartido() << (it->getVotosNominaisTotaisPartido() > 1 ? " nominais" : " nominal") << " e " << it->getVotosLegendaPartido() << " de legenda), " << qtdEleitosPartido << " candidato" << (qtdEleitosPartido > 1 ? "s": "") << " eleito" << (qtdEleitosPartido > 1 ? "s": "") << endl; 
+            cont++;
+        }
 
-                Candidato primeiro = *auxPrintPartido.begin();
-                Candidato ultimo = *auxPrintPartido.begin();
+        cont = 1;
 
-                for(it2 = auxPrintPartido.begin(); it2 != auxPrintPartido.end(); ++it2){
-                    if(it->validaSituacao(*it2) == 0){
-                        primeiro = *it2;
-                        break;
-                    }
+        cout << endl;
+        cout << "Primeiro e último colocados de cada partido:" << endl;
+
+        list<Candidato> auxPrintPartido;
+
+        listaPartidos.sort(compareVotosPartido);
+
+        string singular = " voto)";
+        string plural = " votos)";
+        for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
+            auxPrintPartido = it->getCandidatoPartido();
+            auxPrintPartido.sort(compare);
+            auxPrintPartido.reverse();
+
+            Candidato primeiro = *auxPrintPartido.begin();
+            Candidato ultimo = *auxPrintPartido.begin();
+
+            for(it2 = auxPrintPartido.begin(); it2 != auxPrintPartido.end(); ++it2){
+                if(it->validaSituacao(*it2) == 0){
+                    primeiro = *it2;
+                    break;
                 }
-
-                string actual;
-
-                if(primeiro.getVotosNominaisCandidato() <= 1){
-                    actual = singular;
-                } else{
-                    actual = plural;
-                }
-                
-                myfile << cont << " - " << it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << primeiro.getNomeUrnaCandidato();
-                myfile << " (" << primeiro.getNumeroCandidato() << ", " << primeiro.getVotosNominaisCandidato() << actual << " / "; 
-
-                auxPrintPartido.reverse();
-
-                for(it2 = auxPrintPartido.begin(); it2 != auxPrintPartido.end(); ++it2){
-                    if(it->validaSituacao(*it2) == 0){
-                        ultimo = *it2;
-                        break;
-                    }
-                }
-
-                if(ultimo.getVotosNominaisCandidato() <= 1){
-                    actual = singular;
-                } else{
-                    actual = plural;
-                }
-                
-                myfile << ultimo.getNomeUrnaCandidato() << " (" << ultimo.getNumeroCandidato() << ", " << ultimo.getVotosNominaisCandidato() << actual << endl;             // id - sigla - npartido, nomeM (ncandidato, x votos) / nomem (ncandidato, x votos)
-                auxPrintPartido.clear();
-
-                cont++;
             }
 
-            myfile.imbue(locale("pt_BR.UTF-8"));
+            string actual;
 
-            myfile << endl;
-			myfile << "Eleitos, por faixa etária (na data da eleição):" << endl;
+            if(primeiro.getVotosNominaisCandidato() <= 1){
+                actual = singular;
+            } else{
+                actual = plural;
+            }
+            
+            cout << cont << " - " << it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << primeiro.getNomeUrnaCandidato();
+            cout << " (" << primeiro.getNumeroCandidato() << ", " << primeiro.getVotosNominaisCandidato() << actual << " / "; 
 
-            myfile << "      Idade < 30: " << to_string(idadeAbaixoTrinta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "30 <= Idade < 40: " << to_string(idadeAbaixoQuarenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "40 <= Idade < 50: " << to_string(idadeAbaixoCinquenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoCinquenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "50 <= Idade < 60: " << to_string(idadeAbaixoSessenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoSessenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "60 <= Idade     : " << to_string(idadeAcimaSessenta) << " (" << fixed <<  setprecision(2) <<((idadeAcimaSessenta/(double)qtdVagas)*100) << "%)" << endl;
+            auxPrintPartido.reverse();
 
-			myfile << endl;
-			
-			
-			porcentagemEleitasF = (qtdMulheresEleitas/(double)qtdVagas)*100;
-			porcentagemEleitosM = (qtdHomensEleitos/(double)qtdVagas)*100; 
+            for(it2 = auxPrintPartido.begin(); it2 != auxPrintPartido.end(); ++it2){
+                if(it->validaSituacao(*it2) == 0){
+                    ultimo = *it2;
+                    break;
+                }
+            }
 
-			myfile << "Eleitos, por sexo:" << endl; 
-			myfile << "Feminino:  " << to_string(qtdMulheresEleitas) << " (" << fixed <<  setprecision(2) << porcentagemEleitasF << "%)" << endl;
-			myfile << "Masculino: " << to_string(qtdHomensEleitos) << " (" << fixed <<  setprecision(2) << porcentagemEleitosM << "%)" << endl;
-			myfile << endl;
+            if(ultimo.getVotosNominaisCandidato() <= 1){
+                actual = singular;
+            } else{
+                actual = plural;
+            }
+            
+            cout << ultimo.getNomeUrnaCandidato() << " (" << ultimo.getNumeroCandidato() << ", " << ultimo.getVotosNominaisCandidato() << actual << endl;             // id - sigla - npartido, nomeM (ncandidato, x votos) / nomem (ncandidato, x votos)
+            auxPrintPartido.clear();
 
-            totalVotosNominais = vereadores.contaVotosValidos(candidatosEleitos);
+            cont++;
+        }
 
-			totalVotos = totalVotosLegenda + totalVotosNominais; 
+        cout.imbue(locale("pt_BR.UTF-8"));
 
-			myfile << "Total de votos válidos:    " << to_string(totalVotos) << endl; 
+        cout << endl;
+        cout << "Eleitos, por faixa etária (na data da eleição):" << endl;
 
-			porcentagemVnominais = (totalVotosNominais/(double)totalVotos)*100; 
-			porcentagemVlegenda = (totalVotosLegenda/(double)totalVotos)*100; 
+        cout << "      Idade < 30: " << to_string(idadeAbaixoTrinta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
+        cout << "30 <= Idade < 40: " << to_string(idadeAbaixoQuarenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;
+        cout << "40 <= Idade < 50: " << to_string(idadeAbaixoCinquenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoCinquenta/(double)qtdVagas)*100) << "%)" << endl;
+        cout << "50 <= Idade < 60: " << to_string(idadeAbaixoSessenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoSessenta/(double)qtdVagas)*100) << "%)" << endl;
+        cout << "60 <= Idade     : " << to_string(idadeAcimaSessenta) << " (" << fixed <<  setprecision(2) <<((idadeAcimaSessenta/(double)qtdVagas)*100) << "%)" << endl;
 
-			myfile << "Total de votos nominais:   " << to_string(totalVotosNominais) << " (" << fixed << setprecision(2) << porcentagemVnominais << "%)" << endl; 
-			myfile << "Total de votos de Legenda: " << to_string(totalVotosLegenda) << " (" << fixed << setprecision(2) << porcentagemVlegenda << "%)\n" << endl; 
+        cout << endl;
+        
+        
+        porcentagemEleitasF = (qtdMulheresEleitas/(double)qtdVagas)*100;
+        porcentagemEleitosM = (qtdHomensEleitos/(double)qtdVagas)*100; 
 
-            myfile.close();
+        cout << "Eleitos, por sexo:" << endl; 
+        cout << "Feminino:  " << to_string(qtdMulheresEleitas) << " (" << fixed <<  setprecision(2) << porcentagemEleitasF << "%)" << endl;
+        cout << "Masculino: " << to_string(qtdHomensEleitos) << " (" << fixed <<  setprecision(2) << porcentagemEleitosM << "%)" << endl;
+        cout << endl;
 
-        } 
+        totalVotosNominais = vereadores.contaVotosValidos(candidatosEleitos);
+
+        totalVotos = totalVotosLegenda + totalVotosNominais; 
+
+        cout << "Total de votos válidos:    " << to_string(totalVotos) << endl; 
+
+        porcentagemVnominais = (totalVotosNominais/(double)totalVotos)*100; 
+        porcentagemVlegenda = (totalVotosLegenda/(double)totalVotos)*100; 
+
+        cout << "Total de votos nominais:   " << to_string(totalVotosNominais) << " (" << fixed << setprecision(2) << porcentagemVnominais << "%)" << endl; 
+        cout << "Total de votos de Legenda: " << to_string(totalVotosLegenda) << " (" << fixed << setprecision(2) << porcentagemVlegenda << "%)\n" << endl; 
+
     } catch (invalid_argument& e){
         cerr << e.what() << endl;
         return false;

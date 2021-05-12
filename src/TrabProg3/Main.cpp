@@ -25,7 +25,7 @@ int main(int argc, char** argv){
 
 		Escrita escreveArquivoSaida = Escrita();
         Date data = help.stringToDate(dataString);
-		escreveArquivoSaida.escreveArquivo("out",data,vereador);		
+		escreveArquivoSaida.escreveArquivo(data, vereador);		
 		
 		return 0;
 }

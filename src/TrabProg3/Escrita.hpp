@@ -11,7 +11,7 @@ class Escrita{
     ~Escrita();
 
 	// Métodos
-	bool escreveArquivo(string Caminho, Date dataeleicao, Eleicao vereadores);
+	bool escreveArquivo(Date dataeleicao, Eleicao vereadores);
 };
 
 #endif /* escrita_hpp_ */
