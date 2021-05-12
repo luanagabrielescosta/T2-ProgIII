@@ -172,6 +172,8 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
 					if(qtdVagas == aux){
                         int idade = c.getDataNascimentoCandidato().idade(dataeleicao);
+                        c.getDataNascimentoCandidato().printDate();
+                        cout << endl << idade << endl << endl;
 
 						if(idade < 30){
 							idadeAbaixoTrinta++;
