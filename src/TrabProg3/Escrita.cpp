@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iomanip> 
 #include <list>
+#include <locale>
 
 #include "Escrita.hpp"
 #include "Lib.hpp"
@@ -56,7 +57,6 @@ bool compareVotosPartido(Partido first, Partido second){
 
 bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
     try{
-        // Listas 
         list<Partido> listaPartidos = vereadores.getPartidoEleicao(); 
         list<string> infoCandidatoEleito; 
         list<Candidato> candidatosEleitos;
@@ -172,8 +172,8 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
 					if(qtdVagas == aux){
                         int idade = c.getDataNascimentoCandidato().idade(dataeleicao);
-                        c.getDataNascimentoCandidato().printDate();
-                        cout << endl << idade << endl << endl;
+                        // c.getDataNascimentoCandidato().printDate();
+                        // cout << endl << idade << endl << endl;
 
 						if(idade < 30){
 							idadeAbaixoTrinta++;
@@ -434,14 +434,16 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
                 cont++;
             }
 
+            myfile.imbue(locale("pt_BR.UTF-8"));
+
             myfile << endl;
 			myfile << "Eleitos, por faixa etária (na data da eleição):" << endl;
 
-            myfile << "      Idade < 30: " << idadeAbaixoTrinta << " (" << fixed <<  setprecision(2) <<((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "30 <= Idade < 40: " << idadeAbaixoQuarenta << " (" << fixed <<  setprecision(2) <<((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "40 <= Idade < 50: " << idadeAbaixoCinquenta << " (" << fixed <<  setprecision(2) <<((idadeAbaixoCinquenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "50 <= Idade < 60: " << idadeAbaixoSessenta << " (" << fixed <<  setprecision(2) <<((idadeAbaixoSessenta/(double)qtdVagas)*100) << "%)" << endl;
-			myfile << "60 <= Idade     : " << idadeAcimaSessenta << " (" << fixed <<  setprecision(2) <<((idadeAcimaSessenta/(double)qtdVagas)*100) << "%)" << endl;
+            myfile << "      Idade < 30: " << to_string(idadeAbaixoTrinta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "30 <= Idade < 40: " << to_string(idadeAbaixoQuarenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "40 <= Idade < 50: " << to_string(idadeAbaixoCinquenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoCinquenta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "50 <= Idade < 60: " << to_string(idadeAbaixoSessenta) << " (" << fixed <<  setprecision(2) <<((idadeAbaixoSessenta/(double)qtdVagas)*100) << "%)" << endl;
+			myfile << "60 <= Idade     : " << to_string(idadeAcimaSessenta) << " (" << fixed <<  setprecision(2) <<((idadeAcimaSessenta/(double)qtdVagas)*100) << "%)" << endl;
 
 			myfile << endl;
 			
@@ -450,21 +452,21 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 			porcentagemEleitosM = (qtdHomensEleitos/(double)qtdVagas)*100; 
 
 			myfile << "Eleitos, por sexo:" << endl; 
-			myfile << "Feminino:  " << qtdMulheresEleitas << " (" << fixed <<  setprecision(2) << porcentagemEleitasF << "%)" << endl;
-			myfile << "Masculino: " << qtdHomensEleitos << " (" << fixed <<  setprecision(2) << porcentagemEleitosM << "%)" << endl;
+			myfile << "Feminino:  " << to_string(qtdMulheresEleitas) << " (" << fixed <<  setprecision(2) << porcentagemEleitasF << "%)" << endl;
+			myfile << "Masculino: " << to_string(qtdHomensEleitos) << " (" << fixed <<  setprecision(2) << porcentagemEleitosM << "%)" << endl;
 			myfile << endl;
 
             totalVotosNominais = vereadores.contaVotosValidos(candidatosEleitos);
 
 			totalVotos = totalVotosLegenda + totalVotosNominais; 
 
-			myfile << "Total de votos válidos:    " << totalVotos << endl; 
+			myfile << "Total de votos válidos:    " << to_string(totalVotos) << endl; 
 
 			porcentagemVnominais = (totalVotosNominais/(double)totalVotos)*100; 
 			porcentagemVlegenda = (totalVotosLegenda/(double)totalVotos)*100; 
 
-			myfile << "Total de votos nominais:   " << totalVotosNominais << " (" << fixed << setprecision(2) << porcentagemVnominais << "%)" << endl; 
-			myfile << "Total de votos de Legenda: " << totalVotosLegenda << " (" << fixed << setprecision(2) << porcentagemVlegenda << "%)\n" << endl; 
+			myfile << "Total de votos nominais:   " << to_string(totalVotosNominais) << " (" << fixed << setprecision(2) << porcentagemVnominais << "%)" << endl; 
+			myfile << "Total de votos de Legenda: " << to_string(totalVotosLegenda) << " (" << fixed << setprecision(2) << porcentagemVlegenda << "%)\n" << endl; 
 
             myfile.close();
 
