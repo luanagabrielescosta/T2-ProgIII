@@ -1,16 +1,23 @@
+/*
+// @ Implementação por:
+// @   Eduardo Afonso Ribeiro Rodrigues
+// @   Luana Gabriele de Sousa Costa
+// @ hpp da classe de leitura
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <list>
 #include <iterator>
-
 #include "Leitura.hpp"
 #include "Lib.hpp"
 #include "Date.hpp"
 
 using namespace std;
 
+// Constructor
 Leitura::Leitura(){
     this->comparaSituacao = "Eleito";
     this->comparaSexof = 'F';
@@ -23,19 +30,21 @@ Leitura::Leitura(){
     this->totalVotosLegenda = 0;
 }
 
+// Destructor 
 Leitura::~Leitura(){
 	// TODO Auto-generated destructor stub
 }
 
+// Função de verificação do número de linhas do arquivo
 int getNumeroLinhas(string path){
-    int c = 0;
+    int c = 0; // Contador inicializado
     string line;
     ifstream myfile (path); // ifstream = padrão ios:in
 
     if (myfile.is_open()){
-        while (!myfile.eof()){ //enquanto end of file for false continua
-            getline (myfile,line); // como foi aberto em modo texto(padrão)
-            c++;
+        while (!myfile.eof()){
+            getline (myfile,line); // Pega a linha
+            c++; // Incrementa
         }
         myfile.close();
     }
@@ -43,29 +52,30 @@ int getNumeroLinhas(string path){
     return c;
 }
 
+// Função de leitura do arquivo de partidos
 void Leitura::lePartidos(Eleicao &vereadores, string &path, list<Candidato> c){
-    string line;
+    string line; // string para getline
     ifstream myfile (path); // ifstream = padrão ios:in
-    int bit = 0;
-    list<Candidato> nova;
+    int bit = 0; // Variavel auxiliar para eliminar a primeira linha
+    list<Candidato> nova; // lista de Candidatos auxiliar
 
-    int numeroLinhas = getNumeroLinhas(path) - 1;
+    int numeroLinhas = getNumeroLinhas(path) - 1; // Armazena o número de linhas eliminando a primeira
 
     if (myfile.is_open()){
         while(numeroLinhas != 0){
-            getline (myfile,line); // como foi aberto em modo texto(padrão)
+            getline (myfile,line); // Pega a linha
 
-            if(bit == 0){
-                bit++;
+            if(bit == 0){ //Ent ra se for a primeira linha
+                bit++; // Incrementa o bit
             } else{
-                list< string, allocator<string> > tokens;
-                // stringstream class check1
+                list< string, allocator<string> > tokens; // Cria uma lista de tokens (string)
+
                 stringstream check1(line);
                 string intermediate;
                 
-                // Tokenizing w.r.t. comma ','
+                // Tokenizing com ','
                 while(getline(check1, intermediate, ',')){
-                    tokens.push_back(intermediate);
+                    tokens.push_back(intermediate); // Colocando as informações sem ',' numa lista
                 }
 
                 list < string, allocator<string> > :: iterator it;
@@ -75,72 +85,70 @@ void Leitura::lePartidos(Eleicao &vereadores, string &path, list<Candidato> c){
                 string siglaPartido;
 
                 for(it = tokens.begin(); it != tokens.end(); ++it){
-                    Lib help = Lib();
+                    Lib help = Lib(); // Lib tem funções auxiliares
 
-                    nPartido = help.stringToInt(*it);
+                    nPartido = help.stringToInt(*it); // Converte a string pra int
                     it++;
 
-                    vLegenda = help.stringToInt(*it); 
+                    vLegenda = help.stringToInt(*it); // Converte a string pra int
                     it++;
 
-                    totalVotosLegenda += vLegenda; 
+                    totalVotosLegenda += vLegenda; // Já soma os votos de legenda no total
 
-                    nomePartido = *it;
+                    nomePartido = *it; // Atribui o nome de partido
                     it++; 
 
-                    siglaPartido = *it; 
+                    siglaPartido = *it; // Atribui a sigla de partido
                 }
 
                 list < Candidato, allocator<Candidato> > :: iterator it2;
+                // Loop na lista de candidatos passada de parâmetro
                 for(it2 = c.begin(); it2 != c.end(); ++it2){
-                    Candidato a = *it2;
-                    if(a.getNumeroPartidoCandidato() == nPartido){
-                        // a.printCandidato();
-                        nova.push_back(a);
+                    // Verifica o número do partido do candidato
+                    if(it2->getNumeroPartidoCandidato() == nPartido){
+                        nova.push_back(*it2); // Se for igual adiciona na lista auxiliar de candidatos do partido
                     }
                 }
 
-                for(it2 = nova.begin(); it2 != nova.end(); ++it2){
-                    Candidato a = *it2;
-                    if(a.getNumeroPartidoCandidato() == nPartido){
-                    }
-                }
-
+                // Inicializa o partido já com a lista de candidatos 
                 Partido x = Partido(nPartido, vLegenda, nomePartido, siglaPartido, nova); 
-                // x.printPartido();
-                vereadores.addPartido(x);
-                nova.clear();
+                vereadores.addPartido(x); // Adiciona o partido na eleição
+                nova.clear(); // Limpa a lista auxiliar
             }
-            numeroLinhas--;
-        }
-        myfile.close();
 
+            numeroLinhas--; // Decrementa o número de linhas
+        }
+
+        myfile.close(); // Fecha o arquivo de entrada
     } else{ 
         cout << "Unable to open partidos file" << endl;
     }
 }
 
+// Função de leitura do arquivo de candidatos
 list<Candidato> Leitura::leCandidatos(Eleicao &vereadores, string &path){
-    string line;
+    string line; // string para getline
     ifstream myfile (path); // ifstream = padrão ios:in
-    int bit = 0;
-    list<Candidato> lista;
+    int bit = 0; // Variavel auxiliar para eliminar a primeira linha
+    list<Candidato> lista; // lista de Candidatos para retorno
 
-    int numeroLinhas = getNumeroLinhas(path) - 1;
-
+    int numeroLinhas = getNumeroLinhas(path) - 1;// Armazena o número de linhas eliminando a primeira
 
     if (myfile.is_open()){
-        while(numeroLinhas != 0){ //enquanto end of file for false continua
-            getline (myfile,line); // como foi aberto em modo texto(padrão)
-            if(bit == 0){
-                bit++;
+        while(numeroLinhas != 0){ 
+            getline (myfile,line); // Pega a linha
+
+            if(bit == 0){ //Ent ra se for a primeira linha
+                bit++; // Incrementa o bit
             } else{
-                list< string, allocator<string> > tokens;
+                list< string, allocator<string> > tokens; // Cria uma lista de tokens (string)
+
                 stringstream check1(line);
                 string intermediate;
                 
+                // Tokenizing com ','
                 while(getline(check1, intermediate, ',')){
-                    tokens.push_back(intermediate);
+                    tokens.push_back(intermediate); // Colocando as informações sem ',' numa lista
                 }
                 
                 list < string, allocator<string> > :: iterator it;
@@ -156,63 +164,60 @@ list<Candidato> Leitura::leCandidatos(Eleicao &vereadores, string &path){
 
 
                 for(it = tokens.begin(); it != tokens.end(); ++it){
-                    Lib help = Lib();
+                    Lib help = Lib(); // Lib tem funções auxiliares
 
-                    numCandidato = help.stringToInt(*it);
+                    numCandidato = help.stringToInt(*it); // Converte a string pra int
                     it++;
 
-                    vNominaisCandidato = help.stringToInt(*it);
+                    vNominaisCandidato = help.stringToInt(*it); // Converte a string pra int
                     it++;
 
-                    totalVotosNominais += vNominaisCandidato; 
+                    totalVotosNominais += vNominaisCandidato; // Já soma os votos nominais no total
                     
-                    situCandidato = *it;
+                    situCandidato = *it; // Atribui a situação do candidato
                     it++;
 
                     if(situCandidato.compare(comparaSituacao) == 0){
-                        qtdVagas++; 
+                        qtdVagas++; // Incrementa se for candidato eleito
                     }
 
-                    noCandidato = *it;
+                    noCandidato = *it; // Atribui o nome do candidato
                     it++;
 
-                    noUrnaCandidato = *it;
+                    noUrnaCandidato = *it; // Atribui o nome de urna do candidato
                     it++;
 
-                    sexCandidato = help.stringToChar(*it);
+                    sexCandidato = help.stringToChar(*it); // Converte a string pra char
                     it++;
 
                     if(situCandidato.compare(comparaSituacao) == 0 && sexCandidato == comparaSexof) {
-                        qtdMulheresEleitas++;
+                        qtdMulheresEleitas++; // Incrementa se for candidato do sexo feminino
                     }else if(situCandidato.compare(comparaSituacao) == 0 && sexCandidato == comparaSexom) {
-                        qtdHomensEleitos++; 
+                        qtdHomensEleitos++; // Incrementa se for candidato do sexo masculino
                     }
 
-                    datNascCandidato = help.stringToDate(*it);
+                    datNascCandidato = help.stringToDate(*it); // Converte a string pra Date (class autoral)
                     // datNascCandidato.print_date();
                     it++;
 
-                    destVotoCandidato = *it;
+                    destVotoCandidato = *it; // Atribui a situação da validação do candidato
                     it++;
 
-                    nPartidoCandidato = help.stringToInt(*it);
+                    nPartidoCandidato = help.stringToInt(*it); // Converte a string pra int
 
                 }
 
+                // Inicializa o candidato com os dados obtidos
                 Candidato c = Candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato, nPartidoCandidato); 
-             
-                // vereadores.insereCandidatos(&c);
-                // lista.insert(lista.end(), c);
-                lista.push_back(c);
+                lista.push_back(c); // Adiciona no fim da lista de retorno
                
             }
+            
             numeroLinhas--;
         }
-        myfile.close();
+        
+        myfile.close();// Fecha o arquivo de entrada
         totalVotos = totalVotosLegenda + totalVotosNominais; 
-
-                // vereadores.printEleicao();
-
     } else{ 
         cout << "Unable to open candidatos file" << endl;
     }
