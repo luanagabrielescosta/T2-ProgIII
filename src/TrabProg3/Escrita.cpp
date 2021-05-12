@@ -470,9 +470,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
             myfile.close();
 
-        } else{ 
-            cout << "Unable to open file";
-        }
+        } 
     } catch (invalid_argument& e){
         cerr << e.what() << endl;
         return false;
