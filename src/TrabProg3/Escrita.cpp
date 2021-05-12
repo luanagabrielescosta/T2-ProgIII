@@ -323,7 +323,7 @@ bool Escrita::escreveArquivo(Date dataeleicao, Eleicao vereadores){
             counter = 0;
             for(it3 = candidatosMaisVotados.begin(); it3 != candidatosMaisVotados.end(); ++it3){
 
-                if(it3->compare_candidato(*it2) == 0){
+                if(it3->compareCandidato(*it2) == 0){
                     notFound++;
                 }
 
