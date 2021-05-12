@@ -343,7 +343,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
                 if(notFound == 0){
                     Partido p = vereadores.retornaPartidoPeloNum(it2->getNumeroPartidoCandidato());
-                    myfile << library.returnPosicao(candidatosMaisVotados, it2->getNomeCandidato()) + 1 << " - " << it2->getNomeCandidato() << " / " << it2->getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << it2->getVotosNominaisCandidato() << " votos)" << endl;
+                    myfile << library.returnPosicao(candidatosMaisVotados, it2->getNomeCandidato()) - (qtdVagas - 1) << " - " << it2->getNomeCandidato() << " / " << it2->getNomeUrnaCandidato() << " (" << p.getSiglaPartido() << ", " << it2->getVotosNominaisCandidato() << " votos)" << endl;
                     posicaoCandidato++;
                 }
 
