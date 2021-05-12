@@ -126,3 +126,14 @@ int Partido::validaSituacao(Candidato c){
 
 	return 1;
 }
+
+int Partido::countValidos(){
+	int count = 0;
+	list< Candidato, allocator<Candidato> > :: iterator it2;
+
+	for(it2 = this->candidatoPartido.begin(); it2 != this->candidatoPartido.end(); ++it2){
+		count = count + it2->getVotosNominaisCandidato();
+	}
+
+	return count;
+}

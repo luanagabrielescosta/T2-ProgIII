@@ -438,6 +438,8 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 			myfile << "Masculino: " << qtdHomensEleitos << " (" << fixed <<  setprecision(2) << porcentagemEleitosM << "%)" << endl;
 			myfile << endl;
 
+            totalVotosNominais = vereadores.contaVotosValidos();
+
 			totalVotos = totalVotosLegenda + totalVotosNominais; 
 
 			myfile << "Total de votos válidos:    " << totalVotos << endl; 

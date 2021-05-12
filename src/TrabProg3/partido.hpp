@@ -60,6 +60,8 @@ class Partido{
 	Candidato getUltimoCandidato(Candidato primeiro);
 
 	int validaSituacao(Candidato c);
+	
+	int countValidos();
 };
 
 #endif /* partido_hpp_ */

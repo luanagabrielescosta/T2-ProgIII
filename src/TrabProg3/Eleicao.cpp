@@ -119,3 +119,13 @@ int Eleicao::retornaNumeroPartidos(){
 	
 	return count;
 }
+
+int Eleicao::contaVotosValidos(){
+	int count = 0;
+	list< Partido, allocator<Partido> > :: iterator it;
+	for(it = partidoeleicao.begin(); it != partidoeleicao.end(); ++it){
+		count = count + it->countValidos();
+	}
+
+	return count;
+}

@@ -71,6 +71,8 @@ class Eleicao{
 	void insereCandidatos(Candidato c);
 
 	int retornaNumeroPartidos();
+
+	int contaVotosValidos();
 };
 
 
