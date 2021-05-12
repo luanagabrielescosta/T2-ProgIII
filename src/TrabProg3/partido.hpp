@@ -9,7 +9,7 @@ using namespace std;
 
 class Partido{
 	// Atributos
-	list<Candidato*> candidatoPartido; 
+	list<Candidato> candidatoPartido; 
 	int numeroPartido; 
 	int votosLegendaPartido; 
 	string nomePartido; 
@@ -18,7 +18,9 @@ class Partido{
 
 	public:
 	// Constructor
-	Partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido);
+	Partido(int numeroPartido, int votosLegendaPartido, string &nomePartido, string &siglaPartido, list<Candidato> candidatoPartido);
+	// Destructor
+	~Partido();
 
 	// Metodos 
 	int getVotosNominaisTotaisPartido();
@@ -31,9 +33,9 @@ class Partido{
 
 	void setVotosTotaisPartido(int votosTotaisPartido);
 
-	list<Candidato*> getcandidatoPartido();
+	list<Candidato> getcandidatoPartido();
 
-	void setcandidatoPartido(list<Candidato*> lista);
+	void setcandidatoPartido(list<Candidato> lista);
 
 	int getNumeroPartido();
 
@@ -43,9 +45,17 @@ class Partido{
 
 	string getSiglaPartido();
 	
-	void addCandidato(Candidato *c);
+	void addCandidato(Candidato c);
 
 	void printPartido();
+
+	int countVotosNominais();
+
+	int countEleitos();
+
+	Candidato getPrimeiroCandidato(Candidato primeiro);
+
+	Candidato getUltimoCandidato(Candidato primeiro);
 };
 
 #endif /* partido_hpp_ */

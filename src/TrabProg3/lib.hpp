@@ -8,13 +8,19 @@
 
 class Lib{
     public:
+    // Constructor
     Lib();
-    int string_to_int(std::string &old);
-    Date string_to_date(std:: string &old);
-    char string_to_char(std:: string &old);
-    char int_to_char(int old);
-    int return_int(list< int, allocator<int> > &list, int one);
-    Candidato return_candidato(list< Candidato, allocator<Candidato> > &list, int one);
+    // Destructor
+    ~Lib();
+
+    // Métodos
+    int stringToInt(std::string &old);
+    Date stringToDate(std:: string &old);
+    char stringToChar(std:: string &old);
+    char intToChar(int old);
+    int returnInt(list< int, allocator<int> > &list, int one);
+    Candidato returnCandidato(list<Candidato> lista, Candidato &c, int one);
+    int returnPosicao(list<Candidato> lista, string nome);
 };
 
 

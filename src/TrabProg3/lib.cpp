@@ -8,7 +8,11 @@ using namespace std;
 Lib::Lib(){
 }
 
-int Lib::string_to_int(string &old){
+Lib::~Lib(){
+	// TODO Auto-generated destructor stub
+}
+
+int Lib::stringToInt(string &old){
     int count;
 
     for(int i = 0; i < old.size(); i++){
@@ -22,7 +26,7 @@ int Lib::string_to_int(string &old){
     return count;
 }
 
-Date Lib::string_to_date(string &old){
+Date Lib::stringToDate(string &old){
     int d, m, y;
     Date a = Date();
 
@@ -30,20 +34,20 @@ Date Lib::string_to_date(string &old){
     m = (old[3] - 48) * 10 + (old[4] - 48);
     y = (old[6] - 48) * 1000 + (old[7] - 48) * 100 + (old[8] - 48) * 10 + (old[9] - 48);
 
-    a.enter_date(d, m, y);
+    a.enterDate(d, m, y);
 
     return a;
 }
 
-char Lib::string_to_char(string &old){
+char Lib::stringToChar(string &old){
     return old[0];
 }
 
-char Lib::int_to_char(int old){
+char Lib::intToChar(int old){
     return (old +'0');
 }
 
-int Lib::return_int(list< int, allocator<int> > &lista, int one){
+int Lib::returnInt(list< int, allocator<int> > &lista, int one){
     int count;
     list< int, allocator<int> > :: iterator it;
 
@@ -59,23 +63,35 @@ int Lib::return_int(list< int, allocator<int> > &lista, int one){
     return 0;
 }
 
-Candidato Lib::return_candidato(list< Candidato, allocator<Candidato> > &lista, int one){
+Candidato Lib::returnCandidato(list<Candidato> lista, Candidato &c, int one){
     int count;
-    Date a = Date();
-    a.enter_date(0, 0, 0);
-    string b = " ";
-    char c = ' ';
-    Candidato retorno = Candidato(0, 0, b, b, b, c, a, b, 0);
     list< Candidato, allocator<Candidato> > :: iterator it;
 
     for(it = lista.begin(); it != lista.end();it++){
-		//printa os numeros pares
 		if(count == one){
-            return *it;
+            it->printCandidato();
+            cout << "ata" << endl;
+            c = *it;
+
+            return c;
         }
 
         count++;
 	}
 
-    return retorno;
+    return c;
+}
+
+int Lib::returnPosicao(list<Candidato> lista, string nome){
+    int c = 0;
+    list< Candidato, allocator<Candidato> > :: iterator it3;
+
+    for(it3 = lista.begin(); it3 != lista.end(); ++it3){
+        if(it3->getNomeCandidato().compare(nome) == 0){
+            return c;
+        }
+        c++;
+    }
+    
+    return c;
 }

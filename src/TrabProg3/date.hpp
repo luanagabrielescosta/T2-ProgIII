@@ -7,31 +7,35 @@
 using namespace std;
 
 class Date{
-    private:
+	// Atributos
     int day;
     int month;
     int year;
     
     public:
+	// Constructor
     Date();
-    
-    void enter_date(int d, int m, int y);
+	// Destructor
+    ~Date();
 
-    void print_date();
+	// Métodos
+    void enterDate(int d, int m, int y);
+
+    void printDate();
 
     int bi(int year);
 
-    int return_day();
+    int returnDay();
 
-    int return_month();
+    int returnMonth();
 
-    int return_year();
+    int returnYear();
 
-    unsigned int distance_years(Date &end);
+    unsigned int distanceYears(Date &end);
 
-    void turn_into(Date &new_date);
+    void turnInto(Date &new_date);
 
-    int compare_date(Date other, Date another);
+    int compareDate(Date other, Date another);
 
     int idade(Date &other);
 

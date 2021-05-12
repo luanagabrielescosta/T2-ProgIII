@@ -1,6 +1,5 @@
 #ifndef candidato_hpp_
 #define candidato_hpp_
-// #pragma once
 
 #include <iostream>
 #include <string>
@@ -9,7 +8,6 @@
 
 using namespace std;
 class Candidato{
-	private:
 	// Atributos
 	int numeroCandidato;
 	int votosNominaisCandidato; 
@@ -25,6 +23,8 @@ class Candidato{
 	// Constructor
 	Candidato(int numeroCandidato, int votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
 			char &sexoCandidato, Date &dataNascimentoCandidato, string &destinoVoto, int numeroPartidoCandidato);
+	// Destructor
+	~Candidato();
 
 	// Métodos
 	int getNumeroCandidato();

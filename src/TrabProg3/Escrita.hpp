@@ -5,8 +5,12 @@
 
 class Escrita{
 	public:
+	// Constructor
     Escrita();
+	// Destructor 
+    ~Escrita();
 
+	// Métodos
 	bool escreveArquivo(string Caminho, Date dataeleicao, Eleicao vereadores);
 };
 

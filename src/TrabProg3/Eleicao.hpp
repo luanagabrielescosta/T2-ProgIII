@@ -12,32 +12,31 @@
 using namespace std;
 
 class Eleicao{
-	private:
+	// Atributos
 	int numeroVagaseleicao; 
-	// ArrayList <partido> partidoeleicao;
 	list<Partido> partidoeleicao;
-	// ArrayList <candidato> eleitosProporcionalmente;
 	list<Candidato> eleitosProporcionalmente;
-	// ArrayList <Candidato> maisVotados;
 	list<Candidato> maisVotados;
-	// ArrayList <Candidato> eleitosMajoritariamente;
 	list<Candidato> eleitosMajoritariamente;
-	// ArrayList <Candidato> naoEleitosMajoritariamente; 
 	list<Candidato> naoEleitosMajoritariamente;
 	Date dataeleicao;
 	int qtdVagas; 
 	
 
 	public:
+	// Constructor
 	Eleicao();
+	// Destructor
+	~Eleicao();
 
+	// Métodos
 	int getNumeroVagaseleicao();
 
 	void setNumeroVagaseleicao(int numeroVagaseleicao);
 
-	list<Partido> *getPartidoEleicao();
+	list<Partido> getPartidoEleicao();
 
-	void setpartidoeleicao(list<Partido> *partidoeleicao);
+	void setPartidoEleicao(list<Partido> partidoeleicao);
 
 	list<Candidato> getEleitosProporcionalmente();
 
@@ -69,7 +68,7 @@ class Eleicao{
 
 	void printEleicao();
 
-	void insereCandidatos(Candidato* c);
+	void insereCandidatos(Candidato c);
 
 	int retornaNumeroPartidos();
 };

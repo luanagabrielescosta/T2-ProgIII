@@ -23,13 +23,37 @@ Leitura::Leitura(){
     this->totalVotosLegenda = 0;
 }
 
-void Leitura::lePartidos(Eleicao &vereadores, string &path){
+Leitura::~Leitura(){
+	// TODO Auto-generated destructor stub
+}
+
+int getNumeroLinhas(string path){
+    int c = 0;
     string line;
     ifstream myfile (path); // ifstream = padrão ios:in
-    int bit = 0;
 
     if (myfile.is_open()){
         while (!myfile.eof()){ //enquanto end of file for false continua
+            getline (myfile,line); // como foi aberto em modo texto(padrão)
+            c++;
+        }
+        myfile.close();
+    }
+    
+    return c;
+}
+
+void Leitura::lePartidos(Eleicao &vereadores, string &path, list<Candidato> c){
+    string line;
+    ifstream myfile (path); // ifstream = padrão ios:in
+    int bit = 0;
+    list<Candidato> nova;
+
+    int numeroLinhas = getNumeroLinhas(path) - 1;
+
+    if (myfile.is_open()){
+        // while (!myfile.eof()){ //enquanto end of file for false continua
+        while(numeroLinhas != 0){
             getline (myfile,line); // como foi aberto em modo texto(padrão)
             // cout << line << endl; // delete
             if(bit == 0){
@@ -44,7 +68,7 @@ void Leitura::lePartidos(Eleicao &vereadores, string &path){
                 while(getline(check1, intermediate, ',')){
                     tokens.push_back(intermediate);
                 }
-                
+
                 list < string, allocator<string> > :: iterator it;
                 int nPartido;
                 int vLegenda;
@@ -54,11 +78,11 @@ void Leitura::lePartidos(Eleicao &vereadores, string &path){
                 for(it = tokens.begin(); it != tokens.end(); ++it){
                     Lib help = Lib();
 
-                    nPartido = help.string_to_int(*it);
+                    nPartido = help.stringToInt(*it);
                     // cout << nPartido;
                     it++;
 
-                    vLegenda = help.string_to_int(*it); 
+                    vLegenda = help.stringToInt(*it); 
                     // cout << vLegenda;
                     it++;
 
@@ -73,12 +97,31 @@ void Leitura::lePartidos(Eleicao &vereadores, string &path){
                     // cout << siglaPartido;
                 }
 
-                Partido x = Partido(nPartido, vLegenda, nomePartido, siglaPartido); 
-                
+                list < Candidato, allocator<Candidato> > :: iterator it2;
+                for(it2 = c.begin(); it2 != c.end(); ++it2){
+                    Candidato a = *it2;
+                    if(a.getNumeroPartidoCandidato() == nPartido){
+                        // a.printCandidato();
+                        nova.push_back(a);
+                    }
+                }
+
+                // cout << " == " << nPartido << " == " << endl;
+                for(it2 = nova.begin(); it2 != nova.end(); ++it2){
+                    Candidato a = *it2;
+                    if(a.getNumeroPartidoCandidato() == nPartido){
+                        // a.printCandidato();
+                    }
+                }
+
+                Partido x = Partido(nPartido, vLegenda, nomePartido, siglaPartido, nova); 
+                // x.printPartido();
                 vereadores.addPartido(x);
+                nova.clear();
                 // cout << x.getNumeroPartido() << " - " << x.getVotosLegendaPartido() << " - " << x.getNomePartido() << " - " << x.getSiglaPartido() << endl;
                 cout << endl;
             }
+            numeroLinhas--;
         }
         myfile.close();
 
@@ -87,18 +130,22 @@ void Leitura::lePartidos(Eleicao &vereadores, string &path){
     }
 }
 
-void Leitura::leCandidatos(Eleicao &vereadores, string &path){
+list<Candidato> Leitura::leCandidatos(Eleicao &vereadores, string &path){
     string line;
     ifstream myfile (path); // ifstream = padrão ios:in
     int bit = 0;
     int counter = 0;
     int deleteAfter = 0;
     int countPartidos = vereadores.retornaNumeroPartidos();
-    cout << countPartidos << endl;
-    vector<Candidato> lista;
+    list<Candidato> lista;
+
+    int numeroLinhas = getNumeroLinhas(path) - 1;
+
 
     if (myfile.is_open()){
-        while (! myfile.eof()){ //enquanto end of file for false continua
+        while(numeroLinhas != 0){ //enquanto end of file for false continua
+        // cout << "oh no" << endl;
+        // while (! myfile.eof()){ //enquanto end of file for false continua
             getline (myfile,line); // como foi aberto em modo texto(padrão)
             // cout << line << endl; // delete
             if(bit == 0){
@@ -129,11 +176,11 @@ void Leitura::leCandidatos(Eleicao &vereadores, string &path){
                 for(it = tokens.begin(); it != tokens.end(); ++it){
                     Lib help = Lib();
 
-                    numCandidato = help.string_to_int(*it);
+                    numCandidato = help.stringToInt(*it);
                     // cout << numCandidato << " ";
                     it++;
 
-                    vNominaisCandidato = help.string_to_int(*it);
+                    vNominaisCandidato = help.stringToInt(*it);
                     // cout << vNominaisCandidato << " ";
                     it++;
 
@@ -155,7 +202,7 @@ void Leitura::leCandidatos(Eleicao &vereadores, string &path){
                     // cout << noUrnaCandidato << " ";
                     it++;
 
-                    sexCandidato = help.string_to_char(*it);
+                    sexCandidato = help.stringToChar(*it);
                     // cout << sexCandidato << " ";
                     it++;
 
@@ -165,7 +212,7 @@ void Leitura::leCandidatos(Eleicao &vereadores, string &path){
                         qtdHomensEleitos++; 
                     }
 
-                    datNascCandidato = help.string_to_date(*it);
+                    datNascCandidato = help.stringToDate(*it);
                     // datNascCandidato.print_date();
                     it++;
 
@@ -173,17 +220,19 @@ void Leitura::leCandidatos(Eleicao &vereadores, string &path){
                     // cout << destVotoCandidato;
                     it++;
 
-                    nPartidoCandidato = help.string_to_int(*it);
+                    nPartidoCandidato = help.stringToInt(*it);
                     // cout << nPartidoCandidato;
 
                 }
 
                 Candidato c = Candidato(numCandidato, vNominaisCandidato, situCandidato, noCandidato, noUrnaCandidato, sexCandidato, datNascCandidato, destVotoCandidato, nPartidoCandidato); 
              
-                vereadores.insereCandidatos(&c);
+                // vereadores.insereCandidatos(&c);
                 // lista.insert(lista.end(), c);
+                lista.push_back(c);
                
             }
+            numeroLinhas--;
         }
         myfile.close();
         totalVotos = totalVotosLegenda + totalVotosNominais; 
@@ -193,4 +242,6 @@ void Leitura::leCandidatos(Eleicao &vereadores, string &path){
     } else{ 
         cout << "Unable to open file";
     }
+
+    return lista;
 }

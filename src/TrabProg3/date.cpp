@@ -7,13 +7,17 @@ using namespace std;
 Date::Date(){
 }
 
-void Date::enter_date(int d, int m, int y){
+Date::~Date(){
+	// TODO Auto-generated destructor stub
+}
+
+void Date::enterDate(int d, int m, int y){
     day = d;
     month = m;
     year = y;
 }
 
-void Date::print_date(){
+void Date::printDate(){
     cout<<this->day<<"/"<<this->month<<"/"<<year;
 }
 
@@ -21,19 +25,19 @@ int Date::bi(int year){
     return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
 }   
 
-int Date::return_day(){
+int Date::returnDay(){
     return this->day;
 }
 
-int Date::return_month(){
+int Date::returnMonth(){
     return this->month;
 }
 
-int Date::return_year(){
+int Date::returnYear(){
     return this->year;
 }
 
-unsigned int Date::distance_years(Date &end){
+unsigned int Date::distanceYears(Date &end){
     int days_month[2][13] = {{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},{0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}};
     unsigned int idays;
     unsigned int fdays;	
@@ -47,28 +51,28 @@ unsigned int Date::distance_years(Date &end){
         idays += days_month[dbi][i];
     }
 
-    fdays = end.return_day();
-    dbi = bi(end.return_year());
-    for(int i = end.return_month() - 1; i > 0; --i)
+    fdays = end.returnDay();
+    dbi = bi(end.returnYear());
+    for(int i = end.returnMonth() - 1; i > 0; --i)
         fdays += days_month[dbi][i];
 
-    while (this->year < end.return_year()){
+    while (this->year < end.returnYear()){
         def_years += 365 + bi(this->year++);
     }
 
     return def_years - idays + fdays;
 }
 
-void Date::turn_into(Date &new_date){
-    this->day = new_date.return_day();
-    this->month = new_date.return_month();
-    this->year = new_date.return_year();
+void Date::turnInto(Date &new_date){
+    this->day = new_date.returnDay();
+    this->month = new_date.returnMonth();
+    this->year = new_date.returnYear();
 }
 
-int Date::compare_date(Date other, Date another){
-    if(other.return_year() == another.return_year()){
-        if(other.return_month() == another.return_month()){
-            if(other.return_day() == another.return_day()){
+int Date::compareDate(Date other, Date another){
+    if(other.returnYear() == another.returnYear()){
+        if(other.returnMonth() == another.returnMonth()){
+            if(other.returnDay() == another.returnDay()){
                 return 0;
             }
         }
@@ -78,11 +82,11 @@ int Date::compare_date(Date other, Date another){
 }
 
 int Date::idade(Date &other){
-    int idade = other.return_year() - this->year;
+    int idade = other.returnYear() - this->year;
 
-    if(other.return_month() > this->month){
+    if(other.returnMonth() > this->month){
         idade--;
-    } else if(other.return_day() > this->day){
+    } else if((other.returnMonth() == this->month) && (other.returnDay() > this->day)){
         idade--;
     }
 
@@ -90,11 +94,11 @@ int Date::idade(Date &other){
 }
 
 bool Date::compareTo(Date other){
-    if(this->return_year() > other.return_year()){
+    if(this->returnYear() > other.returnYear()){
         return true;
-    } else if((this->return_year() == other.return_year()) && (this->return_month() > other.return_month())){
+    } else if((this->returnYear() == other.returnYear()) && (this->returnMonth() > other.returnMonth())){
         return true;
-    } else if((this->return_year() == other.return_year()) && (this->return_month() == other.return_month()) && (this->return_day() > other.return_day())){
+    } else if((this->returnYear() == other.returnYear()) && (this->returnMonth() == other.returnMonth()) && (this->returnDay() > other.returnDay())){
         return true;
     }
 

@@ -15,21 +15,16 @@ int main(int argc, char** argv){
 		string arquivoPartidos = argv[2];		
 		string dataString = argv[3];
 
-		cout << arquivoCandidatos << " |here|"<< endl; // delete
-		cout << arquivoPartidos << " |i|" << endl; // delete
-		cout << dataString << " |am|" << endl; // delete
-
-		Leitura lerPartidos = Leitura(); 
-		lerPartidos.lePartidos(vereador,arquivoPartidos);
 		Leitura lerCandidatos = Leitura(); 
-		lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
+		list<Candidato> c = lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
+		Leitura lerPartidos = Leitura(); 
+		lerPartidos.lePartidos(vereador,arquivoPartidos, c);
 
 
-		cout << "SOCORRO" << endl;
-		vereador.printEleicao();
+		// vereador.printEleicao();
 
 		Escrita escreveArquivoSaida = Escrita();
-        Date data = help.string_to_date(dataString);
+        Date data = help.stringToDate(dataString);
 		escreveArquivoSaida.escreveArquivo("out",data,vereador);		
 		cout << "aaaa" << endl;
 		

@@ -6,12 +6,10 @@
 
 class Leitura{
 	// Atributos
-	// Partidos 
 	string nPartido;
 	string vLegenda;
 	string nomePartido; 
 	string siglaPartido; 
-	// Candidatos
 	string numCandidato;
 	string vNominaisCandidato;
 	string situCandidato;
@@ -35,11 +33,13 @@ class Leitura{
 	public:
 	// Constructor
     Leitura();
+	// Destructor
+    ~Leitura();
 	
 	// Métodos
-    void lePartidos(Eleicao &vereadores, string &path);
+    void lePartidos(Eleicao &vereadores, string &path, list<Candidato> c);
 	
-	void leCandidatos(Eleicao &vereadores, string &path);
+	list<Candidato> leCandidatos(Eleicao &vereadores, string &path);
 };
 
 #endif /* leitura_hpp_ */

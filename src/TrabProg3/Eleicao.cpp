@@ -7,13 +7,10 @@
 using namespace std;
 
 Eleicao::Eleicao(){
-	// this->numeroVagaseleicao = numeroVagaseleicao;
-	// this->partidoeleicao = partidoeleicao;
-	// this->eleitosProporcionalmente = eleitosProporcionalmente;
-	// this->maisVotados = maisVotados;
-	// this->eleitosMajoritariamente = eleitosMajoritariamente;
-	// this->naoEleitosMajoritariamente = naoEleitosMajoritariamente;
-	// this->dataeleicao = dataeleicao;
+}
+
+Eleicao::~Eleicao(){
+	// TODO Auto-generated destructor stub
 }
 
 int Eleicao::getNumeroVagaseleicao(){
@@ -24,12 +21,12 @@ void Eleicao::setNumeroVagaseleicao(int numeroVagaseleicao){
 	this->numeroVagaseleicao = numeroVagaseleicao;
 }
 
-list< Partido, allocator<Partido> > *Eleicao::getPartidoEleicao(){
-	return &partidoeleicao;
+list< Partido, allocator<Partido> > Eleicao::getPartidoEleicao(){
+	return partidoeleicao;
 }
 
-void Eleicao::setpartidoeleicao(list< Partido, allocator<Partido> > *partidoeleicao){
-	this->partidoeleicao = *partidoeleicao;
+void Eleicao::setPartidoEleicao(list< Partido, allocator<Partido> > partidoeleicao){
+	this->partidoeleicao = partidoeleicao;
 }
 
 list< Candidato, allocator<Candidato> > Eleicao::getEleitosProporcionalmente(){
@@ -69,8 +66,9 @@ void Eleicao::addPartido(Partido &p){
 
 Partido Eleicao::retornaPartidoPeloNum(int x){
 	list< Partido, allocator<Partido> > :: iterator it;
+	list<Candidato> c;
 	string a = "inexistente";
-	Partido trash = Partido(0, 0, a, a);
+	Partido trash = Partido(0, 0, a, a, c);
 
 	for(it = partidoeleicao.begin(); it != partidoeleicao.end(); ++it){
 		Partido aux = *it;
@@ -100,17 +98,13 @@ void Eleicao::printEleicao(){
 
 }
 
-void Eleicao::insereCandidatos(Candidato* c){
+void Eleicao::insereCandidatos(Candidato c){
 	list<Partido> :: iterator it;
 
 	for(it = partidoeleicao.begin(); it != partidoeleicao.end(); ++it){
 		Partido p = *it;
-		if(c->getNumeroPartidoCandidato() == p.getNumeroPartido()){
-			// p.getcandidatoPartido().insert(p.getcandidatoPartido().end(), c);
+		if(c.getNumeroPartidoCandidato() == p.getNumeroPartido()){
 			p.addCandidato(c);
-	// 		// aux.getcandidatoPartido() = aux.addCandidato(c);
-	// 		// aux.printPartido();
-	// 		// aux.setcandidatoPartido(c);
 		}
 	}
 }
