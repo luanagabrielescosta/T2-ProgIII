@@ -26,7 +26,6 @@ int main(int argc, char** argv){
 		Escrita escreveArquivoSaida = Escrita();
         Date data = help.stringToDate(dataString);
 		escreveArquivoSaida.escreveArquivo("out",data,vereador);		
-		cout << "aaaa" << endl;
 		
 		return 0;
 }

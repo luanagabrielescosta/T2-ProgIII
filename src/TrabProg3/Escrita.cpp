@@ -29,16 +29,21 @@ bool compare(Candidato first, Candidato second){
 	return true;	
 }
 
-bool compare2(Candidato o1, Candidato o2){
-		if(o1.getVotosNominaisCandidato() == o2.getVotosNominaisCandidato()){
-			return o2.getNumeroPartidoCandidato() > o1.getNumeroPartidoCandidato();
-		}else {
-			return o1.getVotosNominaisCandidato() > o2.getVotosNominaisCandidato();	
-		}
+bool compare2(Candidato first, Candidato second){
+    if(first.getVotosNominaisCandidato() == second.getVotosNominaisCandidato()){
+        if(first.getNumeroPartidoCandidato() > second.getNumeroPartidoCandidato()){
+            return false;
+        }
+    }
+    if(first.getVotosNominaisCandidato() > second.getVotosNominaisCandidato()){
+        return false;	
+    }
+
+    return true;
 }
 
-bool comparePartido(Partido o1, Partido o2){
-		return o1.getVotosTotaisPartido() > o2.getVotosTotaisPartido();
+bool comparePartido(Partido first, Partido second){
+    return first.getVotosTotaisPartido() > second.getVotosTotaisPartido();
 }
 
 bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
@@ -99,13 +104,10 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
         list< Partido, allocator<Partido> > :: iterator it;
         list< Candidato, allocator<Candidato> > :: iterator it2;
         list< Candidato, allocator<Candidato> > :: iterator it3;
-        // vereadores.printEleicao();
 
         for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
             qtdPartidos++;
-            // Partido p = *it;
             totalVotosLegenda = totalVotosLegenda + it->getVotosLegendaPartido(); 
-            // it->printPartido();
             list<Candidato> c = it->getcandidatoPartido();
             for(it2 = c.begin(); it2 != c.end(); ++it2){
                 totalCandidatos++;
@@ -120,7 +122,6 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
                 int vNumeroPartidoCandidato = it2->getNumeroPartidoCandidato();
 
                 Candidato pessoa = Candidato(vNumeroCandidato, vVotosNominaisCandidato, vSituacaoCandidato, vNomeCandidato, vNomeUrnaCandidato, vSexoCandidato, vDataNascimentoCandidato, vDestinoVoto, vNumeroPartidoCandidato);
-                // pessoa.printCandidato();
                 candidatosVotos.push_back(pessoa); 
 
                 if(it2->getSituacaoCandidato().compare(comparaSituacao) == 0){
@@ -139,14 +140,9 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
             }
         }
 
-	    // cout << endl << endl << endl;
-        // // PERGUNTAR
         candidatosEleitos.sort(compare);
-        // for(it2 = candidatosEleitos.begin(); it2 != candidatosEleitos.end(); ++it2){
-        //     it2->printCandidato();
-        // }
-        int aux2 = qtdVagas; 
 
+        int aux2 = qtdVagas; 
         ofstream myfile (path); // ifstream = padrão ios:in
         int bit = 0;
 
@@ -370,105 +366,34 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
                 cont++;
             }
 
-            cont = 0;
+            cont = 1;
 
 			myfile << endl;
 			myfile << "Primeiro e último colocados de cada partido:" << endl;
 
-            // for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
-			// 	cont++;
+            list<Candidato> auxPrintPartido;
 
-            //     cout << "ata" << endl;
-			// 	if(it->getVotosTotaisPartido() == 0){
-			// 		cont--;
-			// 		continue;
-			// 	}
-            //     for(it2 = it->getcandidatoPartido().begin(); it2 != it->getcandidatoPartido().end(); ++it2){ // nao seii
-			// 		if(!it2->getDestinoVoto().compare("Válido")){
-            //             continue;
-            //         } 
+            for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
+                auxPrintPartido = it->getcandidatoPartido();
+                auxPrintPartido.sort(compare);
+                auxPrintPartido.reverse();
+                Candidato primeiro = *auxPrintPartido.begin();
+                
+                myfile << cont << " - " << it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << primeiro.getNomeCandidato();
+                myfile << " (" << primeiro.getNumeroCandidato() << ", " << primeiro.getVotosNominaisCandidato() << " votos) / "; 
 
-			// 		if(it2->getVotosNominaisCandidato() < candidatoMenosVotado){
-			// 			candidatoMenosVotado = it2->getVotosNominaisCandidato(); 
-			// 		}
+                auxPrintPartido.reverse();
+                
+                Candidato ultimo = *auxPrintPartido.begin();
 
-			// 		if(it2->getVotosNominaisCandidato() > candidatoMaisVotado){
-			// 			candidatoMaisVotado = it2->getVotosNominaisCandidato();
-			// 		}
-			// 	}
+                myfile << ultimo.getNomeCandidato() << " (" << ultimo.getNumeroCandidato() << ", " << ultimo.getVotosNominaisCandidato() << " votos)" << endl;             // id - sigla - npartido, nomeM (ncandidato, x votos) / nomem (ncandidato, x votos)
+                auxPrintPartido.clear();
 
-            //     for(it2 = it->getcandidatoPartido().begin(); it2 != it->getcandidatoPartido().end(); ++it2){ // nao seii
-			// 		if(it2->getVotosNominaisCandidato() == candidatoMaisVotado){
-			// 			maisVotadoPartido.insert(maisVotadoPartido.end(), *it2);
-			// 		}
-			// 	}
-				
-            //     for(it2 = it->getcandidatoPartido().begin(); it2 != it->getcandidatoPartido().end(); ++it2){ // nao seii
-			// 		if(it2->getVotosNominaisCandidato() == candidatoMenosVotado){						
-			// 				menosVotadoPartido.insert(menosVotadoPartido.end(), *it2);						
-			// 			//myfile << c.getNomeCandidato() + " (" + c.getNumeroCandidato() + ", " + c.getVotosNominaisCandidato() +" votos)");
-			// 		}
-			// 	}
+                cont++;
+            }
 
-			// 	candidatoMaisVotado = 0; 
-			// 	candidatoMenosVotado = 10000;
-			// }
-			
-
-			// maisVotadoPartido.sort(compare2);
-			// menosVotadoPartido.sort(compare2);
-
-            // qtdPartidos=cont;
-			// aux2 = cont;
-			// aux = 0;
-            // cont = 0; 
-		
-			// while(cont < aux2){
-            //     for(it2 = maisVotadoPartido.begin(); it2 != maisVotadoPartido.end(); ++it2){ // nao seii
-			// 		if(qtdPartidos != aux && cont == 0){
-			// 		    qtdPartidos--; 
-			// 		}else if(qtdPartidos != aux && cont > 0){
-			// 			qtdPartidos++;
-			// 		}
-			// 		if(qtdPartidos == aux){ 
-			// 			cont++;
-			// 			aux = aux2-cont; 
-			// 			qtdPartidos = 0;
-			// 			Partido p = vereadores.retornaPartidoPeloNum(it2->getNumeroPartidoCandidato());
-
-			// 			myfile << cont << " - " << p.getSiglaPartido() << " - " << p.getNumeroPartido() << ", " << it2->getNomeUrnaCandidato() << " (" << it2->getNumeroCandidato() << ", " << it2->getVotosNominaisCandidato() <<" voto" << (it2->getVotosNominaisCandidato() > 1 ? "s" : "") << ")" << " / " << endl;
-						
-            //             comparaPartido = it2->getNumeroPartidoCandidato();
-
-			// 			list< Candidato, allocator<Candidato> > menosVotados;
-
-            //             for(it3 = menosVotadoPartido.begin(); it3 != menosVotadoPartido.end(); ++it3){ // nao seii
-            //                 Candidato x = *it3;
-
-			// 				if(comparaPartido == it3->getNumeroPartidoCandidato()){								
-			// 					menosVotados.insert(menosVotados.end(), *it3);								
-			// 				}
-			// 			}	
-
-            //             menosVotados.sort(compare);
-
-            //             myfile << library.return_candidato(menosVotados,0).getNomeUrnaCandidato() << " (" << library.return_candidato(menosVotados,0).getNumeroCandidato() << ", " << library.return_candidato(menosVotados,0).getVotosNominaisCandidato() <<" voto" << (library.return_candidato(menosVotados,0).getVotosNominaisCandidato() > 1 ? "s" : "") << ")" << endl;						
-						
-            //             if(cont <= aux2){
-			// 				break;
-			// 			}
-			// 		}
-			// 	}
-            // }
-
-            // DecimalFormat df = new DecimalFormat("0.00");
-			myfile << endl;
+            myfile << endl;
 			myfile << "Eleitos, por faixa etária (na data da eleição):" << endl;
-			// myfile << "      Idade < 30: " << idadeAbaixoTrinta << " (" << df.format((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
-			// myfile << "30 <= Idade < 40: " << idadeAbaixoQuarenta << " (" << df.format((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;
-			// myfile << "40 <= Idade < 50: " << idadeAbaixoCinquenta << " (" << df.format((idadeAbaixoCinquenta/(double)qtdVagas)*100) << "%)" << endl;
-			// myfile << "50 <= Idade < 60: " << idadeAbaixoSessenta << " (" << df.format((idadeAbaixoSessenta/(double)qtdVagas)*100) << "%)" << endl;
-			// myfile << "60 <= Idade     : " << idadeAcimaSessenta << " (" << df.format((idadeAcimaSessenta/(double)qtdVagas)*100) << "%)" << endl;
 
             myfile << "      Idade < 30: " << idadeAbaixoTrinta << " (" << fixed <<  setprecision(2) <<((idadeAbaixoTrinta/(double)qtdVagas)*100) << "%)" << endl;
 			myfile << "30 <= Idade < 40: " << idadeAbaixoQuarenta << " (" << fixed <<  setprecision(2) <<((idadeAbaixoQuarenta/(double)qtdVagas)*100) << "%)" << endl;

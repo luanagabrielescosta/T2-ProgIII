@@ -68,12 +68,8 @@ void Partido::addCandidato(Candidato c){
 
 void Partido::printPartido(){
 	list< Candidato, allocator<Candidato> > :: iterator it;
-	cout << endl << endl << endl;
 	for(it = this->candidatoPartido.begin(); it != this->candidatoPartido.end(); ++it){
-	// for(int i = 0; i < candidatoPartido.size(); i++){
-		// cout <<  "to aqui"<< endl;
-		Candidato a = *it;
-		a.printCandidato();
+		it->printCandidato();
 	}
 
 	cout << this->numeroPartido << endl;
