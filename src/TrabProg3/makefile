@@ -1,10 +1,8 @@
 ############
-# Exemplo de makefile
-# Prof. João Paulo A. Almeida
+# Eduardo Afonso Ribeiro Rodrigues
+# Luana Gabriele de Sousa Costa
 # Programação III
 # 
-# A princípio, você não precisa alterar nada, mas aqui assume-se que o diretório atual
-# é o diretório onde estão os códigos fonte (.cpp).
 #
 
 # nome do compilador

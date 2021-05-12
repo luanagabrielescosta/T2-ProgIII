@@ -48,7 +48,7 @@ char Lib::intToChar(int old){
 }
 
 int Lib::returnInt(list< int, allocator<int> > &lista, int one){
-    int count;
+    int count = 0;
     list< int, allocator<int> > :: iterator it;
 
     for(it = lista.begin(); it != lista.end();it++){
@@ -64,7 +64,7 @@ int Lib::returnInt(list< int, allocator<int> > &lista, int one){
 }
 
 Candidato Lib::returnCandidato(list<Candidato> lista, Candidato &c, int one){
-    int count;
+    int count = 0;
     list< Candidato, allocator<Candidato> > :: iterator it;
 
     for(it = lista.begin(); it != lista.end();it++){
