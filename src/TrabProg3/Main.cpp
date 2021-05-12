@@ -1,3 +1,10 @@
+/*
+// @ Implementação por:
+// @   Eduardo Afonso Ribeiro Rodrigues
+// @   Luana Gabriele de Sousa Costa
+// @ arquivo main da eleição
+*/
+
 #include <string>
 #include "Eleicao.hpp"
 #include "Leitura.hpp"
@@ -7,25 +14,21 @@
 
 using namespace std;
 
+// Função main
 int main(int argc, char** argv){
+	Eleicao vereador = Eleicao(); // Eleição inicializada
+	Lib help = Lib(); // Lib inicializada
+	string arquivoCandidatos = argv[1]; // String path candidatos atribuida
+	string arquivoPartidos = argv[2]; // String path partidos atribuida		
+	string dataString = argv[3]; // String de data atribuida
 
-		Eleicao vereador = Eleicao(); 
-		Lib help = Lib();
-		string arquivoCandidatos = argv[1];
-		string arquivoPartidos = argv[2];		
-		string dataString = argv[3];
+	Leitura lerArquivo = Leitura(); // Leitura inicializada
+	list<Candidato> c = lerArquivo.leCandidatos(vereador,arquivoCandidatos); // Lê o arquivo de candidatos
+	lerArquivo.lePartidos(vereador,arquivoPartidos, c); // Lê o arquivo de partidos
 
-		Leitura lerCandidatos = Leitura(); 
-		list<Candidato> c = lerCandidatos.leCandidatos(vereador,arquivoCandidatos);
-		Leitura lerPartidos = Leitura(); 
-		lerPartidos.lePartidos(vereador,arquivoPartidos, c);
-
-
-		// vereador.printEleicao();
-
-		Escrita escreveArquivoSaida = Escrita();
-        Date data = help.stringToDate(dataString);
-		escreveArquivoSaida.escreveArquivo(data, vereador);		
-		
-		return 0;
+	Escrita escreveArquivoSaida = Escrita(); // Escrita inicializada
+	Date data = help.stringToDate(dataString); // Data da eleição inicializada e atribuindo
+	escreveArquivoSaida.escreveArquivo(data, vereador); // Chamada da função de escrita
+	
+	return 0;
 }
