@@ -132,7 +132,9 @@ int Partido::countValidos(){
 	list< Candidato, allocator<Candidato> > :: iterator it2;
 
 	for(it2 = this->candidatoPartido.begin(); it2 != this->candidatoPartido.end(); ++it2){
-		count = count + it2->getVotosNominaisCandidato();
+		if(it2->getDestinoVoto().compare("Válido") == 0){
+			count = count + it2->getVotosNominaisCandidato();
+		}
 	}
 
 	return count;
