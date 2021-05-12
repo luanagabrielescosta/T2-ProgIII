@@ -379,14 +379,14 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
                 auxPrintPartido.reverse();
                 Candidato primeiro = *auxPrintPartido.begin();
                 
-                myfile << cont << " - " << it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << primeiro.getNomeCandidato();
+                myfile << cont << " - " << it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << primeiro.getNomeUrnaCandidato();
                 myfile << " (" << primeiro.getNumeroCandidato() << ", " << primeiro.getVotosNominaisCandidato() << " votos) / "; 
 
                 auxPrintPartido.reverse();
                 
                 Candidato ultimo = *auxPrintPartido.begin();
 
-                myfile << ultimo.getNomeCandidato() << " (" << ultimo.getNumeroCandidato() << ", " << ultimo.getVotosNominaisCandidato() << " votos)" << endl;             // id - sigla - npartido, nomeM (ncandidato, x votos) / nomem (ncandidato, x votos)
+                myfile << ultimo.getNomeUrnaCandidato() << " (" << ultimo.getNumeroCandidato() << ", " << ultimo.getVotosNominaisCandidato() << " votos)" << endl;             // id - sigla - npartido, nomeM (ncandidato, x votos) / nomem (ncandidato, x votos)
                 auxPrintPartido.clear();
 
                 cont++;
