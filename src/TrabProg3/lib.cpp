@@ -70,7 +70,6 @@ Candidato Lib::returnCandidato(list<Candidato> lista, Candidato &c, int one){
     for(it = lista.begin(); it != lista.end();it++){
 		if(count == one){
             it->printCandidato();
-            cout << "ata" << endl;
             c = *it;
 
             return c;

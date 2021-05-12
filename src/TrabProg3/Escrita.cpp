@@ -69,18 +69,12 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
         list<int> posicaoRankingMenosVotadosEleitos;
 
         // Variaveis
-        int posicaoEleito = 1;
         int totalCandidatos = 0;
         int aux = 0;
         int cont = 0;
         int posicaoCandidato = 1;
         int eleitoMenosVotos = 10000;
         int qtdVagas = 0;
-        int comparaPartido; 
-        int candidatoMenosVotado = 10000;
-        int candidatoMaisVotado = 0;
-        int numeroCandidatoMenosVotado;
-        int numeroCandidatoMaisVotado;
         int totalVotosNominaisPartido = 0;
         int totalVotosPartido = 0;
         int qtdEleitosPartido = 0;
@@ -152,7 +146,6 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
         int aux2 = qtdVagas; 
         ofstream myfile (path); // ifstream = padrão ios:in
-        int bit = 0;
 
         if (myfile.is_open()){
             //escrita da quantidade de vagas; 
@@ -172,8 +165,6 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
 					if(qtdVagas == aux){
                         int idade = c.getDataNascimentoCandidato().idade(dataeleicao);
-                        // c.getDataNascimentoCandidato().printDate();
-                        // cout << endl << idade << endl << endl;
 
 						if(idade < 30){
 							idadeAbaixoTrinta++;

@@ -29,5 +29,3 @@ int main(int argc, char** argv){
 		
 		return 0;
 }
-// g++ *.cpp -o vereadores 
-// ./vereadores afonso-cláudio-candidatos.csv afonso-claudio-partidos.csv 03/06/2000
