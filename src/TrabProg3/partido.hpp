@@ -33,7 +33,7 @@ class Partido{
 
 	void setVotosTotaisPartido(int votosTotaisPartido);
 
-	list<Candidato> getcandidatoPartido();
+	list<Candidato> getCandidatoPartido();
 
 	void setcandidatoPartido(list<Candidato> lista);
 

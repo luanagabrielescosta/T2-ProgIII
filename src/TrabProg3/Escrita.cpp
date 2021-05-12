@@ -108,7 +108,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
         for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
             qtdPartidos++;
             totalVotosLegenda = totalVotosLegenda + it->getVotosLegendaPartido(); 
-            list<Candidato> c = it->getcandidatoPartido();
+            list<Candidato> c = it->getCandidatoPartido();
             for(it2 = c.begin(); it2 != c.end(); ++it2){
                 totalCandidatos++;
                 int vNumeroCandidato = it2->getNumeroCandidato();
@@ -374,7 +374,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
             list<Candidato> auxPrintPartido;
 
             for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
-                auxPrintPartido = it->getcandidatoPartido();
+                auxPrintPartido = it->getCandidatoPartido();
                 auxPrintPartido.sort(compare);
                 auxPrintPartido.reverse();
                 Candidato primeiro = *auxPrintPartido.begin();

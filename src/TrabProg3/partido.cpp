@@ -37,7 +37,7 @@ void Partido::setVotosTotaisPartido(int votosTotaisPartido){
 	this->votosTotaisPartido = votosTotaisPartido;
 }
 
-list<Candidato> Partido::getcandidatoPartido(){
+list<Candidato> Partido::getCandidatoPartido(){
 	return candidatoPartido;
 }
 
