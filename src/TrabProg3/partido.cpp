@@ -22,6 +22,19 @@ int Partido::getVotosNominaisTotaisPartido(){
 	return votosNominaisTotaisPartido;
 }
 
+int Partido::getVotosNominaisPrimeiro(){
+	int maisVotado = 0;
+	list< Candidato, allocator<Candidato> > :: iterator it2;
+
+	for(it2 = this->candidatoPartido.begin(); it2 != this->candidatoPartido.end(); ++it2){
+		if(it2->getVotosNominaisCandidato() > maisVotado){
+			maisVotado = it2->getVotosNominaisCandidato();
+		}
+	}
+
+	return maisVotado;
+}
+
 void Partido::setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido){
 	this->votosNominaisTotaisPartido = votosNominaisTotaisPartido;
 }
@@ -104,4 +117,12 @@ int Partido::countEleitos(){
 	}
 
 	return eleitos;
+}
+
+int Partido::validaSituacao(Candidato c){
+	if(c.getDestinoVoto().compare("Válido") == 0){
+		return 0;
+	}
+
+	return 1;
 }

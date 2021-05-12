@@ -25,6 +25,8 @@ class Partido{
 	// Metodos 
 	int getVotosNominaisTotaisPartido();
 
+	int getVotosNominaisPrimeiro();
+
 	void setVotosNominaisTotaisPartido(int votosNominaisTotaisPartido);
 
 	int votosTotaisPartido;;
@@ -56,6 +58,8 @@ class Partido{
 	Candidato getPrimeiroCandidato(Candidato primeiro);
 
 	Candidato getUltimoCandidato(Candidato primeiro);
+
+	int validaSituacao(Candidato c);
 };
 
 #endif /* partido_hpp_ */

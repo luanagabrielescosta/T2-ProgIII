@@ -46,6 +46,14 @@ bool comparePartido(Partido first, Partido second){
     return first.getVotosTotaisPartido() > second.getVotosTotaisPartido();
 }
 
+bool compareVotosPartido(Partido first, Partido second){
+    if(first.getVotosNominaisPrimeiro() > second.getVotosNominaisPrimeiro()){
+        return true;
+    }
+
+    return false;
+}
+
 bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
     try{
         // Listas 
@@ -373,19 +381,37 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
             list<Candidato> auxPrintPartido;
 
+            listaPartidos.sort(compareVotosPartido);
+
+            
             for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
                 auxPrintPartido = it->getCandidatoPartido();
                 auxPrintPartido.sort(compare);
                 auxPrintPartido.reverse();
+
                 Candidato primeiro = *auxPrintPartido.begin();
+                Candidato ultimo = *auxPrintPartido.begin();
+
+                for(it2 = auxPrintPartido.begin(); it2 != auxPrintPartido.end(); ++it2){
+                    if(it->validaSituacao(*it2) == 0){
+                        primeiro = *it2;
+                        break;
+                    }
+                }
+
                 
                 myfile << cont << " - " << it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << primeiro.getNomeUrnaCandidato();
                 myfile << " (" << primeiro.getNumeroCandidato() << ", " << primeiro.getVotosNominaisCandidato() << " votos) / "; 
 
                 auxPrintPartido.reverse();
-                
-                Candidato ultimo = *auxPrintPartido.begin();
 
+                for(it2 = auxPrintPartido.begin(); it2 != auxPrintPartido.end(); ++it2){
+                    if(it->validaSituacao(*it2) == 0){
+                        ultimo = *it2;
+                        break;
+                    }
+                }
+                
                 myfile << ultimo.getNomeUrnaCandidato() << " (" << ultimo.getNumeroCandidato() << ", " << ultimo.getVotosNominaisCandidato() << " votos)" << endl;             // id - sigla - npartido, nomeM (ncandidato, x votos) / nomem (ncandidato, x votos)
                 auxPrintPartido.clear();
 
