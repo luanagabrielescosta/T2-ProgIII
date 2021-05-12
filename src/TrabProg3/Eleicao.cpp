@@ -120,7 +120,7 @@ int Eleicao::retornaNumeroPartidos(){
 	return count;
 }
 
-int Eleicao::contaVotosValidos(){
+int Eleicao::contaVotosValidos(list<Candidato> c){
 	int count = 0;
 	list< Partido, allocator<Partido> > :: iterator it;
 	for(it = partidoeleicao.begin(); it != partidoeleicao.end(); ++it){

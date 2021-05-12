@@ -72,7 +72,7 @@ class Eleicao{
 
 	int retornaNumeroPartidos();
 
-	int contaVotosValidos();
+	int contaVotosValidos(list<Candidato> c);
 };
 
 

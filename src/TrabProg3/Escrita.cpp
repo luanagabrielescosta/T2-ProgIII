@@ -383,7 +383,8 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 
             listaPartidos.sort(compareVotosPartido);
 
-            
+            string singular = " voto)";
+            string plural = " votos)";
             for(it = listaPartidos.begin(); it != listaPartidos.end(); ++it){
                 auxPrintPartido = it->getCandidatoPartido();
                 auxPrintPartido.sort(compare);
@@ -399,9 +400,16 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
                     }
                 }
 
+                string actual;
+
+                if(primeiro.getVotosNominaisCandidato() <= 1){
+                    actual = singular;
+                } else{
+                    actual = plural;
+                }
                 
                 myfile << cont << " - " << it->getSiglaPartido() << " - " << it->getNumeroPartido() << ", " << primeiro.getNomeUrnaCandidato();
-                myfile << " (" << primeiro.getNumeroCandidato() << ", " << primeiro.getVotosNominaisCandidato() << " votos) / "; 
+                myfile << " (" << primeiro.getNumeroCandidato() << ", " << primeiro.getVotosNominaisCandidato() << actual << " / "; 
 
                 auxPrintPartido.reverse();
 
@@ -411,8 +419,14 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
                         break;
                     }
                 }
+
+                if(ultimo.getVotosNominaisCandidato() <= 1){
+                    actual = singular;
+                } else{
+                    actual = plural;
+                }
                 
-                myfile << ultimo.getNomeUrnaCandidato() << " (" << ultimo.getNumeroCandidato() << ", " << ultimo.getVotosNominaisCandidato() << " votos)" << endl;             // id - sigla - npartido, nomeM (ncandidato, x votos) / nomem (ncandidato, x votos)
+                myfile << ultimo.getNomeUrnaCandidato() << " (" << ultimo.getNumeroCandidato() << ", " << ultimo.getVotosNominaisCandidato() << actual << endl;             // id - sigla - npartido, nomeM (ncandidato, x votos) / nomem (ncandidato, x votos)
                 auxPrintPartido.clear();
 
                 cont++;
@@ -438,7 +452,7 @@ bool Escrita::escreveArquivo(string path, Date dataeleicao, Eleicao vereadores){
 			myfile << "Masculino: " << qtdHomensEleitos << " (" << fixed <<  setprecision(2) << porcentagemEleitosM << "%)" << endl;
 			myfile << endl;
 
-            totalVotosNominais = vereadores.contaVotosValidos();
+            totalVotosNominais = vereadores.contaVotosValidos(candidatosEleitos);
 
 			totalVotos = totalVotosLegenda + totalVotosNominais; 
 
