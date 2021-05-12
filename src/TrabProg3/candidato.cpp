@@ -1,3 +1,10 @@
+/*
+// @ Implementação por:
+// @   Eduardo Afonso Ribeiro Rodrigues
+// @   Luana Gabriele de Sousa Costa
+// @ cpp da classe de candidatos
+*/
+
 #include <iostream>
 #include <istream>
 #include <string>
@@ -5,6 +12,7 @@
 
 using namespace std;
 
+// Constructor
 Candidato::Candidato(int numeroCandidato, int votosNominaisCandidato,string &situacaoCandidato,string &nomeCandidato,string &nomeUrnaCandidato,
 		char &sexoCandidato, Date &dataNascimentoCandidato, string &destinoVoto, int numeroPartidoCandidato){
 	this->numeroCandidato = numeroCandidato;
@@ -19,49 +27,59 @@ Candidato::Candidato(int numeroCandidato, int votosNominaisCandidato,string &sit
 	this->numeroPartidoCandidato = numeroPartidoCandidato;
 }
 
+// Destructor 
 Candidato::~Candidato(){
 	// TODO Auto-generated destructor stub
 }
 
-
+// Função simples explicada no .hpp
 int Candidato::getNumeroCandidato(){
 	return numeroCandidato;
 }
 
+// Função simples explicada no .hpp
 int Candidato::getVotosNominaisCandidato(){
 	return votosNominaisCandidato;
 }
 
+// Função simples explicada no .hpp
 string Candidato::getSituacaoCandidato(){
 	return situacaoCandidato;
 }
 
+// Função simples explicada no .hpp
 string Candidato::getNomeCandidato(){
 	return nomeCandidato;
 }
 
+// Função simples explicada no .hpp
 string Candidato::getNomeUrnaCandidato(){
 	return nomeUrnaCandidato;
 }
 
+// Função simples explicada no .hpp
 char Candidato::getSexoCandidato(){
 	return sexoCandidato;
 }
 
+// Função simples explicada no .hpp
 Date Candidato::getDataNascimentoCandidato(){
 	return dataNascimentoCandidato;
 }
 
+// Função simples explicada no .hpp
 string Candidato::getDestinoVoto(){
 	return destinoVoto;
 }
 
+// Função simples explicada no .hpp
 int Candidato::getNumeroPartidoCandidato(){
 	return numeroPartidoCandidato;
 }
 
-int Candidato::compare_candidato(Candidato &o){
-	if(this->numeroCandidato == o.getNumeroCandidato()){
+// Função simples explicada no .hpp
+int Candidato::compareCandidato(Candidato &o){
+	if(this->numeroCandidato == o.getNumeroCandidato()){ // compara numero
 		if(this->votosNominaisCandidato == o.getVotosNominaisCandidato()){
 			if(this->situacaoCandidato.compare(o.getSituacaoCandidato()) == 0){
 				if(this->nomeCandidato.compare(o.getNomeCandidato()) == 0){
@@ -83,6 +101,7 @@ int Candidato::compare_candidato(Candidato &o){
 	return 1;
 }
 
+// Função simples explicada no .hpp
 void Candidato::printCandidato(){
 	cout << this->numeroCandidato << " - ";
 	cout << this->votosNominaisCandidato << " - "; 
