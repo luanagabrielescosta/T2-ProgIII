@@ -1,9 +1,8 @@
-############
-# Eduardo Afonso Ribeiro Rodrigues
-# Luana Gabriele de Sousa Costa
-# Programação III
-# 
-#
+###########################################
+# @ Programação III                     @ #
+# @    Eduardo Afonso Ribeiro Rodrigues @ #
+# @    Luana Gabriele de Sousa Costa    @ #
+###########################################
 
 # nome do compilador
 CPP = g++
